@@ -28,13 +28,18 @@ public static class InputManager
         get { return input.Player.LaunchAbility.ReadValue<float>(); }
     }
 
-    public static Vector2 Player_Movement
+    public static Vector2 PlayerMovement
     {
         get { return input.Player.Movement.ReadValue<Vector2>(); }
     }
     #endregion
 
-
+    #region Pad
+    public static Vector2 PlayerMovementPad
+    {
+        get { return input.Player.MovementPad.ReadValue<Vector2>(); }
+    }
+    #endregion
 
     public static Vector2 RightAxis
     {

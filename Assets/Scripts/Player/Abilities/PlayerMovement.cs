@@ -16,9 +16,6 @@ public class PlayerMovement : AbilityBase
     private bool isGamepadActive;
 
 
-    private float HorizontalmovementAction;
-    private float VerticalmovementAction;
-
 
     
 
@@ -30,10 +27,12 @@ public class PlayerMovement : AbilityBase
     private void FixedUpdate()
     {
         //Gamepad Is Enabled if no key is pressed and is moving  
-        isGamepadActive = !Keyboard.current.anyKey.isPressed && InputManager.Player_Movement != Vector2.zero ? true : false;
+        
 
+        Move();
 
-        Debug.Log(isGamepadActive);
+        Debug.Log(InputManager.PlayerMovement);
+
         if (!isGamepadActive)
         {
             CalculateForwardWithMousePosition();
@@ -43,7 +42,7 @@ public class PlayerMovement : AbilityBase
             SetForwardOnGamepad();
         }
 
-        Move();
+        
     }
 
 
@@ -67,13 +66,25 @@ public class PlayerMovement : AbilityBase
     //Works both for keyboard and gamepad by using new input system
     private void Move()
     {
-        Vector2 Direction = InputManager.Player_Movement;
-        float currentZSpeed = Direction.y * (movementSpeed * Time.deltaTime);
-        float currentXSpeed = Direction.x * (movementSpeed * Time.deltaTime);
+        if(isGamepadActive)
+        {
+            Vector2 Direction = InputManager.PlayerMovementPad;
+            float currentZSpeed = Direction.y * (movementSpeed * Time.deltaTime);
+            float currentXSpeed = Direction.x * (movementSpeed * Time.deltaTime);
 
-        playerController.SetVelocity(currentXSpeed, currentZSpeed);
-        
-        
+            playerController.SetVelocity(currentXSpeed, currentZSpeed);
+        }
+        else
+        {
+            Vector2 Direction = InputManager.PlayerMovement;
+            float currentZSpeed = Direction.y * (movementSpeed * Time.deltaTime);
+            float currentXSpeed = Direction.x * (movementSpeed * Time.deltaTime);
+
+            playerController.SetVelocity(currentXSpeed, currentZSpeed);
+
+        }
+
+
     }
 
 
@@ -89,7 +100,7 @@ public class PlayerMovement : AbilityBase
 
 
         //ENABLE THIS TO SEE THE RAYCAST IN THE EDITOR
-        //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);  
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);  
 
 
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundLayer))
