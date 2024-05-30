@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,17 +20,20 @@ public class PlayerMovement : AbilityBase
     private float VerticalmovementAction;
 
 
+    
 
 
-
-
+    private void Awake()
+    {
+        
+    }
     private void FixedUpdate()
     {
-        //Gamepad Is Enabled if no key is pressed and one of the two axis is not equal  0 
-        isGamepadActive = !Keyboard.current.anyKey.isPressed & InputManager.RightAxis!=Vector2.zero;
-        
-        Move();
+        //Gamepad Is Enabled if no key is pressed and is moving  
+        isGamepadActive = !Keyboard.current.anyKey.isPressed && InputManager.Player_Movement != Vector2.zero ? true : false;
 
+
+        Debug.Log(isGamepadActive);
         if (!isGamepadActive)
         {
             CalculateForwardWithMousePosition();
@@ -38,6 +42,8 @@ public class PlayerMovement : AbilityBase
         {
             SetForwardOnGamepad();
         }
+
+        Move();
     }
 
 
@@ -52,7 +58,7 @@ public class PlayerMovement : AbilityBase
             Vector3 newForward = new Vector3(InputManager.RightAxis.x, 0f, InputManager.RightAxis.y);
             playerController.SetForward(newForward);
         }
-
+        
     }
 
 
@@ -66,6 +72,8 @@ public class PlayerMovement : AbilityBase
         float currentXSpeed = Direction.x * (movementSpeed * Time.deltaTime);
 
         playerController.SetVelocity(currentXSpeed, currentZSpeed);
+        
+        
     }
 
 
