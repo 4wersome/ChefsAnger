@@ -23,10 +23,8 @@ public static class InputManager
 
 
     #region mouse and keyboard
-    public static float Player_LaunchAbility
-    {
-        get { return input.Player.LaunchAbility.ReadValue<float>(); }
-    }
+  
+
 
     public static Vector2 PlayerMovement
     {

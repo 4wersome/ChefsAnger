@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Rigidbody playerRigidBody;
 
+    [SerializeField]
+    public PlayerAnimatorMngr AnimatorMgnr;
 
 
     private AbilityBase[] abilities;

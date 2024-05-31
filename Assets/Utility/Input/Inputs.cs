@@ -29,7 +29,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""LaunchAbility"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""f8878367-f2d0-4338-9fef-f152306ba735"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

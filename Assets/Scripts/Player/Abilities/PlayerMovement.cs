@@ -31,7 +31,6 @@ public class PlayerMovement : AbilityBase
 
         Move();
 
-        Debug.Log(InputManager.PlayerMovement);
 
         if (!isGamepadActive)
         {
