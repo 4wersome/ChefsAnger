@@ -28,7 +28,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             ""id"": ""5bcd39a5-864e-46bf-99d9-fc0f94b2c9f0"",
             ""actions"": [
                 {
-                    ""name"": ""LaunchAbility"",
+                    ""name"": ""MeleeAttack"",
                     ""type"": ""Button"",
                     ""id"": ""f8878367-f2d0-4338-9fef-f152306ba735"",
                     ""expectedControlType"": ""Button"",
@@ -62,6 +62,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MeleeAttackPad"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f70dc48-c5be-4aff-8097-f594dc5570de"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -71,8 +80,8 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LaunchAbility"",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""MeleeAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -93,7 +102,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -104,7 +113,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -115,7 +124,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -126,7 +135,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -137,7 +146,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Looking"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -148,22 +157,62 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""MovementPad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bea4971f-993d-428b-8e7f-e0f102928c45"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MeleeAttackPad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""KeyboardMouse"",
+            ""bindingGroup"": ""KeyboardMouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_LaunchAbility = m_Player.FindAction("LaunchAbility", throwIfNotFound: true);
+        m_Player_MeleeAttack = m_Player.FindAction("MeleeAttack", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Looking = m_Player.FindAction("Looking", throwIfNotFound: true);
         m_Player_MovementPad = m_Player.FindAction("MovementPad", throwIfNotFound: true);
+        m_Player_MeleeAttackPad = m_Player.FindAction("MeleeAttackPad", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,18 +274,20 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_LaunchAbility;
+    private readonly InputAction m_Player_MeleeAttack;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Looking;
     private readonly InputAction m_Player_MovementPad;
+    private readonly InputAction m_Player_MeleeAttackPad;
     public struct PlayerActions
     {
         private @Inputs m_Wrapper;
         public PlayerActions(@Inputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @LaunchAbility => m_Wrapper.m_Player_LaunchAbility;
+        public InputAction @MeleeAttack => m_Wrapper.m_Player_MeleeAttack;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Looking => m_Wrapper.m_Player_Looking;
         public InputAction @MovementPad => m_Wrapper.m_Player_MovementPad;
+        public InputAction @MeleeAttackPad => m_Wrapper.m_Player_MeleeAttackPad;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -246,9 +297,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @LaunchAbility.started += instance.OnLaunchAbility;
-            @LaunchAbility.performed += instance.OnLaunchAbility;
-            @LaunchAbility.canceled += instance.OnLaunchAbility;
+            @MeleeAttack.started += instance.OnMeleeAttack;
+            @MeleeAttack.performed += instance.OnMeleeAttack;
+            @MeleeAttack.canceled += instance.OnMeleeAttack;
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
@@ -258,13 +309,16 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MovementPad.started += instance.OnMovementPad;
             @MovementPad.performed += instance.OnMovementPad;
             @MovementPad.canceled += instance.OnMovementPad;
+            @MeleeAttackPad.started += instance.OnMeleeAttackPad;
+            @MeleeAttackPad.performed += instance.OnMeleeAttackPad;
+            @MeleeAttackPad.canceled += instance.OnMeleeAttackPad;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @LaunchAbility.started -= instance.OnLaunchAbility;
-            @LaunchAbility.performed -= instance.OnLaunchAbility;
-            @LaunchAbility.canceled -= instance.OnLaunchAbility;
+            @MeleeAttack.started -= instance.OnMeleeAttack;
+            @MeleeAttack.performed -= instance.OnMeleeAttack;
+            @MeleeAttack.canceled -= instance.OnMeleeAttack;
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
@@ -274,6 +328,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MovementPad.started -= instance.OnMovementPad;
             @MovementPad.performed -= instance.OnMovementPad;
             @MovementPad.canceled -= instance.OnMovementPad;
+            @MeleeAttackPad.started -= instance.OnMeleeAttackPad;
+            @MeleeAttackPad.performed -= instance.OnMeleeAttackPad;
+            @MeleeAttackPad.canceled -= instance.OnMeleeAttackPad;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -291,11 +348,30 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+    private int m_KeyboardMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseScheme
+    {
+        get
+        {
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("KeyboardMouse");
+            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
-        void OnLaunchAbility(InputAction.CallbackContext context);
+        void OnMeleeAttack(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnLooking(InputAction.CallbackContext context);
         void OnMovementPad(InputAction.CallbackContext context);
+        void OnMeleeAttackPad(InputAction.CallbackContext context);
     }
 }

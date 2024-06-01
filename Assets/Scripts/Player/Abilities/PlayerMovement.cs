@@ -9,20 +9,19 @@ public class PlayerMovement : AbilityBase
 {
 
     [SerializeField]
-    float movementSpeed = 1000f;
+    float movementSpeed = 10f;
     [SerializeField]
     private LayerMask groundLayer; //Remember to change the layer  when they will be completed 
-    [SerializeField]
-    private bool isGamepadActive;
 
 
 
-    
 
 
-    private void Awake()
+
+
+    private void Start()
     {
-        
+        playerController.MovePrevented += PreventAbility;
     }
     private void FixedUpdate()
     {
@@ -32,7 +31,7 @@ public class PlayerMovement : AbilityBase
         Move();
 
 
-        if (!isGamepadActive)
+        if (!playerController.IsGamepadActive)
         {
             CalculateForwardWithMousePosition();
         }
@@ -62,27 +61,27 @@ public class PlayerMovement : AbilityBase
 
 
 
-    //Works both for keyboard and gamepad by using new input system
+    //Works both for keyboard and gamepad
     private void Move()
     {
-        if(isGamepadActive)
+        if(playerController.IsGamepadActive)
         {
             Vector2 Direction = InputManager.PlayerMovementPad;
-            float currentZSpeed = Direction.y * (movementSpeed * Time.deltaTime);
-            float currentXSpeed = Direction.x * (movementSpeed * Time.deltaTime);
+            float currentZSpeed = Direction.y * movementSpeed;
+            float currentXSpeed = Direction.x * movementSpeed;
 
             playerController.SetVelocity(currentXSpeed, currentZSpeed);
         }
         else
         {
             Vector2 Direction = InputManager.PlayerMovement;
-            float currentZSpeed = Direction.y * (movementSpeed * Time.deltaTime);
-            float currentXSpeed = Direction.x * (movementSpeed * Time.deltaTime);
+            float currentZSpeed = Direction.y * movementSpeed;
+            float currentXSpeed = Direction.x * movementSpeed;
 
             playerController.SetVelocity(currentXSpeed, currentZSpeed);
 
         }
-
+     
 
     }
 
@@ -121,5 +120,14 @@ public class PlayerMovement : AbilityBase
 
     }
 
+    protected override void PreventAbility()
+    {
+                throw new NotImplementedException();
+    }
+
+    protected override void UnPreventAbility()
+    {
+        throw new NotImplementedException();
+    }
 }
 

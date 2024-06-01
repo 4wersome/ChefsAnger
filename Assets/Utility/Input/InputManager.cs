@@ -25,7 +25,14 @@ public static class InputManager
     #region mouse and keyboard
   
 
-
+    public static bool PlayerMelee()
+    {
+        return input.Player.MeleeAttack.WasPressedThisFrame();
+    }
+    public static bool PlayerMeleePad()
+    {
+        return input.Player.MeleeAttackPad.WasPressedThisFrame();
+    }
     public static Vector2 PlayerMovement
     {
         get { return input.Player.Movement.ReadValue<Vector2>(); }

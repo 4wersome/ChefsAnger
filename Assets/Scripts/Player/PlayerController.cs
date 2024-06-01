@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Serialized
+
     [SerializeField]
     Player player;
 
@@ -13,9 +16,21 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     public PlayerAnimatorMngr AnimatorMgnr;
+    [SerializeField]
+    private bool isGamepadActive;
 
-
+    #endregion
     private AbilityBase[] abilities;
+
+
+    public bool IsGamepadActive { get { return isGamepadActive; } }
+
+    #region abilityMelee
+    public Action MeleePrevented;
+    #endregion
+    #region abilityMove
+    public Action MovePrevented;
+    #endregion
 
     private void Awake()
     {
@@ -30,7 +45,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
     public void SetForward(Vector3 forward)
     {

@@ -4,25 +4,62 @@ using UnityEngine;
 
 public class PlayerMeleeAttack : AbilityBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-      
-    }
+    private const int animationLayer = 0;
+    private const string animationStateName = "Melee";
 
-    // Update is called once per frame
+    private void Start()
+    {
+        playerController.MeleePrevented += PreventAbility;
+    }
     void Update()
     {
-       
-       if (InputManager.Player.LaunchAbility.IsPressed())
+        if (playerController.IsGamepadActive)
         {
-           
-            playerController.AnimatorMgnr.SetTriggerParameter("Attack");
+            meleeAttackPad();
+        }
+        else
+        {
+            meleeAttack();
         }
     }
 
-    private void Attack()
+    private void meleeAttack()
     {
-      
+        if (InputManager.PlayerMelee() && !isPrevented && !playerController.AnimatorMgnr.CheckCurrentAnimationState(animationLayer, animationStateName))
+        {
+
+            playerController.AnimatorMgnr.SetTriggerParameter("Attack");
+            PreventAbility();
+        }
+        else if (playerController.AnimatorMgnr.CheckCurrentAnimationState(animationLayer, animationStateName) && isPrevented)
+        {
+            UnPreventAbility();
+        }
+    }
+
+
+    private void meleeAttackPad()
+    {
+        if (InputManager.PlayerMeleePad() && !isPrevented && !playerController.AnimatorMgnr.CheckCurrentAnimationState(animationLayer, animationStateName))
+        {
+
+            playerController.AnimatorMgnr.SetTriggerParameter("Attack");
+            PreventAbility();
+        }
+        else if (playerController.AnimatorMgnr.CheckCurrentAnimationState(animationLayer, animationStateName) && isPrevented)
+        {
+            UnPreventAbility();
+        }
+    }
+
+    protected override void PreventAbility()
+    {
+
+        isPrevented = true;
+    }
+
+    protected override void UnPreventAbility()
+    {
+        isPrevented = false;
     }
 }

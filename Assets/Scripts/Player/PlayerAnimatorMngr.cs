@@ -11,6 +11,7 @@ public class PlayerAnimatorMngr : MonoBehaviour
 
     {
         playerAnimator.SetTrigger(Animator.StringToHash(name));
+        
     }
 
     public void SetAnimatorBool(string name , bool value )
@@ -21,6 +22,12 @@ public class PlayerAnimatorMngr : MonoBehaviour
     public void SetAnimatorFloat (string name , float value )
     {
         playerAnimator.SetFloat(Animator.StringToHash(name), value);
+        
+    }
 
+    //This check if an animation is currently running
+    public bool CheckCurrentAnimationState (int layer , string StateName)
+    {
+        return playerAnimator.GetCurrentAnimatorStateInfo(layer).IsName(StateName);
     }
 }

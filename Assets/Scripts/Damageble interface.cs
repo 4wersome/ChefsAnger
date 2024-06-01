@@ -1,6 +1,6 @@
 using System;
 
-public enum DamageType
+public enum TypeOfDamage
 {
     Melee,
     Ranged
@@ -10,6 +10,6 @@ public interface IDamageble
 
 {
     
-    public void TakeDamage(DamageType type, float amount);
+    public void TakeDamage(TypeOfDamage type, float amount);
 
 }
