@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyTest : MonoBehaviour,IDamageble
 {
+    [SerializeField]
+    private bool testbool;
     public void TakeDamage(DamageType type, float amount)
     {
         Debug.Log("Taking damage:" + amount + "type :" + type);

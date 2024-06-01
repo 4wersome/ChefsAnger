@@ -1514,7 +1514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8322405575895062630, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: movementSpeed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8764623792072881301, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1598,6 +1598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9729edfdc620f49af84fdfe3bd4396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testbool: 0
 --- !u!65 &1255209859
 BoxCollider:
   m_ObjectHideFlags: 0

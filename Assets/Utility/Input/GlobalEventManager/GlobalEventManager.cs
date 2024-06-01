@@ -30,7 +30,7 @@ public static class GlobalEventManager {
 
     public static void CastEvent(GlobalEventIndex eventToCast, GlobalEventArgs message) {
 #if DEBUG
-        Debug.Log(eventToCast + GlobalEventArgsFactory.GetDebugString(eventToCast, message));
+       // Debug.Log(eventToCast + GlobalEventArgsFactory.GetDebugString(eventToCast, message));
 #endif
         globalEvents[(int)eventToCast]?.Invoke(message);
     }
@@ -92,6 +92,7 @@ public class GlobalEventArgs : EventArgs {
 public enum GlobalEventIndex {
     PlayerDeath,
     PlayerHealthUpdated,
-    PlayerMovement
+    PlayerMovement,
+    EnableGamepad
 }
 
