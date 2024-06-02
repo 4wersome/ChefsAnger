@@ -34,10 +34,10 @@ public class PlayerMovement : AbilityBase
 
 
         //uncomment this  to re-enable  old movement
-        // Move(); 
+        Move(); 
 
         //comment this method to disable new movement system 
-        MoveWithForward();
+        //MoveWithForward();
 
         if (!playerController.IsGamepadActive)
         {

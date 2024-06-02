@@ -1,30 +1,18 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine.Events;
-
-public interface IPickupable
-{
-    public void OnPickupCallback(ref List<FoodInfo> inventory);
-
-}
+using UnityEngine;
 
 public enum PickupableItemType
 {
-    Food,
-    Recipe
+    Ingredient,
+    Recipe,
+    Potion,
+    Shield
 }
 
-
-public struct FoodInfo
+public interface IPickupable
 {
-    public PickupableItemType ItemType;
-    public bool UsedForRecipe;
-    
-    public FoodInfo(PickupableItemType itemType, bool usedforRecipe = false )
-    {
-        ItemType = itemType;
-        UsedForRecipe = usedforRecipe;
-       
-
-    }
+    public void OnPickup();
+    public void SpawnItemInWorld(Transform position);
+    public void DeSpawnItem();
 }

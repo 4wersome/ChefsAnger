@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageble
 {
-    private List<FoodInfo> FoodInventory;
-
+    private List<Ingredient> IngredientInventory;
+    private List<Recipe> UncompletedRecipes;
+    private List<Recipe> CompletedRecipes;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        FoodInventory = new List<FoodInfo>();
+        IngredientInventory = new List<Ingredient>();
+        UncompletedRecipes = new List<Recipe>();
+        CompletedRecipes = new List<Recipe>();
     }
 
     // Update is called once per frame
@@ -20,17 +23,21 @@ public class Player : MonoBehaviour, IDamageble
        
     }
 
+    public void AddIngredient(Ingredient ingredient){
+        IngredientInventory.Add(ingredient);
+    }
 
+    public void AddIngredients(List<Ingredient> ingredients){
+        IngredientInventory.AddRange(ingredients);
+    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        IPickupable item = other.GetComponent<IPickupable>();
-        if (item != null)
-        {
-            item.OnPickupCallback(ref FoodInventory);
-        }
-        Debug.Log("item picked up: " + FoodInventory[0].ItemType);
+    public void AddRecipe(Recipe recipe){
+        UncompletedRecipes.Add(recipe);
+    }
 
+    public void CompleteRecipe(Recipe recipe){
+        CompletedRecipes.Add(recipe);
+        UncompletedRecipes.Remove(recipe);
     }
 
     public void TakeDamage(DamageType type, float amount)
