@@ -1,3 +1,4 @@
+using Codice.Client.Commands;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ using UnityEngine.Windows.Speech;
 public class PlayerMovement : AbilityBase
 {
 
-    private const string AnimatorBlendTreeX = "X";
-    private const string AnimatorBlendTreeY = "Y";
+    private const string AnimatorBlendTreeX = "DirectionX";
+    private const string AnimatorBlendTreeY = "DirectionY";
 
 
     [SerializeField]
@@ -60,34 +61,38 @@ public class PlayerMovement : AbilityBase
 
     {
         Vector3 finalVelocity;
+        Vector3 Controls = playerController.IsGamepadActive ? InputManager.PlayerMovementPad : InputManager.PlayerMovement;
+
         if (playerController.IsGamepadActive)
         {
-            Vector2 Direction = InputManager.PlayerMovementPad;
-            float currentZSpeed = Direction.y * movementSpeed;
-            float currentXSpeed = Direction.x * movementSpeed;
-            Vector3 newForward = new Vector3(Direction.x, 0, Direction.y);
+            float currentZSpeed = Controls.y * movementSpeed;
+            float currentXSpeed = Controls.x * movementSpeed;
+            Vector3 newForward = new Vector3(Controls.x, 0, Controls.y);
             finalVelocity = new Vector3(currentXSpeed, 0, currentZSpeed);
 
+           
+            if(newForward!=Vector3.zero)
             playerController.SetForward(newForward);
         }
         else
         {
             Vector3 straightVelocity;
             Vector3 strifeVelocity;
-            Vector3 speed = new Vector3(InputManager.PlayerMovement.x, 0, InputManager.PlayerMovement.y) * movementSpeed;
-            Vector3 currentForward = playerController.GetForward();
-               
-            straightVelocity = currentForward * speed.z; 
-            
+            Vector3 speed = new Vector3(Controls.x, 0,Controls.y) * movementSpeed;
+         
+
+            straightVelocity = playerController.GetForward() * speed.z;
             strifeVelocity = playerController.GetTransformRight() * speed.x;
 
-            playerController.AnimatorMgnr.SetAnimatorFloat(AnimatorBlendTreeX, strifeVelocity.x);
-            playerController.AnimatorMgnr.SetAnimatorFloat(AnimatorBlendTreeY, straightVelocity.z);
-             finalVelocity = straightVelocity + strifeVelocity;
-
-
+            finalVelocity = straightVelocity + strifeVelocity;
         }
-            playerController.SetVelocity(finalVelocity);
+
+        playerController.AnimatorMgnr.AnimateBlendTree(AnimatorBlendTreeX, Controls.x, AnimatorBlendTreeY, Controls.y);
+
+     
+        playerController.SetVelocity(finalVelocity);
+        
+
     }
 
 

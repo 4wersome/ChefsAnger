@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 public class PlayerAnimatorMngr : MonoBehaviour
@@ -29,5 +30,12 @@ public class PlayerAnimatorMngr : MonoBehaviour
     public bool CheckCurrentAnimationState (int layer , string StateName)
     {
         return playerAnimator.GetCurrentAnimatorStateInfo(layer).IsName(StateName);
+    }
+
+    public void AnimateBlendTree(string XparameterName, float X , string YparameterName,float Y )
+    {
+        playerAnimator.SetFloat(Animator.StringToHash(XparameterName), X);
+        playerAnimator.SetFloat(Animator.StringToHash(YparameterName), Y);
+
     }
 }
