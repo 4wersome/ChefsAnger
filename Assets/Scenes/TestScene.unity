@@ -1598,6 +1598,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335e4e55900e65f4cad45acc53a77303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ingredientType: 0
+  number: 0
 --- !u!65 &1158308321
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1854,6 +1856,14 @@ PrefabInstance:
     - target: {fileID: 489180, guid: 0d56ba182c17d0e4da331a28eba47ccf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64082845407956792, guid: 0d56ba182c17d0e4da331a28eba47ccf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64082845407956792, guid: 0d56ba182c17d0e4da331a28eba47ccf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

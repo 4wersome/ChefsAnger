@@ -21,28 +21,26 @@ public class Ingredient : MonoBehaviour, IPickupable
     [SerializeField]
     private int number;
 
+    #region ReferenceGetter
+    public IngredientType IngredientType {
+        get { return ingredientType; }
+    }
+
+    public int Number {
+        get { return number; }
+    }
+    #endregion
+
     private void Awake()
     {
         pickupableType = PickupableItemType.Ingredient;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        GameObject otherObject = other.GetComponent<GameObject>();
-        
-    }
-
 #region PickUp Methods
     public void OnPickup()
     {
-       InternalOnPickup();
+       Debug.Log("Picked up: " + ingredientType + " x" + number);
        DeSpawnItem();
-    }
-
-    private void InternalOnPickup()
-    {
-        // TODO
-        Debug.Log("Picked up: " + ingredientType + " x" + number);
     }
     
     public void SpawnItemInWorld(Transform position)
