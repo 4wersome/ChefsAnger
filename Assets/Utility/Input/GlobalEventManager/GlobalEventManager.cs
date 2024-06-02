@@ -93,6 +93,7 @@ public enum GlobalEventIndex {
     PlayerDeath,
     PlayerHealthUpdated,
     PlayerMovement,
-    EnableGamepad
+    EnableGamepad,
+    
 }
 
