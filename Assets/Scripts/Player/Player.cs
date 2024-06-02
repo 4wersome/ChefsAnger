@@ -29,7 +29,7 @@ public class Player : MonoBehaviour, IDamageble
         {
             item.OnPickupCallback(ref FoodInventory);
         }
-      
+        Debug.Log("item picked up: " + FoodInventory[0].ItemType);
 
     }
 
