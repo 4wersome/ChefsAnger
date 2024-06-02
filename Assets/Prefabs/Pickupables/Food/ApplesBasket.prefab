@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3340404}
   - component: {fileID: 2380210}
   - component: {fileID: 64115629096091982}
-  - component: {fileID: -7921511135514229047}
   - component: {fileID: 5500312430500120271}
   m_Layer: 9
   m_Name: ApplesBasket
@@ -101,27 +100,13 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43569758537415600, guid: c0b58bd397a065240aecfecbf324ff35, type: 2}
---- !u!114 &-7921511135514229047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 335e4e55900e65f4cad45acc53a77303, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ingredientType: 0
-  number: 3
 --- !u!114 &5500312430500120271
 MonoBehaviour:
   m_ObjectHideFlags: 0
