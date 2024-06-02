@@ -1,0 +1,16 @@
+{
+    "name": "ChefsAnger_FSM",
+    "rootNamespace": "",
+    "references": [
+        "GUID:34cd950b6e775734e8a6c5f55d10ee5f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
