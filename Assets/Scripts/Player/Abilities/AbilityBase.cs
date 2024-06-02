@@ -7,7 +7,7 @@ public abstract class AbilityBase : MonoBehaviour
 {
     
     protected PlayerController playerController;
-    protected bool isPrevented;
+    protected bool isPrevented = false;
 
 
     public bool IsPrevented {  get { return isPrevented; } }
@@ -18,5 +18,9 @@ public abstract class AbilityBase : MonoBehaviour
     {
         playerController = controller;
     }
-    
+
+    protected abstract void PreventAbility();
+
+
+    protected abstract void UnPreventAbility();
 }

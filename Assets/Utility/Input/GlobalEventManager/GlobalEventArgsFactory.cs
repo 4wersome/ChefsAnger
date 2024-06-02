@@ -92,6 +92,22 @@ public static class GlobalEventArgsFactory
     }
     #endregion
 
+    #region EnableGamepad
+
+    public static GlobalEventArgs EnableGamepadFactory(bool value)
+    {
+        GlobalEventArgs message = new GlobalEventArgs();
+        message.args = new ExtendedVariable[1];
+        message.args[0] = new ExtendedVariable("GamepadEnabled", ExtendedVariableType.Bool, value);
+        return message;
+    }
+
+    public static void EnableGamepadParses(GlobalEventArgs message, out bool value)
+    {
+        value = (bool)message.args[0].GetValue();
+    }
+
+    #endregion
 
 
 

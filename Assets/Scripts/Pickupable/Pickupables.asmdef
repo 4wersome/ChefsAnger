@@ -1,12 +1,7 @@
 {
-    "name": "PlayerAssembly",
+    "name": "Pickupables",
     "rootNamespace": "",
-    "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:3e86d9dafad6a42478a6b3c967b69335",
-        "GUID:df8be16442906e8449ee29c998ccb7f8",
-        "GUID:e3a30edeb2a4a5c46aec05c0a4faf5bd"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

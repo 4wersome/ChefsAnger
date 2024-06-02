@@ -1,55 +1,103 @@
+using Codice.Client.Commands;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows.Speech;
 
 public class PlayerMovement : AbilityBase
 {
 
+    private const string AnimatorBlendTreeX = "DirectionX";
+    private const string AnimatorBlendTreeY = "DirectionY";
+
+
     [SerializeField]
-    float movementSpeed = 1000f;
+    float movementSpeed = 10f;
     [SerializeField]
     private LayerMask groundLayer; //Remember to change the layer  when they will be completed 
-    [SerializeField]
-    private bool isGamepadActive;
 
 
-    private float HorizontalmovementAction;
-    private float VerticalmovementAction;
 
 
-    
 
 
-    private void Awake()
+
+    private void Start()
     {
-        
+        playerController.MovePrevented += PreventAbility;
     }
     private void FixedUpdate()
     {
-        //Gamepad Is Enabled if no key is pressed and is moving  
-        isGamepadActive = !Keyboard.current.anyKey.isPressed && InputManager.Player_Movement != Vector2.zero ? true : false;
 
 
-        Debug.Log(isGamepadActive);
-        if (!isGamepadActive)
+        //uncomment this  to re-enable  old movement
+        // Move(); 
+
+        //comment this method to disable new movement system 
+        MoveWithForward();
+
+        if (!playerController.IsGamepadActive)
         {
             CalculateForwardWithMousePosition();
         }
+        //uncomment this  to re-enable  old movement
+        //else  
+        //{
+        //    SetForwardOnGamepad();
+        //}
+
+
+    }
+
+    #region internal 
+
+
+
+    //New type of movement based on player forward for both gamepad and keyboard
+    private void MoveWithForward()
+
+    {
+        Vector3 finalVelocity;
+        Vector3 Controls = playerController.IsGamepadActive ? InputManager.PlayerMovementPad : InputManager.PlayerMovement;
+
+        if (playerController.IsGamepadActive)
+        {
+            float currentZSpeed = Controls.y * movementSpeed;
+            float currentXSpeed = Controls.x * movementSpeed;
+            Vector3 newForward = new Vector3(Controls.x, 0, Controls.y);
+            finalVelocity = new Vector3(currentXSpeed, 0, currentZSpeed);
+
+           
+            if(newForward!=Vector3.zero)
+            playerController.SetForward(newForward);
+        }
         else
         {
-            SetForwardOnGamepad();
+            Vector3 straightVelocity;
+            Vector3 strifeVelocity;
+            Vector3 speed = new Vector3(Controls.x, 0,Controls.y) * movementSpeed;
+         
+
+            straightVelocity = playerController.GetForward() * speed.z;
+            strifeVelocity = playerController.GetTransformRight() * speed.x;
+
+            finalVelocity = straightVelocity + strifeVelocity;
         }
 
-        Move();
+        playerController.AnimatorMgnr.AnimateBlendTree(AnimatorBlendTreeX, Controls.x, AnimatorBlendTreeY, Controls.y);
+
+     
+        playerController.SetVelocity(finalVelocity);
+        
+
     }
 
 
 
-
-
+    //OLD MOVING METHODS 
     //Gets the forward by  using the vector 2 from the right axis , and giving the Y to the Z of the player 
     private void SetForwardOnGamepad()
     {
@@ -58,23 +106,40 @@ public class PlayerMovement : AbilityBase
             Vector3 newForward = new Vector3(InputManager.RightAxis.x, 0f, InputManager.RightAxis.y);
             playerController.SetForward(newForward);
         }
-        
+
     }
 
-
-
-
-    //Works both for keyboard and gamepad by using new input system
+    //Works both for keyboard and gamepad. Works in combination with the Functions to calculate the Forward 
     private void Move()
     {
-        Vector2 Direction = InputManager.Player_Movement;
-        float currentZSpeed = Direction.y * (movementSpeed * Time.deltaTime);
-        float currentXSpeed = Direction.x * (movementSpeed * Time.deltaTime);
+        if (playerController.IsGamepadActive)
+        {
+            Vector2 Direction = InputManager.PlayerMovementPad;
+            float currentZSpeed = Direction.y * movementSpeed;
+            float currentXSpeed = Direction.x * movementSpeed;
 
-        playerController.SetVelocity(currentXSpeed, currentZSpeed);
-        
-        
+
+
+            playerController.SetVelocity(currentXSpeed, currentZSpeed);
+        }
+        else
+        {
+            Vector2 Direction = InputManager.PlayerMovement;
+            float currentZSpeed = Direction.y * movementSpeed;
+            float currentXSpeed = Direction.x * movementSpeed;
+
+            playerController.AnimatorMgnr.SetAnimatorFloat(AnimatorBlendTreeX, Direction.x);
+            playerController.AnimatorMgnr.SetAnimatorFloat(AnimatorBlendTreeY, Direction.y);
+
+            playerController.SetVelocity(currentXSpeed, currentZSpeed);
+
+        }
+
+
     }
+
+
+
 
 
 
@@ -89,7 +154,7 @@ public class PlayerMovement : AbilityBase
 
 
         //ENABLE THIS TO SEE THE RAYCAST IN THE EDITOR
-        //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);  
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
 
 
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundLayer))
@@ -111,5 +176,19 @@ public class PlayerMovement : AbilityBase
 
     }
 
+    #endregion
+
+
+
+
+    protected override void PreventAbility()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void UnPreventAbility()
+    {
+        throw new NotImplementedException();
+    }
 }
 

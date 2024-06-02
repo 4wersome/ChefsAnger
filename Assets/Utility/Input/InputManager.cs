@@ -23,18 +23,28 @@ public static class InputManager
 
 
     #region mouse and keyboard
-    public static float Player_LaunchAbility
-    {
-        get { return input.Player.LaunchAbility.ReadValue<float>(); }
-    }
+  
 
-    public static Vector2 Player_Movement
+    public static bool PlayerMelee()
+    {
+        return input.Player.MeleeAttack.WasPressedThisFrame();
+    }
+    public static bool PlayerMeleePad()
+    {
+        return input.Player.MeleeAttackPad.WasPressedThisFrame();
+    }
+    public static Vector2 PlayerMovement
     {
         get { return input.Player.Movement.ReadValue<Vector2>(); }
     }
     #endregion
 
-
+    #region Pad
+    public static Vector2 PlayerMovementPad
+    {
+        get { return input.Player.MovementPad.ReadValue<Vector2>(); }
+    }
+    #endregion
 
     public static Vector2 RightAxis
     {
