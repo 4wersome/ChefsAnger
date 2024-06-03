@@ -67,7 +67,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public void ConsumeIngredient(Ingredient ingredient){
-        if(IngredientInventory[ingredient.IngredientType] == null || IngredientInventory[ingredient.IngredientType] <= 0){
+        if(IngredientInventory[ingredient.IngredientType] <= 0){
             return;
         }
         

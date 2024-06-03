@@ -34,6 +34,7 @@ public class Player : MonoBehaviour, IDamageble
     private PlayerInventory playerInventory;
     #endregion //PlayerReferences
 
+
     #region MonoCallbacks
     private void Awake() {
         if (instance != null && instance != this) {
