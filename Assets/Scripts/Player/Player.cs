@@ -6,68 +6,70 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageble
 {
+    #region SerializeFields
     [SerializeField]
-    private Dictionary<IngredientType, int> IngredientInventory;
+    private float maxHP;
+    [SerializeField]
+    private float shield;
+    #endregion
 
-    private List<Recipe> UncompletedRecipes;
-    private List<Recipe> CompletedRecipes;
+    #region PrivateMembers
+    private float currentHP;
+    #endregion
 
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        SetUpIngredients();
-        UncompletedRecipes = new List<Recipe>();
-        CompletedRecipes = new List<Recipe>();
-    }
+    #region StaticMembers
+    private static Player instance;
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Ingredient ingredient = other.GetComponent<Ingredient>();
-        if(ingredient != null){
-            PickIngredient(ingredient);
-            ingredient.OnPickup();
+    public static Player Get () {
+        if (instance != null) return instance;
+            instance = GameObject.FindObjectOfType<Player>();
+            return instance;
         }
-    }
+    #endregion //StaticMembers
 
-    #region Ingredients
-    public void SetUpIngredients(){
-        IngredientInventory = new Dictionary<IngredientType, int>();
-        foreach(IngredientType type in Enum.GetValues(typeof(IngredientType))){
-            IngredientInventory.Add(type, 0);
-        }
-    }
+    #region PlayerReferences
+    [SerializeField]
+    private PlayerController playerController;
+    [SerializeField]
+    private PlayerInventory playerInventory;
+    #endregion //PlayerReferences
 
-    public void PickIngredient(Ingredient ingredient){
-        IngredientInventory[ingredient.IngredientType] += ingredient.Number;
-    }
-
-    public void ConsumeIngredient(Ingredient ingredient){
-        if(IngredientInventory[ingredient.IngredientType] == null || IngredientInventory[ingredient.IngredientType] <= 0){
+    #region MonoCallbacks
+    private void Awake() {
+        if (instance != null && instance != this) {
+            Destroy(gameObject);
             return;
         }
-        
-        IngredientInventory[ingredient.IngredientType] -= ingredient.Number;
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
-        if(IngredientInventory[ingredient.IngredientType] <= 0){
-            IngredientInventory[ingredient.IngredientType] = 0;
-        }
+    private void Start() {
+        if (instance != this) return;
+        playerInventory.OnRecipeCompleted += InternalOnRecipeCompleted;
     }
     #endregion
 
-    #region Recipes
-    public void AddRecipe(Recipe recipe){
-        UncompletedRecipes.Add(recipe);
-    }
-
-    public void CompleteRecipe(Recipe recipe){
-        CompletedRecipes.Add(recipe);
-        UncompletedRecipes.Remove(recipe);
+    #region Inventory
+    public void InternalOnRecipeCompleted(Recipe recipe) {
+            RecipeNameEnum recipeName = recipe.RecipeName;
+            switch(recipeName){
+                case RecipeNameEnum.LifeUp:
+                    // Increment Player Max HP
+                    // TODO: Add Health Module Management
+                    maxHP++;
+                    break;
+                case RecipeNameEnum.DefenceUp:
+                    // Increment Player Defence
+                    // TODO: Create better Management
+                    shield++;
+                    break;
+                default:
+                    // Unlock Ability
+                    playerController.UnlockAbility(recipeName);
+                    break;
+            }
+            Debug.Log("Completed Recipe: " + recipeName);
     }
     #endregion
 

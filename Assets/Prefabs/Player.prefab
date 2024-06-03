@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1507ca507e75f6f4fb3dc96732703f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiredRecipe: 0
   movementSpeed: 1000
   groundLayer:
     serializedVersion: 2
@@ -227,6 +228,8 @@ GameObject:
   - component: {fileID: 1926371346702630789}
   - component: {fileID: 1520043293434886860}
   - component: {fileID: 3938206307300249135}
+  - component: {fileID: 1398694670894487947}
+  - component: {fileID: -600400313923066015}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -290,6 +293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f876e7b65ee72fd498a4cc0e84d09945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  shield: 0
+  playerController: {fileID: -600400313923066015}
+  playerInventory: {fileID: 1398694670894487947}
 --- !u!114 &3938206307300249135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +310,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 3874200686528503682}
+--- !u!114 &1398694670894487947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7612537191513124991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99eee72be72d4874bb1b990e98f32a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UncompletedRecipes: []
+  CompletedRecipes: []
+--- !u!114 &-600400313923066015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7612537191513124991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8bc37cc12ba1141a07c98d2073054a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1520043293434886860}
+  playerRigidBody: {fileID: 1926371346702630789}
+  AnimatorMgnr: {fileID: 3938206307300249135}
+  isGamepadActive: 0
 --- !u!1 &7976390184787985390
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 461ffb5ebdae70d4fba70cc004138dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiredRecipe: 0
 --- !u!1 &8965015389413099718
 GameObject:
   m_ObjectHideFlags: 0
