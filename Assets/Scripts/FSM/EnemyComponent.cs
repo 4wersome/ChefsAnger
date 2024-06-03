@@ -2,48 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyComponent : MonoBehaviour, IDamageble {
 
-    [SerializeField] private float maxHp;
-    private float hp;
-
-    private bool isDead;
-    
-    
+    [SerializeField] private HealthModule healthModule;
     public Action OnSpawn;
-    public Action<float> OnTakeDamage;
-    public Action OnDeath;
-    
-    public float Hp {
-        get => hp;
-        set {
-            hp = Math.Clamp(value, 0, maxHp);
-            if (hp <= 0) IsDead = true;
-        }
-    }
-    public bool IsDead {
-        get {
-            return isDead;
-        }
-        set {
-            isDead = value;
-            if(value) OnDeath?.Invoke();
-            else OnSpawn?.Invoke();
-            
-            //playerVisual.SetAnimatorParameter(isDeadAnimatorParameter, value);
-        }
-    }
-    
    
-    
+    public HealthModule HealthModule { get => healthModule; }
     
     private void Awake() {
-        hp = maxHp;
+        healthModule.Reset();
+        OnSpawn?.Invoke();
     }
 
     public void TakeDamage(DamageType type, float amount) {
-        OnTakeDamage?.Invoke(amount);
-        Hp -= amount;
+        healthModule.OnDamageTaken?.Invoke(type, amount);
     }
 }

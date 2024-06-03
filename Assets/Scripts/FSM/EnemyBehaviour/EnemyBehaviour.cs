@@ -18,6 +18,7 @@ public class EnemyBehaviour : MonoBehaviour {
         
         State follow = SetUpBaseMovementState();
         State attack = SetUpAttackState();
+        State death;
         
         follow.SetUpMe(new Transition[] { FollowToAttack(follow, attack)});
         attack.SetUpMe(new Transition[] { AttackToFollow(attack, follow)});
@@ -46,10 +47,23 @@ public class EnemyBehaviour : MonoBehaviour {
         SetVelocity2DAction stopAction = new SetVelocity2DAction(GetComponent<Rigidbody>(), Vector3.zero, false);
         
         Animator animator = GetComponent<Animator>();
-        AnimatorResetTriggerAction resetTrigger = new AnimatorResetTriggerAction(animator, "Run");
+        AnimatorResetTriggerAction resetTriggerRun = new AnimatorResetTriggerAction(animator, "Run");
         AnimatorSetTriggerAction setTrigger = new AnimatorSetTriggerAction(animator, "Attack");
         
-        state.SetUpMe(new StateAction[] { stopAction, resetTrigger, setTrigger });
+        state.SetUpMe(new StateAction[] { stopAction, resetTriggerRun, setTrigger });
+        return state;
+    }
+    
+    protected State SetUpDeathState(){
+        State state = new State();
+        SetVelocity2DAction stopAction = new SetVelocity2DAction(GetComponent<Rigidbody>(), Vector3.zero, false);
+        
+        Animator animator = GetComponent<Animator>();
+        AnimatorResetTriggerAction resetTriggerRun = new AnimatorResetTriggerAction(animator, "Run");
+        AnimatorResetTriggerAction resetTriggerAttack = new AnimatorResetTriggerAction(animator, "Attack");
+        AnimatorTriggerAction triggerDeath = new AnimatorTriggerAction(animator, "Death");
+        
+        state.SetUpMe(new StateAction[] { stopAction, resetTriggerRun, resetTriggerAttack, triggerDeath });
         return state;
     }
     #endregion
@@ -67,6 +81,14 @@ public class EnemyBehaviour : MonoBehaviour {
         CheckDistanceCondition distanceCondition = new CheckDistanceCondition(transform, Player.Get().transform,
             distanceToStopAttack, COMPARISON.GREATEREQUAL);
         transition.SetUpMe(attack, follow, new Condition[]{ distanceCondition });
+        return transition;
+    }
+
+    protected virtual Transition StateToDeath(State prev, State death) {
+        Transition transition = new Transition();
+        HpStateCondition hpStateCondition =
+            new HpStateCondition(COMPARISON.LESSEQUAL, GetComponent<EnemyComponent>()?.HealthModule, 0);
+        transition.SetUpMe(prev, death, new Condition[]{ hpStateCondition });
         return transition;
     }
     
