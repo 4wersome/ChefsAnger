@@ -1,8 +1,10 @@
 {
-    "name": "ChefsAnger_FSM",
+    "name": "ChefsAnger_Enemy",
     "rootNamespace": "",
     "references": [
-        "GUID:34cd950b6e775734e8a6c5f55d10ee5f"
+        "GUID:34cd950b6e775734e8a6c5f55d10ee5f",
+        "GUID:99933a00cb929de4a97dab6392595feb",
+        "GUID:df8be16442906e8449ee29c998ccb7f8"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -6,71 +6,67 @@ using UnityEngine.SceneManagement;
 public class EnemyBehaviour : MonoBehaviour {
 
     #region SerializedField
-    //[SerializeField] private float patrolSpeed;
     [SerializeField] private float followSpeed;
-    //[SerializeField] private Transform[] patrolStations;
     [SerializeField] private float distanceToStartAttack;
     [SerializeField] private float distanceToStopAttack;
+    
     #endregion
     
     #region MonoBehaviour
     void Start() {
         StateMachine stateMachine = GetComponent<StateMachine>();
         
-        //State patrol = SetUpPatrolState();
         State follow = SetUpBaseMovementState();
         State attack = SetUpAttackState();
         
-        //patrol.SetUpMe(new Transition[] {});
         follow.SetUpMe(new Transition[] { FollowToAttack(follow, attack)});
         attack.SetUpMe(new Transition[] { AttackToFollow(attack, follow)});
         
-        //stateMachine.Init(new State[]{patrol, follow, attack}, patrol);
         stateMachine.Init(new State[] { follow, attack }, follow);
     }
     #endregion
 
     #region StateSetUp
-    /*protected virtual State SetUpPatrolState() {
-        State state = new State();
-        //SetVelocity3DAction setVelocity = new SetVelocity3DAction(GetComponent<Rigidbody>(), Player.Get().transform.position, transform.position, patrolSpeed);
-        return state;
-    }*/
-
     protected State SetUpBaseMovementState(){
         State state = new State();
-        //SetVelocity3DAction setVelocity = new SetVelocity3DAction(GetComponent<Rigidbody>(), Player.Get().transform.position, transform.position, followSpeed);
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        SetVelocity3DAction setVelocity = new SetVelocity3DAction(GetComponent<Rigidbody>(), Player.Get().transform, transform, followSpeed);
+        FollowTargetAction followTargetAction = new FollowTargetAction(gameObject, Player.Get().gameObject.transform);
 
-        //FollowTargetAction followTargetAction = new FollowTargetAction(gameObject, Player.Get().gameObject);
-        AnimatorSetTriggerAction setTrigger = new AnimatorSetTriggerAction(GetComponent<Animator>(), "Run");
-        //state.SetUpMe(new StateAction[] { followTargetAction, setTrigger });
+        Animator animator = GetComponent<Animator>();
+        AnimatorSetSpeedAction setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed", true);
+        AnimatorSetTriggerAction setTrigger = new AnimatorSetTriggerAction(animator, "Run");
+        
+        state.SetUpMe(new StateAction[] { setVelocity, followTargetAction, setSpeedAction, setTrigger });
         return state;
     }
 
     protected State SetUpAttackState(){
         State state = new State();
         SetVelocity2DAction stopAction = new SetVelocity2DAction(GetComponent<Rigidbody>(), Vector3.zero, false);
-        AnimatorResetTriggerAction resetTrigger = new AnimatorResetTriggerAction(GetComponent<Animator>(), "Run");
-        AnimatorSetTriggerAction setTrigger = new AnimatorSetTriggerAction(GetComponent<Animator>(), "Attack");
+        
+        Animator animator = GetComponent<Animator>();
+        AnimatorResetTriggerAction resetTrigger = new AnimatorResetTriggerAction(animator, "Run");
+        AnimatorSetTriggerAction setTrigger = new AnimatorSetTriggerAction(animator, "Attack");
+        
         state.SetUpMe(new StateAction[] { stopAction, resetTrigger, setTrigger });
         return state;
     }
     #endregion
 
     #region TransitionSetUp
-    protected virtual Transition FollowToAttack(State prev, State attack) {
+    protected virtual Transition FollowToAttack(State follow, State attack) {
         Transition transition = new Transition();
-        /*CheckDistanceCondition distanceCondition = new CheckDistanceCondition(transform, Player.Get().transform,
-            distanceToStartAttack, COMPARISON.LESSEQUAL);*/
-        //transition.SetUpMe(prev, attack, new Condition[]{ distanceCondition });
+        CheckDistanceCondition distanceCondition = new CheckDistanceCondition(transform, Player.Get().transform,
+            distanceToStartAttack, COMPARISON.LESSEQUAL);
+        transition.SetUpMe(follow, attack, new Condition[]{ distanceCondition });
         return transition;
     }
     protected virtual Transition AttackToFollow(State attack, State follow) {
         Transition transition = new Transition();
-        /*CheckDistanceCondition distanceCondition = new CheckDistanceCondition(transform, Player.Get().transform,
-            distanceToStopAttack, COMPARISON.GREATEREQUAL);*/
-        //transition.SetUpMe(prev, attack, new Condition[]{ distanceCondition });
-
+        CheckDistanceCondition distanceCondition = new CheckDistanceCondition(transform, Player.Get().transform,
+            distanceToStopAttack, COMPARISON.GREATEREQUAL);
+        transition.SetUpMe(attack, follow, new Condition[]{ distanceCondition });
         return transition;
     }
     

@@ -27,5 +27,4 @@ public class AnimatorSetTriggerAction : StateAction
     private void InternalSetTrigger () {
         animator.SetTrigger(Animator.StringToHash(triggerName));
     }
-
 }
