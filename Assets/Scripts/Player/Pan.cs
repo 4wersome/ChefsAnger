@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class Pan : MonoBehaviour
 {
-    private  float damage = 1f;
-    private DamageType type = DamageType.Melee;
+    [SerializeField]
+    private DamageContainer damage;
 
+    #region Mono
+    private void Awake() {
+        damage.DamageType = DamageType.Melee;
+        damage.Damage = 1;
+    }
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
         IDamageble damageble = other.GetComponent<IDamageble>();
         if (damageble == null) return;
 
-        damageble.TakeDamage(type, damage);
+        damageble.TakeDamage(damage);
     }
 
 }

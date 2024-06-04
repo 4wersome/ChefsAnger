@@ -8,13 +8,19 @@ public class Player : MonoBehaviour, IDamageble
 {
     #region SerializeFields
     [SerializeField]
-    private float maxHP;
+    private HealthModule healthModule;
     [SerializeField]
-    private float shield;
+    private float damageInvTime;
+    [SerializeField]
+    private float shieldInvTime;
     #endregion
 
     #region PrivateMembers
-    private float currentHP;
+    private Coroutine invCoroutine;
+    #endregion
+
+    #region PublicEvents
+    public Action<DamageContainer> onDamageTaken;
     #endregion
 
     #region StaticMembers
@@ -47,35 +53,77 @@ public class Player : MonoBehaviour, IDamageble
 
     private void Start() {
         if (instance != this) return;
+        ResetHealth();
+        healthModule.OnDamageTaken += InternalOnDamageTaken;
+        healthModule.OnDeath += InternalOnDeath;
         playerInventory.OnRecipeCompleted += InternalOnRecipeCompleted;
+    }
+    #endregion
+
+    #region HealthModule
+    public void ResetHealth () {
+        healthModule.Reset();
+        NotifyHealthUpdatedGlobal();
+        playerController.IsDead = false;
+    }
+
+    public void TakeDamage(DamageContainer damage) {
+        healthModule.TakeDamage(damage);
+    }
+
+    public void InternalOnDamageTaken(DamageContainer container) {
+        NotifyHealthUpdatedGlobal();
+        onDamageTaken?.Invoke(container);
+        playerController.OnDamageTaken?.Invoke(container);
+        SetInvulnearble(damageInvTime);
+    }
+
+    public void InternalOnDeath() {
+        playerController.IsDead = true;
+        playerController.OnDeath?.Invoke();
     }
     #endregion
 
     #region Inventory
     public void InternalOnRecipeCompleted(Recipe recipe) {
-            RecipeNameEnum recipeName = recipe.RecipeName;
-            switch(recipeName){
-                case RecipeNameEnum.LifeUp:
-                    // Increment Player Max HP
-                    // TODO: Add Health Module Management
-                    maxHP++;
-                    break;
-                case RecipeNameEnum.DefenceUp:
-                    // Increment Player Defence
-                    // TODO: Create better Management
-                    shield++;
-                    break;
-                default:
-                    // Unlock Ability
-                    playerController.UnlockAbility(recipeName);
-                    break;
-            }
-            Debug.Log("Completed Recipe: " + recipeName);
+        RecipeNameEnum recipeName = recipe.RecipeName;
+        switch(recipeName){
+            case RecipeNameEnum.LifeUp:
+                // Increment Player Max HP
+                healthModule.IncreaseMaxHP(1);
+                break;
+            case RecipeNameEnum.DefenceUp:
+                // Increment Player Defence
+                healthModule.IncreaseDefence(1);
+                break;
+            default:
+                // Unlock Ability
+                playerController.UnlockAbility(recipeName);
+                break;
+        }
+        Debug.Log("Completed Recipe: " + recipeName);
     }
     #endregion
 
-    public void TakeDamage(DamageType type, float amount)
-    {
-        throw new System.NotImplementedException();
+    #region PrivateMethods
+    private void SetInvulnearble (float invTime) {
+        if (invCoroutine != null) {
+            StopCoroutine(invCoroutine);
+        }
+        invCoroutine = StartCoroutine(InvulnerabilityCoroutine(invTime));
     }
+
+    private void NotifyHealthUpdatedGlobal () {
+        GlobalEventManager.CastEvent(GlobalEventIndex.PlayerHealthUpdated,
+        GlobalEventArgsFactory.PlayerHealthUpdatedFactory(healthModule.MaxHP, healthModule.CurrentHP));
+    }
+    #endregion
+
+    #region Coroutine
+    private IEnumerator InvulnerabilityCoroutine (float invTime) {
+        healthModule.SetInvulnerable(true);
+        yield return new WaitForSeconds(invTime);
+        healthModule.SetInvulnerable(false);
+    }
+    #endregion
 }

@@ -28,7 +28,7 @@ public class EnemyComponent : MonoBehaviour, IDamageble {
         if(projectileToSpawn) Instantiate(projectileToSpawn ,transform.position + (transform.forward * 2), transform.rotation);
     }
     
-    public void TakeDamage(DamageType type, float amount) {
-        healthModule.OnDamageTaken?.Invoke(type, amount);
+    public void TakeDamage(DamageContainer damage) {
+        healthModule.OnDamageTaken?.Invoke(damage);
     }
 }

@@ -31,8 +31,8 @@ public class PlayerInventory : MonoBehaviour
         IPickupable pickupable = other.GetComponent<IPickupable>();
 
         if(pickupable != null){
-            PickItem(pickupable);
             pickupable.OnPickup();
+            PickItem(pickupable);
         }
     }
 

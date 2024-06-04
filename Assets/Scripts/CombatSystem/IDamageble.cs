@@ -9,5 +9,5 @@ public enum DamageType
 public interface IDamageble
 
 {
-    public void TakeDamage(DamageType type, float amount);
+    public void TakeDamage(DamageContainer damage);
 }

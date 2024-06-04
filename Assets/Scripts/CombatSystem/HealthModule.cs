@@ -8,10 +8,12 @@ public class HealthModule
     #region SerializeField
     [SerializeField]
     private float maxHP;
+    [SerializeField]
+    private float defence;
     #endregion
 
     #region Events
-    public Action<DamageType, float> OnDamageTaken;
+    public Action<DamageContainer> OnDamageTaken;
     public Action OnDeath;
     #endregion
 
@@ -37,14 +39,27 @@ public class HealthModule
         currentHP = maxHP;
     }
 
+    public void IncreaseMaxHP(int amount){
+        maxHP += amount;
+    }
+
+    public void IncreaseDefence(float amount){
+        defence += amount;
+    }
+
     public void SetInvulnerable (bool value) {
         invulnerable = value;
     }
 
-    public void TakeDamage (DamageType damage, float amount) {
+    public void TakeDamage (DamageContainer damage) {
         if (IsDead || invulnerable) return;
-        currentHP -= amount;
-        OnDamageTaken?.Invoke(damage, amount);
+
+        // Remove Defence from Damage
+        float finalDamage = damage.Damage - defence;
+        if(finalDamage <= 0) finalDamage = 0;
+
+        currentHP -= finalDamage;
+        OnDamageTaken?.Invoke(damage);
         if (currentHP > 0) return;
         OnDeath?.Invoke();
     }

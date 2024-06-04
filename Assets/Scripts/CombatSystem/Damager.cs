@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damager : MonoBehaviour {
-    [SerializeField] protected float damage;
+public class Damager : MonoBehaviour, IDamager {
     [SerializeField] protected string damagebleTag = "Player";
-    [SerializeField] protected DamageType damageType;
+    [SerializeField] protected DamageContainer damage;
+    
     protected void OnTriggerEnter(Collider other) {
         DealDamage(other);
     }
@@ -15,6 +15,6 @@ public class Damager : MonoBehaviour {
         if (!other.CompareTag(damagebleTag)) return;
         IDamageble damageble = other.GetComponent<IDamageble>();
         if (damageble == null) return;
-        damageble.TakeDamage(damageType, damage);
+        damageble.TakeDamage(damage);
     }
 }
