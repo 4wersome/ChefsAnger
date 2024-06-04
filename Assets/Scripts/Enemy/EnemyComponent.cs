@@ -9,8 +9,10 @@ public class EnemyComponent : MonoBehaviour, IDamageble {
     [SerializeField] private HealthModule healthModule;
     public Action OnSpawn;
     [SerializeField]
-    public GameObject projectileToSpawn;
+    private GameObject projectileToSpawn;
+    
     public HealthModule HealthModule { get => healthModule; }
+    public GameObject ProjectileToSpawn {get => projectileToSpawn;}
     
     private void Awake() {
         OnSpawn?.Invoke();
