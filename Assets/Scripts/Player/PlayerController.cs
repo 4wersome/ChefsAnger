@@ -9,9 +9,9 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     private const string AnimatorMovingBool = "isMoving";
+    private const string isDeadAnimatorParameter = "PlayerDead";
     
     #region Serialized
-
     [SerializeField]
     Player player;
 
@@ -20,13 +20,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     public PlayerAnimatorMngr AnimatorMgnr;
+    
     [SerializeField]
     private bool isGamepadActive;
-
     #endregion
+
     private AbilityBase[] abilities;
-
-
     public bool IsGamepadActive { get { return isGamepadActive; } }
 
     #region abilityMelee
@@ -52,14 +51,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
- 
     void Update()
     {
         SetAnimatorMovement();
     }
 
     #region public
-
     public Vector3 GetForward()
     {
         return playerRigidBody.transform.forward;
@@ -92,9 +89,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-
-
-
     #region Internal
     private void SetGamepadActive(GlobalEventArgs message)
     {
@@ -110,4 +104,29 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Abilities
+    public void UnlockAbility(RecipeNameEnum recipeName){
+        foreach(AbilityBase ability in abilities){
+            if(ability.RequiredRecipe != RecipeNameEnum.None && ability.RequiredRecipe == recipeName){
+                ability.UnlockAbility();
+                break;
+            }
+        }
+    }
+    #endregion
+
+    #region HealthModule
+    private bool isDead;
+    public Action<DamageContainer> OnDamageTaken;
+    public Action OnDeath;
+    public bool IsDead {
+        get {
+            return isDead;
+        }
+        set {
+            isDead = value;
+            AnimatorMgnr.SetAnimatorBool(isDeadAnimatorParameter, value);
+        }
+    }
+    #endregion
 }

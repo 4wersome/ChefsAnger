@@ -31,23 +31,11 @@ public class PlayerMovement : AbilityBase
     }
     private void FixedUpdate()
     {
-
-
-        //uncomment this  to re-enable  old movement
-        // Move(); 
-
-        //comment this method to disable new movement system 
-        MoveWithForward();
-
+        Move();
         if (!playerController.IsGamepadActive)
         {
             CalculateForwardWithMousePosition();
         }
-        //uncomment this  to re-enable  old movement
-        //else  
-        //{
-        //    SetForwardOnGamepad();
-        //}
 
 
     }
@@ -57,45 +45,69 @@ public class PlayerMovement : AbilityBase
 
 
     //New type of movement based on player forward for both gamepad and keyboard
-    private void MoveWithForward()
+
+    private void MoveWithForwardPad()
+    {
+        Vector3 finalVelocity;
+        Vector3 Controls = playerController.IsGamepadActive ? InputManager.PlayerMovementPad : InputManager.PlayerMovement;
+
+
+        float currentZSpeed = Controls.y * movementSpeed;
+        float currentXSpeed = Controls.x * movementSpeed;
+        Vector3 newForward = new Vector3(Controls.x, 0, Controls.y);
+        finalVelocity = new Vector3(currentXSpeed, 0, currentZSpeed);
+
+
+        if (newForward != Vector3.zero)
+            playerController.SetForward(newForward);
+
+    }
+    private void MoveWithForwardKeyboard()
 
     {
         Vector3 finalVelocity;
         Vector3 Controls = playerController.IsGamepadActive ? InputManager.PlayerMovementPad : InputManager.PlayerMovement;
 
-        if (playerController.IsGamepadActive)
-        {
-            float currentZSpeed = Controls.y * movementSpeed;
-            float currentXSpeed = Controls.x * movementSpeed;
-            Vector3 newForward = new Vector3(Controls.x, 0, Controls.y);
-            finalVelocity = new Vector3(currentXSpeed, 0, currentZSpeed);
+        Vector3 straightVelocity;
+        Vector3 strifeVelocity;
+        Vector3 speed = new Vector3(Controls.x, 0, Controls.y) * movementSpeed;
 
-           
-            if(newForward!=Vector3.zero)
-            playerController.SetForward(newForward);
-        }
-        else
-        {
-            Vector3 straightVelocity;
-            Vector3 strifeVelocity;
-            Vector3 speed = new Vector3(Controls.x, 0,Controls.y) * movementSpeed;
-         
 
-            straightVelocity = playerController.GetForward() * speed.z;
-            strifeVelocity = playerController.GetTransformRight() * speed.x;
+        straightVelocity = playerController.GetForward() * speed.z;
+        strifeVelocity = playerController.GetTransformRight() * speed.x;
 
-            finalVelocity = straightVelocity + strifeVelocity;
-        }
+        finalVelocity = straightVelocity + strifeVelocity;
 
         playerController.AnimatorMgnr.AnimateBlendTree(AnimatorBlendTreeX, Controls.x, AnimatorBlendTreeY, Controls.y);
 
-     
+
         playerController.SetVelocity(finalVelocity);
-        
+
 
     }
 
+    private void MoveWithoutForwrdKeyboard()
+    {
+        Vector2 Direction = InputManager.PlayerMovement;
+        float currentZSpeed = Direction.y * movementSpeed;
+        float currentXSpeed = Direction.x * movementSpeed;
 
+        playerController.AnimatorMgnr.SetAnimatorFloat(AnimatorBlendTreeX, Direction.x);
+        playerController.AnimatorMgnr.SetAnimatorFloat(AnimatorBlendTreeY, Direction.y);
+
+        playerController.SetVelocity(currentXSpeed, currentZSpeed);
+    }
+
+    private void MoveWithoutForwardPad()
+    {
+        Vector2 Direction = InputManager.PlayerMovementPad;
+        float currentZSpeed = Direction.y * movementSpeed;
+        float currentXSpeed = Direction.x * movementSpeed;
+
+
+
+        playerController.SetVelocity(currentXSpeed, currentZSpeed);
+    }
 
     //OLD MOVING METHODS 
     //Gets the forward by  using the vector 2 from the right axis , and giving the Y to the Z of the player 
@@ -114,24 +126,11 @@ public class PlayerMovement : AbilityBase
     {
         if (playerController.IsGamepadActive)
         {
-            Vector2 Direction = InputManager.PlayerMovementPad;
-            float currentZSpeed = Direction.y * movementSpeed;
-            float currentXSpeed = Direction.x * movementSpeed;
-
-
-
-            playerController.SetVelocity(currentXSpeed, currentZSpeed);
+            MoveWithForwardPad();
         }
         else
         {
-            Vector2 Direction = InputManager.PlayerMovement;
-            float currentZSpeed = Direction.y * movementSpeed;
-            float currentXSpeed = Direction.x * movementSpeed;
-
-            playerController.AnimatorMgnr.SetAnimatorFloat(AnimatorBlendTreeX, Direction.x);
-            playerController.AnimatorMgnr.SetAnimatorFloat(AnimatorBlendTreeY, Direction.y);
-
-            playerController.SetVelocity(currentXSpeed, currentZSpeed);
+            MoveWithoutForwrdKeyboard();
 
         }
 

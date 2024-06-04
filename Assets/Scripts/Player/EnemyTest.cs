@@ -6,9 +6,9 @@ public class EnemyTest : MonoBehaviour,IDamageble
 {
     [SerializeField]
     private bool testbool;
-    public void TakeDamage(DamageType type, float amount)
+    public void TakeDamage(DamageContainer damage)
     {
-        Debug.Log("Taking damage:" + amount + "type :" + type);
+        Debug.Log("Taking damage:" + damage.Damage + "type :" + damage.DamageType);
     }
 
     // Start is called before the first frame update
