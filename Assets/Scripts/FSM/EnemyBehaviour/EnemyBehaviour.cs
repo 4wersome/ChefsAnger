@@ -89,6 +89,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     
     protected virtual Transition FollowToAttack(State follow, State attack) {
+        //to implement an exit after the animation
         return ShiftStateOnPlayerDistance(follow, attack, COMPARISON.LESSEQUAL, distanceToStartAttack);
     }
     

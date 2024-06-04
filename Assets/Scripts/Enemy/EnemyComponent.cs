@@ -12,10 +12,14 @@ public class EnemyComponent : MonoBehaviour, IDamageble {
     public HealthModule HealthModule { get => healthModule; }
     
     private void Awake() {
-        healthModule.Reset();
         OnSpawn?.Invoke();
     }
 
+    public void Spawn(Vector3 position) {
+        transform.position = position;
+        healthModule.Reset();
+        OnSpawn?.Invoke();
+    }
     public void TakeDamage(DamageType type, float amount) {
         healthModule.OnDamageTaken?.Invoke(type, amount);
     }
