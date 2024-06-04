@@ -8,7 +8,8 @@ public class EnemyComponent : MonoBehaviour, IDamageble {
 
     [SerializeField] private HealthModule healthModule;
     public Action OnSpawn;
-   
+    [SerializeField]
+    public GameObject projectileToSpawn;
     public HealthModule HealthModule { get => healthModule; }
     
     private void Awake() {
@@ -20,6 +21,11 @@ public class EnemyComponent : MonoBehaviour, IDamageble {
         healthModule.Reset();
         OnSpawn?.Invoke();
     }
+
+    public void Shoot() {
+        if(projectileToSpawn) Instantiate(projectileToSpawn ,transform.position + (transform.forward * 2), transform.rotation);
+    }
+    
     public void TakeDamage(DamageType type, float amount) {
         healthModule.OnDamageTaken?.Invoke(type, amount);
     }

@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyBullet : Damager {
     [SerializeField] private float speed = 3;
     [SerializeField] [Range(0, 10)] private float lifeSpan;
-    
     private Rigidbody rigidbody;
     
     #region Mono
     private void Awake() {
         rigidbody = GetComponent<Rigidbody>();
+        damageType = DamageType.Ranged;
     }
     #endregion
 

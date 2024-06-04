@@ -308,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthModule:
     maxHP: 8
+  projectileToSpawn: {fileID: 131238, guid: 6c6a2dd4bd253624f829c7c57f24356e, type: 3}
 --- !u!114 &7107215189769230561
 MonoBehaviour:
   m_ObjectHideFlags: 0
