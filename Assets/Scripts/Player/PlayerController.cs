@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
     }
 
     #region public
-
     public Vector3 GetForward()
     {
         return playerRigidBody.transform.forward;
@@ -92,9 +91,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-
-
-
     #region Internal
     private void SetGamepadActive(GlobalEventArgs message)
     {
@@ -110,4 +106,14 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Abilities
+    public void UnlockAbility(RecipeNameEnum recipeName){
+        foreach(AbilityBase ability in abilities){
+            if(ability.RequiredRecipe != RecipeNameEnum.None && ability.RequiredRecipe == recipeName){
+                ability.UnlockAbility();
+                break;
+            }
+        }
+    }
+    #endregion
 }

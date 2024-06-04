@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - Ground
-  - 
-  - 
-  - 
+  - Enemy
+  - Prop
+  - Ignore Player
   - 
   - 
   - 
