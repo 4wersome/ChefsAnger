@@ -60,9 +60,11 @@ public class EnemyBehaviour : MonoBehaviour {
         
         Animator animator = GetComponent<Animator>();
         AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Attack");
+        AnimatorSetBoolean setBoolean = new AnimatorSetBoolean(animator, "AttackEnded", false);
+        
         DebugAction debugAction = new DebugAction("AttackEnter", "AttackExit");
 
-        state.SetUpMe(new StateAction[] { stopAction, setTrigger, debugAction });
+        state.SetUpMe(new StateAction[] { stopAction, setTrigger, setBoolean, debugAction });
         return state;
     }
     
@@ -74,7 +76,9 @@ public class EnemyBehaviour : MonoBehaviour {
         AnimatorTriggerAction triggerDeath = new AnimatorTriggerAction(animator, "Death");
         //to implement a time delay for the visibility (or a gradual as for the material)
         SetVisibleAction setVisible = new SetVisibleAction(gameObject);
+        
         DebugAction debugAction = new DebugAction("DeathEnter", "DeathExit");
+        
         state.SetUpMe(new StateAction[] { stopAction, triggerDeath, setVisible, debugAction });
         return state;
     }
