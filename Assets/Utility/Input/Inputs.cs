@@ -71,6 +71,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AbilityCheeseWheel"",
+                    ""type"": ""Button"",
+                    ""id"": ""58840b51-eadb-4fc1-97a2-2b3bae2b7039"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,28 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""MeleeAttackPad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a973315-da00-4a81-86f9-e8d294002085"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""AbilityCheeseWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5fbc359-bc02-482b-8e46-ea164b913b0f"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AbilityCheeseWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -213,6 +244,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Player_Looking = m_Player.FindAction("Looking", throwIfNotFound: true);
         m_Player_MovementPad = m_Player.FindAction("MovementPad", throwIfNotFound: true);
         m_Player_MeleeAttackPad = m_Player.FindAction("MeleeAttackPad", throwIfNotFound: true);
+        m_Player_AbilityCheeseWheel = m_Player.FindAction("AbilityCheeseWheel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -279,6 +311,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Looking;
     private readonly InputAction m_Player_MovementPad;
     private readonly InputAction m_Player_MeleeAttackPad;
+    private readonly InputAction m_Player_AbilityCheeseWheel;
     public struct PlayerActions
     {
         private @Inputs m_Wrapper;
@@ -288,6 +321,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         public InputAction @Looking => m_Wrapper.m_Player_Looking;
         public InputAction @MovementPad => m_Wrapper.m_Player_MovementPad;
         public InputAction @MeleeAttackPad => m_Wrapper.m_Player_MeleeAttackPad;
+        public InputAction @AbilityCheeseWheel => m_Wrapper.m_Player_AbilityCheeseWheel;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -312,6 +346,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MeleeAttackPad.started += instance.OnMeleeAttackPad;
             @MeleeAttackPad.performed += instance.OnMeleeAttackPad;
             @MeleeAttackPad.canceled += instance.OnMeleeAttackPad;
+            @AbilityCheeseWheel.started += instance.OnAbilityCheeseWheel;
+            @AbilityCheeseWheel.performed += instance.OnAbilityCheeseWheel;
+            @AbilityCheeseWheel.canceled += instance.OnAbilityCheeseWheel;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -331,6 +368,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MeleeAttackPad.started -= instance.OnMeleeAttackPad;
             @MeleeAttackPad.performed -= instance.OnMeleeAttackPad;
             @MeleeAttackPad.canceled -= instance.OnMeleeAttackPad;
+            @AbilityCheeseWheel.started -= instance.OnAbilityCheeseWheel;
+            @AbilityCheeseWheel.performed -= instance.OnAbilityCheeseWheel;
+            @AbilityCheeseWheel.canceled -= instance.OnAbilityCheeseWheel;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -373,5 +413,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         void OnLooking(InputAction.CallbackContext context);
         void OnMovementPad(InputAction.CallbackContext context);
         void OnMeleeAttackPad(InputAction.CallbackContext context);
+        void OnAbilityCheeseWheel(InputAction.CallbackContext context);
     }
 }
