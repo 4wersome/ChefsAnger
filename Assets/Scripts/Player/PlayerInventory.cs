@@ -17,6 +17,8 @@ public class PlayerInventory : MonoBehaviour
     public Action<Ingredient> OnIngredientGot;
     public Action<Recipe> OnRecipeFound;
     public Action<Recipe> OnRecipeCompleted;
+    public Action<Potion> OnPotionGot;
+    public Action<Shield> OnShieldGot;
     #endregion
 
     private void Awake()
@@ -48,6 +50,16 @@ public class PlayerInventory : MonoBehaviour
             case PickupableItemType.Recipe:
                 Recipe recipe = (Recipe) item;
                 AddRecipe(recipe);
+                break;
+
+            case PickupableItemType.Potion:
+                Potion potion = (Potion) item;
+                PickPotion(potion);
+                break;
+
+            case PickupableItemType.Shield:
+                Shield shield = (Shield) item;
+                PickShield(shield);
                 break;
         }
     }
@@ -116,6 +128,16 @@ public class PlayerInventory : MonoBehaviour
         foreach(Ingredient ingredient in recipe.RequiredIngredients){
             ConsumeIngredient(ingredient);
         }
+    }
+    #endregion
+
+    #region Temporary PowerUp
+    public void PickPotion(Potion potion){
+        OnPotionGot?.Invoke(potion);
+    }
+    
+    public void PickShield(Shield shield){
+        OnShieldGot?.Invoke(shield);
     }
     #endregion
 }

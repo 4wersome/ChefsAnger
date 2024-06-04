@@ -57,6 +57,8 @@ public class Player : MonoBehaviour, IDamageble
         healthModule.OnDamageTaken += InternalOnDamageTaken;
         healthModule.OnDeath += InternalOnDeath;
         playerInventory.OnRecipeCompleted += InternalOnRecipeCompleted;
+        playerInventory.OnPotionGot += InternalOnPotionGot;
+        playerInventory.OnShieldGot += InternalOnShieldGot;
     }
     #endregion
 
@@ -85,6 +87,7 @@ public class Player : MonoBehaviour, IDamageble
     #endregion
 
     #region Inventory
+    // Recipe Completition
     public void InternalOnRecipeCompleted(Recipe recipe) {
         RecipeNameEnum recipeName = recipe.RecipeName;
         switch(recipeName){
@@ -102,6 +105,23 @@ public class Player : MonoBehaviour, IDamageble
                 break;
         }
         Debug.Log("Completed Recipe: " + recipeName);
+    }
+
+    // Potion
+    public void InternalOnPotionGot(Potion potion) {
+        healthModule.HealDamage(potion.HealAmount);
+        if(healthModule.CurrentHP == healthModule.MaxHP){
+            Debug.Log("Full Healed!");
+        }
+        else{
+            Debug.Log("Healed of: " + potion.HealAmount + "HP");
+        }
+    }
+
+    // Shield
+    public void InternalOnShieldGot(Shield shield) {
+        SetInvulnearble(shield.ShieldTime);
+        Debug.Log("Shield Activated for " + shield.ShieldTime + " seconds");
     }
     #endregion
 

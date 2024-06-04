@@ -2,17 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : MonoBehaviour
+public class Potion : MonoBehaviour, IPickupable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField]
+    private float healAmount;
+
+    #region ReferenceGetter
+    public float HealAmount {
+        get { return healAmount; }
+    }
+    #endregion
+
+    #region PickUp Methods
+
+    public PickupableItemType GetPickupableItemType(){
+        return PickupableItemType.Potion;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPickup()
     {
-        
+       Debug.Log("Picked up Potion - Heal Power: " + healAmount + " HP");
+       DeSpawnItem();
     }
+    
+    public void SpawnItemInWorld(Transform position)
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void DeSpawnItem()
+    {
+        gameObject.SetActive(false);
+    }
+    #endregion
 }

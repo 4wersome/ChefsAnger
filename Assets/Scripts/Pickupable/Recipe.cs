@@ -66,7 +66,7 @@ public class Recipe : MonoBehaviour, IPickupable
     }
     #endregion
 
-#region PickUp Methods
+    #region PickUp Methods
     public PickupableItemType GetPickupableItemType(){
         return PickupableItemType.Recipe;
     }
@@ -89,6 +89,6 @@ public class Recipe : MonoBehaviour, IPickupable
     {
         gameObject.SetActive(false);
     }
-#endregion
+    #endregion
 
 }

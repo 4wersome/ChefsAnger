@@ -14,6 +14,7 @@ public class HealthModule
 
     #region Events
     public Action<DamageContainer> OnDamageTaken;
+    public Action<float> OnHealed;
     public Action OnDeath;
     #endregion
 
@@ -49,6 +50,13 @@ public class HealthModule
 
     public void SetInvulnerable (bool value) {
         invulnerable = value;
+    }
+
+    public void HealDamage (float healAmount) {
+        if (IsDead) return;
+        currentHP += healAmount;
+        OnHealed?.Invoke(healAmount);
+        if (currentHP > maxHP) Reset();
     }
 
     public void TakeDamage (DamageContainer damage) {
