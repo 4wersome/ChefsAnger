@@ -11,7 +11,7 @@ public class SetVelocity3DAction : StateAction {
     
     public SetVelocity3DAction(Rigidbody rigidbody, Transform ownerTransform, Transform targetTransform, float velocityLenghtToSet, bool everyFrame = false) {
         this.rigidbody = rigidbody;
-        this.directionToSet = (ownerTransform.position - targetTransform.position).normalized;
+        this.directionToSet = (targetTransform.position - ownerTransform.position).normalized;
         this.everyFrame = everyFrame;
         this.velocityLenghtToSet = velocityLenghtToSet;
     }

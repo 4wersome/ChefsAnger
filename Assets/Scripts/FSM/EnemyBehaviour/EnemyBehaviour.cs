@@ -18,27 +18,39 @@ public class EnemyBehaviour : MonoBehaviour {
         
         State follow = SetUpBaseMovementState();
         State attack = SetUpAttackState();
-        State death;
+        State death = SetUpDeathState();
         
-        follow.SetUpMe(new Transition[] { FollowToAttack(follow, attack)});
-        attack.SetUpMe(new Transition[] { AttackToFollow(attack, follow)});
-        
-        stateMachine.Init(new State[] { follow, attack }, follow);
+        follow.SetUpMe(new Transition[] { FollowToAttack(follow, attack), StateToDeath(follow, death)});
+        attack.SetUpMe(new Transition[] { AttackToFollow(attack, follow), StateToDeath(attack, death)});
+        death.SetUpMe(new Transition[] { DeathToMovementState(death, follow)});
+        stateMachine.Init(new State[] { follow, attack, death }, follow);
     }
     #endregion
 
     #region StateSetUp
     protected State SetUpBaseMovementState(){
         State state = new State();
-        Rigidbody rigidbody = GetComponent<Rigidbody>();
-        SetVelocity3DAction setVelocity = new SetVelocity3DAction(GetComponent<Rigidbody>(), Player.Get().transform, transform, followSpeed);
-        FollowTargetAction followTargetAction = new FollowTargetAction(gameObject, Player.Get().gameObject.transform);
-
-        Animator animator = GetComponent<Animator>();
-        AnimatorSetSpeedAction setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed", true);
-        AnimatorSetTriggerAction setTrigger = new AnimatorSetTriggerAction(animator, "Run");
         
-        state.SetUpMe(new StateAction[] { setVelocity, followTargetAction, setSpeedAction, setTrigger });
+        Animator animator = GetComponent<Animator>();
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+
+        AnimatorSetSpeedAction setSpeedAction;
+        AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Run");
+        SetVelocity3DAction setVelocity;
+        DebugAction debugAction = new DebugAction("MovementEnter", "MovementExit");
+
+        if (Player.Get()) {
+            setVelocity = new SetVelocity3DAction(rigidbody, Player.Get().transform, transform, followSpeed);
+            setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed", true);
+            FollowTargetAction followTargetAction = new FollowTargetAction(gameObject, Player.Get().gameObject.transform);
+            state.SetUpMe(new StateAction[] { setVelocity, followTargetAction, setSpeedAction, setTrigger, debugAction });
+        }
+        else {
+            setVelocity = new SetVelocity3DAction(rigidbody, Vector3.zero, followSpeed);
+            setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed");
+            state.SetUpMe(new StateAction[] { setVelocity, setSpeedAction, setTrigger, debugAction });
+        }
+        
         return state;
     }
 
@@ -47,10 +59,10 @@ public class EnemyBehaviour : MonoBehaviour {
         SetVelocity2DAction stopAction = new SetVelocity2DAction(GetComponent<Rigidbody>(), Vector3.zero, false);
         
         Animator animator = GetComponent<Animator>();
-        AnimatorResetTriggerAction resetTriggerRun = new AnimatorResetTriggerAction(animator, "Run");
-        AnimatorSetTriggerAction setTrigger = new AnimatorSetTriggerAction(animator, "Attack");
-        
-        state.SetUpMe(new StateAction[] { stopAction, resetTriggerRun, setTrigger });
+        AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Attack");
+        DebugAction debugAction = new DebugAction("AttackEnter", "AttackExit");
+
+        state.SetUpMe(new StateAction[] { stopAction, setTrigger, debugAction });
         return state;
     }
     
@@ -59,36 +71,44 @@ public class EnemyBehaviour : MonoBehaviour {
         SetVelocity2DAction stopAction = new SetVelocity2DAction(GetComponent<Rigidbody>(), Vector3.zero, false);
         
         Animator animator = GetComponent<Animator>();
-        AnimatorResetTriggerAction resetTriggerRun = new AnimatorResetTriggerAction(animator, "Run");
-        AnimatorResetTriggerAction resetTriggerAttack = new AnimatorResetTriggerAction(animator, "Attack");
         AnimatorTriggerAction triggerDeath = new AnimatorTriggerAction(animator, "Death");
-        
-        state.SetUpMe(new StateAction[] { stopAction, resetTriggerRun, resetTriggerAttack, triggerDeath });
+        //to implement a time delay for the visibility (or a gradual as for the material)
+        SetVisibleAction setVisible = new SetVisibleAction(gameObject);
+        DebugAction debugAction = new DebugAction("DeathEnter", "DeathExit");
+        state.SetUpMe(new StateAction[] { stopAction, triggerDeath, setVisible, debugAction });
         return state;
     }
     #endregion
 
     #region TransitionSetUp
-    protected virtual Transition FollowToAttack(State follow, State attack) {
+    protected virtual Transition ShiftStateOnPlayerDistance(State prev, State next, COMPARISON distanceComparison, float distanceToCheck) {
         Transition transition = new Transition();
-        CheckDistanceCondition distanceCondition = new CheckDistanceCondition(transform, Player.Get().transform,
-            distanceToStartAttack, COMPARISON.LESSEQUAL);
-        transition.SetUpMe(follow, attack, new Condition[]{ distanceCondition });
+        CheckDistanceCondition distanceCondition = new CheckDistanceCondition(transform, Player.Get().transform, distanceToCheck, distanceComparison);
+        transition.SetUpMe(prev, next, new Condition[]{ distanceCondition });
         return transition;
     }
+    
+    protected virtual Transition FollowToAttack(State follow, State attack) {
+        return ShiftStateOnPlayerDistance(follow, attack, COMPARISON.LESSEQUAL, distanceToStartAttack);
+    }
+    
     protected virtual Transition AttackToFollow(State attack, State follow) {
+        return ShiftStateOnPlayerDistance(follow, attack, COMPARISON.GREATEREQUAL, distanceToStopAttack);
+    }
+
+    protected virtual Transition StateToDeath(State actualState, State death) {
         Transition transition = new Transition();
-        CheckDistanceCondition distanceCondition = new CheckDistanceCondition(transform, Player.Get().transform,
-            distanceToStopAttack, COMPARISON.GREATEREQUAL);
-        transition.SetUpMe(attack, follow, new Condition[]{ distanceCondition });
+        HpStateCondition hpStateCondition =
+            new HpStateCondition(GetComponent<EnemyComponent>()?.HealthModule, COMPARISON.LESSEQUAL, 0);
+        transition.SetUpMe(actualState, death, new Condition[]{ hpStateCondition });
         return transition;
     }
 
-    protected virtual Transition StateToDeath(State prev, State death) {
+    protected virtual Transition DeathToMovementState(State death, State movemenState) {
         Transition transition = new Transition();
         HpStateCondition hpStateCondition =
-            new HpStateCondition(COMPARISON.LESSEQUAL, GetComponent<EnemyComponent>()?.HealthModule, 0);
-        transition.SetUpMe(prev, death, new Condition[]{ hpStateCondition });
+            new HpStateCondition(GetComponent<EnemyComponent>()?.HealthModule, COMPARISON.GREATEREQUAL, 1);
+        transition.SetUpMe(death, movemenState, new Condition[]{ hpStateCondition });
         return transition;
     }
     

@@ -26,7 +26,7 @@ public class FollowTargetAction : StateAction {
     }
 
     protected void InternalSetVelocity() {
-        Vector3 direction = (owner.transform.position - target.transform.position).normalized;
+        Vector3 direction = (target.transform.position - owner.transform.position).normalized;
         rigidbody.velocity = rigidbody.velocity.magnitude * direction;
         Quaternion rotation =  Quaternion.LookRotation(direction, Vector3.up);
         owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, rotation, Time.deltaTime * rotationSpeed);
