@@ -11,11 +11,6 @@ public class ThrowAnimationRedirector : MonoBehaviour
     public void EventRedirect(AnimationEvent animEvent)
     { 
         Debug.Log("Animation Event triggered: " + animEvent);
-        DoIt();
-    }
-
-    public void DoIt()
-    {
         if (throwAbility is IThrowAbility)
         {
             //TODO remove
