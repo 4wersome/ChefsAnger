@@ -1,0 +1,17 @@
+{
+    "name": "Destroyable",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e3a30edeb2a4a5c46aec05c0a4faf5bd",
+        "GUID:df8be16442906e8449ee29c998ccb7f8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
