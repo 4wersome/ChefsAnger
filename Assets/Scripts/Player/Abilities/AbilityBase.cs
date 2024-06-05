@@ -15,7 +15,7 @@ public abstract class AbilityBase : MonoBehaviour
     public bool IsPrevented {  get { return isPrevented; } }
 
 
-    public  void Init(PlayerController controller)
+    public void Init(PlayerController controller)
     {
         playerController = controller;
     }
