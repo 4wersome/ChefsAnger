@@ -77,7 +77,7 @@ public class Player : MonoBehaviour, IDamageble
         NotifyHealthUpdatedGlobal();
         onDamageTaken?.Invoke(container);
         playerController.OnDamageTaken?.Invoke(container);
-        SetInvulnearble(damageInvTime);
+        SetInvulnerable(damageInvTime);
     }
 
     public void InternalOnDeath() {
@@ -120,13 +120,13 @@ public class Player : MonoBehaviour, IDamageble
 
     // Shield
     public void InternalOnShieldGot(Shield shield) {
-        SetInvulnearble(shield.ShieldTime);
+        SetInvulnerable(shield.ShieldTime);
         Debug.Log("Shield Activated for " + shield.ShieldTime + " seconds");
     }
     #endregion
 
     #region PrivateMethods
-    private void SetInvulnearble (float invTime) {
+    private void SetInvulnerable (float invTime) {
         if (invCoroutine != null) {
             StopCoroutine(invCoroutine);
         }
