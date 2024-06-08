@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AbilityAppleThrow",
+                    "type": "Button",
+                    "id": "4a9afc8b-923e-491d-b225-28c13b717ecb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -179,6 +188,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "AbilityCheeseWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb154bf2-a87c-4c23-b626-76739b736b8c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "AbilityAppleThrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd6ddbfe-7c04-4c20-9dcb-4b370e24d291",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "AbilityAppleThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

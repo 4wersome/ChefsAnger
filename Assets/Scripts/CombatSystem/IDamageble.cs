@@ -3,7 +3,8 @@ using System;
 public enum DamageType
 {
     Melee,
-    Ranged
+    Ranged,
+    Explosive
 }
 
 public interface IDamageble

@@ -22,6 +22,11 @@ public static class InputManager
         return input.Player.AbilityCheeseWheel.WasPressedThisFrame();
     }
 
+    public static bool AbilityAppleThrowPressed()
+    {
+        return input.Player.AbilityAppleThrow.WasPressedThisFrame();
+    }
+
     #region mouse and keyboard
 
 

@@ -23,6 +23,11 @@ public class PlayerAnimatorMngr : MonoBehaviour
         
     }
 
+    public bool GetAnimatorBool(string name)
+    {
+      return playerAnimator.GetBool(Animator.StringToHash(name));
+    }
+
     //This check if an animation is currently running
     public bool CheckCurrentAnimationState (int layer , string StateName)
     {

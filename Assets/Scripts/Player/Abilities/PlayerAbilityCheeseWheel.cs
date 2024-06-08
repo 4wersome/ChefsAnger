@@ -7,8 +7,7 @@ public class PlayerAbilityCheeseWheel : AbilityBase, IThrowAbility
     private const int animationLayer = 0;
     private const string animationStateName = "ThrowCheese";
     private const string animationStateTrigger = "AbilityCheeseWheel";
-    [SerializeField] //for testing purposes
-    private bool isUnlocked = false;
+   
     [SerializeField]
     private GameObject projectilePrefab;
 
@@ -20,7 +19,7 @@ public class PlayerAbilityCheeseWheel : AbilityBase, IThrowAbility
 
     void Update()
     {
-        if (isUnlocked) 
+        if (isEnabled) 
         {
             if (InputManager.AbilityCheeseWheelPressed() && !isPrevented && !playerController.AnimatorMgnr.CheckCurrentAnimationState(animationLayer, animationStateName))
             {
@@ -47,7 +46,7 @@ public class PlayerAbilityCheeseWheel : AbilityBase, IThrowAbility
     public override void UnlockAbility() 
     {
         Debug.Log("Cheese wheel unlocked");
-        isUnlocked = true;
+        isEnabled = true;
     }
 
     public void PrintEvent(string s)
