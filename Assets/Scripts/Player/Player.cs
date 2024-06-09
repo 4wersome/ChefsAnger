@@ -65,6 +65,7 @@ public class Player : MonoBehaviour, IDamageble
         healthModule.Reset();
         NotifyHealthUpdatedGlobal();
         playerController.IsDead = false;
+
     }
 
     public void TakeDamage(DamageContainer damage) {

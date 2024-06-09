@@ -11,8 +11,6 @@ public class ProjectileApple : ProjectileBase
 
     protected BoxCollider boxCollider;
     protected MeshRenderer meshRender;
-    protected float ExplosionDmg = 5f;
-    protected DamageType dmgType = DamageType.Explosive;
 
     protected bool startPositionCalculated;
 
@@ -55,7 +53,7 @@ public class ProjectileApple : ProjectileBase
         startPositionCalculated = false;
         projectileIsReady = false;
         sphereRadiusCollider.enabled = false;
-      
+
     }
     #endregion
 
@@ -80,9 +78,9 @@ public class ProjectileApple : ProjectileBase
         {
             StartDespawnTimer();
         }
-       
+
     }
-    
+
     private void Explode()
     {
         meshRender.enabled = false;
@@ -91,11 +89,11 @@ public class ProjectileApple : ProjectileBase
     }
     private void Update()
     {
-       //a timer to  make the apple disappear before the trigger of the explosion collider 
+        //a timer to  make the apple disappear before the trigger of the explosion collider 
         if (timerIsAwake)
         {
             elapsedTime += Time.deltaTime;
-            if(elapsedTime>appleDespawnTime && meshRender.enabled)
+            if (elapsedTime > appleDespawnTime && meshRender.enabled)
             {
                 Explode();
             }

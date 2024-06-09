@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AbilityPumpkinMine",
+                    "type": "Button",
+                    "id": "53fc6d01-fd99-49db-97d4-fab8ffefb871",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -210,6 +219,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "AbilityAppleThrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbe1e643-4376-4fd3-9bba-3100025bfbce",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "AbilityPumpkinMine",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "898ac8fa-de62-47fa-8e0a-c119dc8d9266",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "AbilityPumpkinMine",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

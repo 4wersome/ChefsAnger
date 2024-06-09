@@ -89,6 +89,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AbilityPumpkinMine"",
+                    ""type"": ""Button"",
+                    ""id"": ""53fc6d01-fd99-49db-97d4-fab8ffefb871"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -234,6 +243,28 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""AbilityAppleThrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbe1e643-4376-4fd3-9bba-3100025bfbce"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AbilityPumpkinMine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""898ac8fa-de62-47fa-8e0a-c119dc8d9266"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""AbilityPumpkinMine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -277,6 +308,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Player_MeleeAttackPad = m_Player.FindAction("MeleeAttackPad", throwIfNotFound: true);
         m_Player_AbilityCheeseWheel = m_Player.FindAction("AbilityCheeseWheel", throwIfNotFound: true);
         m_Player_AbilityAppleThrow = m_Player.FindAction("AbilityAppleThrow", throwIfNotFound: true);
+        m_Player_AbilityPumpkinMine = m_Player.FindAction("AbilityPumpkinMine", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -345,6 +377,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MeleeAttackPad;
     private readonly InputAction m_Player_AbilityCheeseWheel;
     private readonly InputAction m_Player_AbilityAppleThrow;
+    private readonly InputAction m_Player_AbilityPumpkinMine;
     public struct PlayerActions
     {
         private @Inputs m_Wrapper;
@@ -356,6 +389,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         public InputAction @MeleeAttackPad => m_Wrapper.m_Player_MeleeAttackPad;
         public InputAction @AbilityCheeseWheel => m_Wrapper.m_Player_AbilityCheeseWheel;
         public InputAction @AbilityAppleThrow => m_Wrapper.m_Player_AbilityAppleThrow;
+        public InputAction @AbilityPumpkinMine => m_Wrapper.m_Player_AbilityPumpkinMine;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -386,6 +420,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @AbilityAppleThrow.started += instance.OnAbilityAppleThrow;
             @AbilityAppleThrow.performed += instance.OnAbilityAppleThrow;
             @AbilityAppleThrow.canceled += instance.OnAbilityAppleThrow;
+            @AbilityPumpkinMine.started += instance.OnAbilityPumpkinMine;
+            @AbilityPumpkinMine.performed += instance.OnAbilityPumpkinMine;
+            @AbilityPumpkinMine.canceled += instance.OnAbilityPumpkinMine;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -411,6 +448,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @AbilityAppleThrow.started -= instance.OnAbilityAppleThrow;
             @AbilityAppleThrow.performed -= instance.OnAbilityAppleThrow;
             @AbilityAppleThrow.canceled -= instance.OnAbilityAppleThrow;
+            @AbilityPumpkinMine.started -= instance.OnAbilityPumpkinMine;
+            @AbilityPumpkinMine.performed -= instance.OnAbilityPumpkinMine;
+            @AbilityPumpkinMine.canceled -= instance.OnAbilityPumpkinMine;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -455,5 +495,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         void OnMeleeAttackPad(InputAction.CallbackContext context);
         void OnAbilityCheeseWheel(InputAction.CallbackContext context);
         void OnAbilityAppleThrow(InputAction.CallbackContext context);
+        void OnAbilityPumpkinMine(InputAction.CallbackContext context);
     }
 }

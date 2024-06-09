@@ -24,6 +24,8 @@ public class AnimatorTriggerAction : StateAction
 
     public override void OnExit() {
         animator.ResetTrigger(Animator.StringToHash(triggerName));
+
+        Debug.Log("OnExit ");
     }
 
     private void InternalSetTrigger () {

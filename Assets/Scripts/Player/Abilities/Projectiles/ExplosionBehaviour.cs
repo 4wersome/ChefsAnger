@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AppleExplosionBehaviour : MonoBehaviour,IDamager
+public class ExplosionBehaviour : MonoBehaviour,IDamager
 {
     [SerializeField]
     private float Damage = 5f;
+
     private DamageType type = DamageType.Explosive;
 
     private DamageContainer damageContainer = new DamageContainer();

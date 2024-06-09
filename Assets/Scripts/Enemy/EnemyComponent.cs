@@ -29,6 +29,8 @@ public class EnemyComponent : MonoBehaviour, IDamageble {
     }
     
     public void TakeDamage(DamageContainer damage) {
-        healthModule.OnDamageTaken?.Invoke(damage);
+        
+        healthModule.TakeDamage(damage);
     }
+
 }
