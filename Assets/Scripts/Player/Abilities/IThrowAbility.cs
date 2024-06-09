@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IThrowAbility 
 {
-    public void ThrowProjectile(Vector3 forward, Quaternion rotation);
+    public void TriggerThrow();
 }

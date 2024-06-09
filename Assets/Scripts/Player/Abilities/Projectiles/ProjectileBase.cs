@@ -38,6 +38,11 @@ public abstract class ProjectileBase : MonoBehaviour
 
         if (!launch)
         {
+            if(rb == null)
+            {
+                Debug.LogWarning("Rigid body is null!");
+                return;
+            }
             rb.AddForce(ThrowForce, ForceMode.Impulse);
             launch = true;
         }
