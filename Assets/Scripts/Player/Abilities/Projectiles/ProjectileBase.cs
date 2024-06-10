@@ -16,7 +16,7 @@ public abstract class ProjectileBase : MonoBehaviour
 
     void Awake()
     {
-       
+      
     }
 
     public virtual void EnableProjectile()

@@ -26,7 +26,10 @@ public static class InputManager
     {
         return input.Player.AbilityAppleThrow.WasPressedThisFrame();
     }
-
+    public static bool AbilityPumpkinMinePressed()
+    {
+        return input.Player.AbilityPumpkinMine.WasPressedThisFrame();
+    }
     #region mouse and keyboard
 
 

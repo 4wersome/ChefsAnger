@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5618703070441519307}
   - component: {fileID: 7298032406872366823}
+  - component: {fileID: 3722087914428978517}
   - component: {fileID: 5011804138318849434}
   m_Layer: 0
   m_Name: PumpkinMine
@@ -46,6 +47,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97b01c6aa400eb41b1665821d832d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
+--- !u!54 &3722087914428978517
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7705839331530101335}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!65 &5011804138318849434
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -131,6 +160,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 199514, guid: 0d56ba182c17d0e4da331a28eba47ccf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9098647279966269453}
+    - targetCorrespondingSourceObject: {fileID: 199514, guid: 0d56ba182c17d0e4da331a28eba47ccf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1325642122642753426}
   m_SourcePrefab: {fileID: 100100000, guid: 0d56ba182c17d0e4da331a28eba47ccf, type: 3}
 --- !u!1 &805890064011882428 stripped
 GameObject:
@@ -165,12 +197,33 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
   m_Radius: 1.8100286
   m_Center: {x: 0, y: 0.21586847, z: 0.0335418}
+--- !u!65 &1325642122642753426
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805890064011882428}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.42952466, y: 0.3190418, z: 0.44293562}
+  m_Center: {x: -0.000000037252903, y: 0.1595209, z: 0.000000029802322}
 --- !u!4 &805890064012120634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 489180, guid: 0d56ba182c17d0e4da331a28eba47ccf, type: 3}

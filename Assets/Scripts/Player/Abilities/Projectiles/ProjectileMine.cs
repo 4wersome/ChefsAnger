@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ProjectileMine : ProjectileBase
 {
-    [SerializeField]
-    protected bool isActive;
+    
+    protected bool isExploded;
     protected SphereCollider sphereCollider;
     protected BoxCollider boxCollider ;
     protected MeshRenderer Renderer;
@@ -15,9 +15,18 @@ public class ProjectileMine : ProjectileBase
     protected float timer;
     protected bool timerIsActive;
     
-    
+
+    public bool IsExploded { get { return isExploded; } }
+
+    #region Mono
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     private void Start()
     {
+       // rb.GetComponent<Rigidbody>();
         sphereCollider = GetComponentInChildren<SphereCollider>();
         Renderer = GetComponentInChildren<MeshRenderer>();
         boxCollider = GetComponentInChildren<BoxCollider>();
@@ -25,50 +34,65 @@ public class ProjectileMine : ProjectileBase
         DisableProjectile();
     }
 
-    public override void EnableProjectile()
+    private void Update()
     {
-        base.EnableProjectile();
-        Renderer.enabled = true;    
-    }
+        if (isExploded)
+            if (timerIsActive)
+            {
+                timer -= Time.deltaTime;
+                if (timer < 0)
+                {
+                    timerIsActive = false;
+                    DisableProjectile();
+                }
+            }
 
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == (int)Layers.Enemy)
         {
+            isExploded = true;
             boxCollider.enabled = false;
             Renderer.enabled = false;
             sphereCollider.enabled = true;
             StartDespawnTimer();
+
 
        }
 
         
     }
 
+    #endregion
 
-    public override void DisableProjectile()
-    {
-        base.DisableProjectile();
-        sphereCollider.enabled = false;
-    }
 
+    #region Internal
     private void StartDespawnTimer()
     {
         timer = timeToDespawn;
         timerIsActive = true;
     }
 
-    private void Update()
+    #endregion
+
+    #region overrides
+    public override void EnableProjectile()
     {
-        if (isActive )
-         if (timerIsActive)
-        {
-            timer -= Time.deltaTime;
-            if (timer < 0)
-            {
-                timerIsActive = false;
-                DisableProjectile();
-            }
-        }
+        base.EnableProjectile();
+        boxCollider.enabled = true;
+        Renderer.enabled = true;    
     }
+    public override void DisableProjectile()
+    {
+        base.DisableProjectile();
+        isExploded = false;
+        sphereCollider.enabled = false;
+    }
+
+
+
+    #endregion
+
+
 }
