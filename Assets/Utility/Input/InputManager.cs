@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public static class InputManager
@@ -20,10 +17,21 @@ public static class InputManager
         get { return input.Player; }
     }
 
+    public static bool AbilityCheeseWheelPressed()
+    {
+        return input.Player.AbilityCheeseWheel.WasPressedThisFrame();
+    }
 
-
+    public static bool AbilityAppleThrowPressed()
+    {
+        return input.Player.AbilityAppleThrow.WasPressedThisFrame();
+    }
+    public static bool AbilityPumpkinMinePressed()
+    {
+        return input.Player.AbilityPumpkinMine.WasPressedThisFrame();
+    }
     #region mouse and keyboard
-  
+
 
     public static bool PlayerMelee()
     {

@@ -10,7 +10,7 @@ public class EnemyBullet : Damager {
     #region Mono
     private void Awake() {
         rigidbody = GetComponent<Rigidbody>();
-        damageType = DamageType.Ranged;
+        damage.DamageType = DamageType.Ranged;
     }
     #endregion
 

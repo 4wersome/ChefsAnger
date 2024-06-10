@@ -34,7 +34,7 @@ public class Ingredient : MonoBehaviour, IPickupable
         this.number = number;
     }
 
-#region PickUp Methods
+    #region PickUp Methods
 
     public PickupableItemType GetPickupableItemType(){
         return PickupableItemType.Ingredient;
@@ -55,6 +55,6 @@ public class Ingredient : MonoBehaviour, IPickupable
     {
         gameObject.SetActive(false);
     }
-#endregion
+    #endregion
 
 }

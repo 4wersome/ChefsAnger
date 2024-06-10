@@ -7,15 +7,17 @@ public abstract class AbilityBase : MonoBehaviour
 {
     [SerializeField]
     protected RecipeNameEnum requiredRecipe;
+    [SerializeField] // For Testing Purpose
+    protected bool isEnabled;
+
 
     protected PlayerController playerController;
     protected bool isPrevented = false;
-
     public RecipeNameEnum RequiredRecipe { get { return requiredRecipe; }}
     public bool IsPrevented {  get { return isPrevented; } }
 
 
-    public  void Init(PlayerController controller)
+    public void Init(PlayerController controller)
     {
         playerController = controller;
     }

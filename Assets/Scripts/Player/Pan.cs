@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class Pan : MonoBehaviour
 {
-    private  float damage = 1f;
-    private DamageType type = DamageType.Melee;
+    [SerializeField]
+    private DamageContainer damage;
 
+    #region Mono
+    private void Awake() {
+    }
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("collider found");
         IDamageble damageble = other.GetComponent<IDamageble>();
-        if (damageble == null) return;
-
-        damageble.TakeDamage(type, damage);
+        if (damageble == null)
+        {
+            Debug.Log("Damageble not found ");
+            return;
+        }
+        damageble.TakeDamage(damage);
     }
 
 }

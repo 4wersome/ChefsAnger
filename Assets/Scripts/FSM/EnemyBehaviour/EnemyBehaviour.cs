@@ -41,7 +41,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
         if (Player.Get()) {
             setVelocity = new SetVelocity3DAction(rigidbody, Player.Get().transform, transform, followSpeed);
-            setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed", true);
+            setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed", false);
             FollowTargetAction followTargetAction = new FollowTargetAction(gameObject, Player.Get().gameObject.transform);
             state.SetUpMe(new StateAction[] { setVelocity, followTargetAction, setSpeedAction, setTrigger, debugAction });
         }
@@ -98,7 +98,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     
     protected virtual Transition AttackToFollow(State attack, State follow) {
-        return ShiftStateOnPlayerDistance(follow, attack, COMPARISON.GREATEREQUAL, distanceToStopAttack);
+        return ShiftStateOnPlayerDistance(attack, follow, COMPARISON.GREATEREQUAL, distanceToStopAttack);
     }
 
     protected virtual Transition StateToDeath(State actualState, State death) {

@@ -2,17 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield : MonoBehaviour
+public class Shield : MonoBehaviour, IPickupable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField]
+    private float shieldTime;
+
+    #region ReferenceGetter
+    public float ShieldTime {
+        get { return shieldTime; }
+    }
+    #endregion
+
+    #region PickUp Methods
+
+    public PickupableItemType GetPickupableItemType(){
+        return PickupableItemType.Shield;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPickup()
     {
-        
+       Debug.Log("Picked up Shield - Invulnerability Time: " + shieldTime + " Seconds");
+       DeSpawnItem();
     }
+    
+    public void SpawnItemInWorld(Transform position)
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void DeSpawnItem()
+    {
+        gameObject.SetActive(false);
+    }
+    #endregion
 }
