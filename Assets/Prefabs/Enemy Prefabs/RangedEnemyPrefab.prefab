@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 9549874}
   - component: {fileID: 614200713124560701}
   - component: {fileID: 4803038540255591190}
-  - component: {fileID: 7107215189769230561}
+  - component: {fileID: 3381930152240725063}
   - component: {fileID: 4348805938288237657}
   - component: {fileID: 2185250332272363330}
   m_Layer: 0
@@ -271,7 +271,7 @@ Animator:
   m_GameObject: {fileID: 111886}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fd7d68a65822e4a44a9ef78850e64cfc, type: 3}
-  m_Controller: {fileID: 9100000, guid: b70b1597945ace94d8b349d490e57cb1, type: 2}
+  m_Controller: {fileID: 9100000, guid: e454728e1bf16094481938ee58c60fc0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 111886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a432df66b2b40784087a8a7c96503241, type: 3}
+  m_Script: {fileID: 11500000, guid: a48e18bac5c3c604882bb33a0ab0e9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4803038540255591190
@@ -303,13 +303,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 111886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d21d4eb47e43c44abb7a6a9d2cfd8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 23e02bf6a531fe649bed053e478141ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthModule:
-    maxHP: 8
-  projectileToSpawn: {fileID: 131238, guid: 6c6a2dd4bd253624f829c7c57f24356e, type: 3}
---- !u!114 &7107215189769230561
+  followSpeed: 5
+  distanceToStartAttack: 5
+  distanceToStopAttack: 6
+--- !u!114 &3381930152240725063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,12 +318,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 111886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c12aff2a3f36ba143b34c71be9c3f644, type: 3}
+  m_Script: {fileID: 11500000, guid: 45d8f096757c8634d95bd6735baf7632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 5
-  distanceToStartAttack: 5
-  distanceToStopAttack: 7
+  healthModule:
+    maxHP: 8
+    defence: 2
+  projectileToSpawn: {fileID: 131238, guid: 75babf244cf17b442b3305101df6234d, type: 3}
 --- !u!54 &4348805938288237657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -349,7 +350,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!136 &2185250332272363330
 CapsuleCollider:

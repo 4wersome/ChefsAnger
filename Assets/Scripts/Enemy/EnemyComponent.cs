@@ -12,9 +12,10 @@ public class EnemyComponent : MonoBehaviour, IDamageble {
     private GameObject projectileToSpawn;
     
     public HealthModule HealthModule { get => healthModule; }
-    public GameObject ProjectileToSpawn {get => projectileToSpawn;}
+    public GameObject ProjectileToSpawn { get => projectileToSpawn; }
     
     private void Awake() {
+        healthModule.Reset();
         OnSpawn?.Invoke();
     }
 

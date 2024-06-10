@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,21 +10,28 @@ public class EnemyBehaviour : MonoBehaviour {
     [SerializeField] private float followSpeed;
     [SerializeField] private float distanceToStartAttack;
     [SerializeField] private float distanceToStopAttack;
-    
     #endregion
-    
+
+    private StateMachine stateMachine;
     #region MonoBehaviour
     void Start() {
-        StateMachine stateMachine = GetComponent<StateMachine>();
+        stateMachine = GetComponent<StateMachine>();
         
         State follow = SetUpBaseMovementState();
+        follow.stateName = "FollowState";
         State attack = SetUpAttackState();
+        attack.stateName = "AttackState";
         State death = SetUpDeathState();
+        death.stateName = "DeathState";
         
         follow.SetUpMe(new Transition[] { FollowToAttack(follow, attack), StateToDeath(follow, death)});
         attack.SetUpMe(new Transition[] { AttackToFollow(attack, follow), StateToDeath(attack, death)});
         death.SetUpMe(new Transition[] { DeathToMovementState(death, follow)});
         stateMachine.Init(new State[] { follow, attack, death }, follow);
+    }
+
+    private void Update() {
+        Debug.Log(stateMachine.CurrentState.stateName);
     }
     #endregion
 
@@ -34,43 +42,38 @@ public class EnemyBehaviour : MonoBehaviour {
         Animator animator = GetComponent<Animator>();
         Rigidbody rigidbody = GetComponent<Rigidbody>();
 
-        AnimatorSetSpeedAction setSpeedAction;
-        AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Run");
-        SetVelocity3DAction setVelocity;
+        //AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Run");
+        SetVelocity3DAction setVelocity = new SetVelocity3DAction(rigidbody, Player.Get().transform, transform, followSpeed);
+        AnimatorSetSpeedAction setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed");
+        
+        FollowTargetAction followTargetAction = new FollowTargetAction(gameObject, Player.Get().gameObject.transform);
+        
         DebugAction debugAction = new DebugAction("MovementEnter", "MovementExit");
-
-        if (Player.Get()) {
-            setVelocity = new SetVelocity3DAction(rigidbody, Player.Get().transform, transform, followSpeed);
-            setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed", false);
-            FollowTargetAction followTargetAction = new FollowTargetAction(gameObject, Player.Get().gameObject.transform);
-            state.SetUpMe(new StateAction[] { setVelocity, followTargetAction, setSpeedAction, setTrigger, debugAction });
-        }
-        else {
-            setVelocity = new SetVelocity3DAction(rigidbody, Vector3.zero, followSpeed);
-            setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed");
-            state.SetUpMe(new StateAction[] { setVelocity, setSpeedAction, setTrigger, debugAction });
-        }
+        
+        state.SetUpMe(new StateAction[] { setVelocity, setSpeedAction, followTargetAction, debugAction });
         
         return state;
     }
 
     protected State SetUpAttackState(){
         State state = new State();
-        SetVelocity2DAction stopAction = new SetVelocity2DAction(GetComponent<Rigidbody>(), Vector3.zero, false);
         
+        SetVelocity3DAction stopAction = new SetVelocity3DAction(GetComponent<Rigidbody>(), Vector3.zero, followSpeed);
+
         Animator animator = GetComponent<Animator>();
         AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Attack");
         AnimatorSetBoolean setBoolean = new AnimatorSetBoolean(animator, "AttackEnded", false);
+        AnimatorSetFloat setAnimatorSpeed = new AnimatorSetFloat(animator, 0, "Speed");
         
         DebugAction debugAction = new DebugAction("AttackEnter", "AttackExit");
 
-        state.SetUpMe(new StateAction[] { stopAction, setTrigger, setBoolean, debugAction });
+        state.SetUpMe(new StateAction[] { stopAction, setAnimatorSpeed, setBoolean, setTrigger, debugAction });
         return state;
     }
     
     protected State SetUpDeathState(){
         State state = new State();
-        SetVelocity2DAction stopAction = new SetVelocity2DAction(GetComponent<Rigidbody>(), Vector3.zero, false);
+        SetVelocity3DAction stopAction = new SetVelocity3DAction(GetComponent<Rigidbody>(), Vector3.zero, followSpeed);
         
         Animator animator = GetComponent<Animator>();
         AnimatorTriggerAction triggerDeath = new AnimatorTriggerAction(animator, "Death");
@@ -93,29 +96,25 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     
     protected virtual Transition FollowToAttack(State follow, State attack) {
-        //to implement an exit after the animation
-        return ShiftStateOnPlayerDistance(follow, attack, COMPARISON.LESSEQUAL, distanceToStartAttack);
+        return ShiftStateOnPlayerDistance(follow, attack, COMPARISON.LESS, distanceToStartAttack);
     }
     
     protected virtual Transition AttackToFollow(State attack, State follow) {
-        return ShiftStateOnPlayerDistance(attack, follow, COMPARISON.GREATEREQUAL, distanceToStopAttack);
+        return ShiftStateOnPlayerDistance(attack, follow, COMPARISON.GREATER, distanceToStopAttack);
     }
 
     protected virtual Transition StateToDeath(State actualState, State death) {
         Transition transition = new Transition();
-        HpStateCondition hpStateCondition =
-            new HpStateCondition(GetComponent<EnemyComponent>()?.HealthModule, COMPARISON.LESSEQUAL, 0);
+        HpStateCondition hpStateCondition = new HpStateCondition(GetComponent<EnemyComponent>()?.HealthModule, COMPARISON.LESSEQUAL, 0);
         transition.SetUpMe(actualState, death, new Condition[]{ hpStateCondition });
         return transition;
     }
 
     protected virtual Transition DeathToMovementState(State death, State movemenState) {
         Transition transition = new Transition();
-        HpStateCondition hpStateCondition =
-            new HpStateCondition(GetComponent<EnemyComponent>()?.HealthModule, COMPARISON.GREATEREQUAL, 1);
+        HpStateCondition hpStateCondition = new HpStateCondition(GetComponent<EnemyComponent>()?.HealthModule, COMPARISON.GREATEREQUAL, 1);
         transition.SetUpMe(death, movemenState, new Condition[]{ hpStateCondition });
         return transition;
     }
-    
     #endregion
 }

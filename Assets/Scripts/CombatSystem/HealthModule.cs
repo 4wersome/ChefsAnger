@@ -32,7 +32,6 @@ public class HealthModule
 
     #region PrivateAttributes
     private bool invulnerable;
-    [SerializeField]
     private float currentHP;
     #endregion
 
