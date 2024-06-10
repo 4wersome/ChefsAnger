@@ -9,16 +9,18 @@ public class Pan : MonoBehaviour
 
     #region Mono
     private void Awake() {
-        damage.DamageType = DamageType.Melee;
-        damage.Damage = 1;
     }
     #endregion
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("collider found");
         IDamageble damageble = other.GetComponent<IDamageble>();
-        if (damageble == null) return;
-
+        if (damageble == null)
+        {
+            Debug.Log("Damageble not found ");
+            return;
+        }
         damageble.TakeDamage(damage);
     }
 

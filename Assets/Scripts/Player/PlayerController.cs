@@ -6,7 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     private const string AnimatorMovingBool = "isMoving";
     private const string isDeadAnimatorParameter = "PlayerDead";
-    
+    private const string animatorIsAttackingBoolName = "isAttacking";
+    private const string animatorIdleStateName = "Idle";
+    private const string animatorMovingStateName = "Movement";
+
+
     #region Serialized
     [SerializeField]
     Player player;
@@ -50,6 +54,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         SetAnimatorMovement();
+
     }
 
     #region public
