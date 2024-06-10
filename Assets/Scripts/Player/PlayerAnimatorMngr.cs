@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 public class PlayerAnimatorMngr : MonoBehaviour
@@ -24,6 +21,11 @@ public class PlayerAnimatorMngr : MonoBehaviour
     {
         playerAnimator.SetFloat(Animator.StringToHash(name), value);
         
+    }
+
+    public bool GetAnimatorBool(string name)
+    {
+      return playerAnimator.GetBool(Animator.StringToHash(name));
     }
 
     //This check if an animation is currently running

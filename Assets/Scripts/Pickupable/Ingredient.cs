@@ -14,8 +14,6 @@ public enum IngredientType
 
 public class Ingredient : MonoBehaviour, IPickupable
 {
-    private PickupableItemType pickupableType;
-
     [SerializeField]
     private IngredientType ingredientType;
     [SerializeField]
@@ -31,12 +29,17 @@ public class Ingredient : MonoBehaviour, IPickupable
     }
     #endregion
 
-    private void Awake()
-    {
-        pickupableType = PickupableItemType.Ingredient;
+    public Ingredient(IngredientType ingredientType, int number){
+        this.ingredientType = ingredientType;
+        this.number = number;
     }
 
-#region PickUp Methods
+    #region PickUp Methods
+
+    public PickupableItemType GetPickupableItemType(){
+        return PickupableItemType.Ingredient;
+    }
+
     public void OnPickup()
     {
        Debug.Log("Picked up: " + ingredientType + " x" + number);
@@ -52,6 +55,6 @@ public class Ingredient : MonoBehaviour, IPickupable
     {
         gameObject.SetActive(false);
     }
-#endregion
+    #endregion
 
 }

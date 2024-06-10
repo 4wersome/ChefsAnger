@@ -12,6 +12,7 @@ public enum PickupableItemType
 
 public interface IPickupable
 {
+    public PickupableItemType GetPickupableItemType();
     public void OnPickup();
     public void SpawnItemInWorld(Transform position);
     public void DeSpawnItem();
