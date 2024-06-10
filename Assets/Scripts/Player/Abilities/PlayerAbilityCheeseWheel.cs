@@ -15,7 +15,11 @@ public class PlayerAbilityCheeseWheel : AbilityBase, IThrowAbility
 
     void Start()
     {
+        if (projectile!=null)
+        {
         projectile.gameObject.SetActive(false);
+            
+        }
     }
 
     void Update()
