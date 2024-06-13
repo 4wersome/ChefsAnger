@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour {
     #region PrivateAttribute
+    [SerializeField]
     private PoolData enemyPulled;
     
     private int nOfEnemyToSpawn;
@@ -42,10 +43,11 @@ public class Spawner : MonoBehaviour {
     public void StartSpawn(int nOfEnemyToSpawn, float waveDuration, float levelDiffulty) {
         this.nOfEnemyToSpawn = nOfEnemyToSpawn;
         timeBetweenEach = waveDuration / nOfEnemyToSpawn;
+        
         isSpawnActive = true;
         activeEnemies = 0;
-        
         elapsedTime = 0;
+        
         if(spawnCoroutine != null) StopCoroutine(spawnCoroutine);
         spawnCoroutine = StartCoroutine(SpawnCoroutine(levelDiffulty));
     }
@@ -61,8 +63,9 @@ public class Spawner : MonoBehaviour {
             EnemyComponent enemy = Pooler.Instance.GetPooledObject(enemyPulled).GetComponent<EnemyComponent>();
             if (enemy) {
                 //get position. based on level increase enemyStats
-                Vector3 randomPoint = new Vector3(Random.Range(-1f, 1), 0f, Random.Range(-1f, 1));
-                Vector3 spawnPosition = Player.Get().transform.position + (randomPoint * 10f);
+                Vector3 randomPoint = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+                //per ora 25, poi sarebbe da calcolare la dimensione dello schermo
+                Vector3 spawnPosition = Player.Get().transform.position + (randomPoint.normalized * 25f);
                 enemy.Spawn(spawnPosition, difficultyLevel);
             }
 

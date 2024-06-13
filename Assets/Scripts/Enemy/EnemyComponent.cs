@@ -44,7 +44,7 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
     public void Spawn(Vector3 position, float levelDifficulty) {
         transform.position = position;
         
-        healthModule.Reset();
+        healthModule.Reset(levelDifficulty);
         gameObject.SetActive(true);
         OnSpawn?.Invoke();
     }

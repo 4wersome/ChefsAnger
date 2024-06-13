@@ -15,10 +15,13 @@ public class EnemyThrowAttack : BaseEnemyAttack, IEnemyAttack, IPoolRequester {
     
     public override void Attack() {
         //transform.position + (transform.forward * 2)
-        EnemyBullet bullet = Pooler.Instance.GetPooledObject(bullets[(int)EnemyBulletType.EnemyApple]).GetComponent<EnemyBullet>();
+        GameObject bulletGameObject = Pooler.Instance.GetPooledObject(bullets[(int)EnemyBulletType.EnemyApple]);
+        if(!bulletGameObject) return;
+        EnemyBullet bullet = bulletGameObject.GetComponent<EnemyBullet>();
         if (bullet) {
             bullet.DamageContainer = damageContainer;
-            bullet.Shoot(transform.position + (transform.forward * 2), bulletSpeed, bulletLifeSpan);
+            //Debug.Log(gameObject.name + " " + gameObject.transform.position);
+            bullet.Shoot(gameObject.transform.position, bulletSpeed, bulletLifeSpan);
         }
     }
 }

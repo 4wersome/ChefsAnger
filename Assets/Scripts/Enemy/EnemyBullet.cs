@@ -26,16 +26,15 @@ public class EnemyBullet : Damager {
     public Vector2 GetVelocity() => rigidbody.velocity;
     public void SetVelocity(Vector2 newVelocity) => rigidbody.velocity = newVelocity;
 
-    public void Shoot(Vector2 startPos, float bulletSpeed, float bulletDuration) {
+    public void Shoot(Vector3 startPos, float bulletSpeed, float bulletDuration) {
+        gameObject.SetActive(true);
         transform.position = startPos;
         Shoot(bulletSpeed);
         destroyOverTime = StartCoroutine(DestroyOverTime(bulletDuration));
     }
 
     public void Shoot(float bulletSpeed) {
-        Vector3 playerPosition = Player.Get().transform.position;
-        
-        Vector3 direction = playerPosition - transform.position;
+        Vector3 direction = Player.Get().transform.position - transform.position;
         rigidbody.velocity = direction.normalized * bulletSpeed;
         
         Quaternion rotation =  Quaternion.LookRotation(direction, Vector3.up);

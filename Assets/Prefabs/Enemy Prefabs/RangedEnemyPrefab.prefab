@@ -327,6 +327,7 @@ MonoBehaviour:
     maxHP: 8
     defence: 2
   enemyDrops: []
+  dropChance: 0
 --- !u!114 &5721516516189806169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,8 +347,8 @@ MonoBehaviour:
     freezeTime: 0
   bullets:
   - {fileID: 11400000, guid: b7db1ca61d18fde40be12791172bbd03, type: 2}
-  bulletSpeed: 3
-  bulletLifeSpan: 3
+  bulletSpeed: 6
+  bulletLifeSpan: 6
 --- !u!114 &1590339374129104864
 MonoBehaviour:
   m_ObjectHideFlags: 0

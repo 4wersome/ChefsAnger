@@ -29,10 +29,6 @@ public class EnemyBehaviour : MonoBehaviour {
         death.SetUpMe(new Transition[] { DeathToMovementState(death, follow)});
         stateMachine.Init(new State[] { follow, attack, death }, follow);
     }
-
-    private void Update() {
-        Debug.Log(stateMachine.CurrentState.stateName);
-    }
     #endregion
 
     #region StateSetUp
@@ -48,9 +44,10 @@ public class EnemyBehaviour : MonoBehaviour {
         
         FollowTargetAction followTargetAction = new FollowTargetAction(gameObject, Player.Get().gameObject.transform);
         
-        DebugAction debugAction = new DebugAction("MovementEnter", "MovementExit");
+        //DebugAction debugAction = new DebugAction("MovementEnter", "MovementExit");
         
-        state.SetUpMe(new StateAction[] { setVelocity, setSpeedAction, followTargetAction, debugAction });
+        //state.SetUpMe(new StateAction[] { setVelocity, setSpeedAction, followTargetAction, debugAction });
+        state.SetUpMe(new StateAction[] { setVelocity, setSpeedAction, followTargetAction });
         
         return state;
     }
@@ -65,9 +62,10 @@ public class EnemyBehaviour : MonoBehaviour {
         AnimatorSetBoolean setBoolean = new AnimatorSetBoolean(animator, "AttackEnded", false);
         AnimatorSetFloat setAnimatorSpeed = new AnimatorSetFloat(animator, 0, "Speed");
         
-        DebugAction debugAction = new DebugAction("AttackEnter", "AttackExit");
+        //DebugAction debugAction = new DebugAction("AttackEnter", "AttackExit");
 
-        state.SetUpMe(new StateAction[] { stopAction, setAnimatorSpeed, setBoolean, setTrigger, debugAction });
+        //state.SetUpMe(new StateAction[] { stopAction, setAnimatorSpeed, setBoolean, setTrigger, debugAction });
+        state.SetUpMe(new StateAction[] { stopAction, setAnimatorSpeed, setBoolean, setTrigger });
         return state;
     }
     
@@ -80,9 +78,10 @@ public class EnemyBehaviour : MonoBehaviour {
         //to implement a time delay for the visibility (or a gradual as for the material)
         SetVisibleAction setVisible = new SetVisibleAction(gameObject);
         
-        DebugAction debugAction = new DebugAction("DeathEnter", "DeathExit");
+        //DebugAction debugAction = new DebugAction("DeathEnter", "DeathExit");
         
-        state.SetUpMe(new StateAction[] { stopAction, triggerDeath, setVisible, debugAction });
+        //state.SetUpMe(new StateAction[] { stopAction, triggerDeath, setVisible, debugAction });
+        state.SetUpMe(new StateAction[] { stopAction, triggerDeath, setVisible });
         return state;
     }
     #endregion

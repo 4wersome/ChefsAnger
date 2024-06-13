@@ -22,7 +22,8 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
     private DictionaryItem[] enemyTypes;
     
     [SerializeField][Tooltip("Final Level to reach")] private int victoryLevel;
-    [SerializeField] private bool isInfinite; 
+    [SerializeField] private bool isInfinite;
+    [SerializeField] private WaveStage startingWaveStatus;
     
     [SerializeField][Tooltip("Time between the end of a wave and the start of a new one")] 
     private float safeDuration;
@@ -60,9 +61,11 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
         for (int i = 0; i < enemyTypes.Length; i++) {
             spawners[i] = gameObject.AddComponent<Spawner>();
             spawners[i].Init(enemyTypes[i].Key, timeNoise);
+            Debug.Log( i + enemyTypes[i].Key.PoolKey);
         }
 
-        elapsedTime = 0;
+        waveStatus = startingWaveStatus;
+        ResetTimer();
     }
 
     private void Update() {
@@ -70,6 +73,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
         switch (waveStatus) {
             case WaveStage.Safe:
                 if (elapsedTime > safeDuration) {
+                    
                     StartNextWave();
                 }
                 break;
@@ -91,31 +95,33 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
     }
 
     private void StartNextWave() {
-        ResetTimer();
         waveStatus = WaveStage.EnemyAttack;
+        ResetTimer();
         //in base al livello decidi quanti nemici spawnare e di che tipo
         level++;
         float fuzzyDifficulty = level * levelDifficultyGrowth * 0.5f;
         
         //ogni x aumenta il numero di nemici da spawnare
         numberOfEnemy += (int)fuzzyDifficulty;
-        
+        //Debug.Log("Level: " + level + ", Difficulty: " + fuzzyDifficulty);
         //decidi, in base alla difficolta, quale e quanti spawner prendere
         for (int i = 0; i < enemyTypes.Length; i++) {
-            if (enemyTypes[i].Value >= fuzzyDifficulty) {
+            if (enemyTypes[i].Value <= fuzzyDifficulty) {
+                //Debug.Log("Start Spawn " + enemyTypes[i].Key.PoolKey);
                 spawners[i].StartSpawn(numberOfEnemy, waveDuration, fuzzyDifficulty );
             }
         }
     }
 
     private void StartSafeZone() {
-        ResetTimer();
         waveStatus = WaveStage.Safe;
+        ResetTimer();
         //eventuale reward per aver ucciso tutti i nemici prima della durata della wave
     }
 
     private void ResetTimer() {
         elapsedTime = 0;
+        //Debug.Log("Wave State: " + waveStatus);
     }
     #endregion
 }
