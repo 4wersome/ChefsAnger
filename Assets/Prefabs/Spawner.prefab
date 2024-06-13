@@ -46,15 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypes:
-  - {fileID: 11400000, guid: 7df7fe6655c302f4ca1a396db25b9363, type: 2}
-  - {fileID: 11400000, guid: 2616e08d731d67c4abdfb04b3a580f3d, type: 2}
+  - Key: {fileID: 11400000, guid: 7df7fe6655c302f4ca1a396db25b9363, type: 2}
+    Value: 0
+  - Key: {fileID: 11400000, guid: 2616e08d731d67c4abdfb04b3a580f3d, type: 2}
+    Value: 5
   victoryLevel: 15
   isInfinite: 0
   safeDuration: 15
   waveDuration: 80
-  timeNoise: 0
-  levelDifficultyGrowth: 3
-  startingNOfEnemy: 0
+  timeNoise: 0.166
+  levelDifficultyGrowth: 4
+  numberOfEnemy: 15
 --- !u!114 &7878338628782549066
 MonoBehaviour:
   m_ObjectHideFlags: 0
