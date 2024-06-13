@@ -9,6 +9,7 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
 
     #region privateAttribute
     private IEnemyAttack enemyAttackComponent;
+    
     #endregion
     
     #region publicAttribute

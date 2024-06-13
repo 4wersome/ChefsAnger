@@ -231,7 +231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 413626}
-  - component: {fileID: 9549874}
+  - component: {fileID: 3422738874440141192}
   - component: {fileID: 614200713124560701}
   - component: {fileID: 4803038540255591190}
   - component: {fileID: 3381930152240725063}
@@ -263,7 +263,7 @@ Transform:
   - {fileID: 479774}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &9549874
+--- !u!95 &3422738874440141192
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -274,7 +274,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fd7d68a65822e4a44a9ef78850e64cfc, type: 3}
   m_Controller: {fileID: 9100000, guid: e454728e1bf16094481938ee58c60fc0, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -341,10 +341,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageContainer:
-    damageType: 0
-    damage: 0
+    damageType: 1
+    damage: 2
     damageImpulse: {x: 0, y: 0, z: 0}
     freezeTime: 0
+  hasCD: 1
+  abilityCooldown: 0.1
   bullets:
   - {fileID: 11400000, guid: b7db1ca61d18fde40be12791172bbd03, type: 2}
   bulletSpeed: 6
