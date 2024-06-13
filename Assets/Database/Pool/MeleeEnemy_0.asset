@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1282e67f51d6af647b834ab717c01663, type: 3}
-  m_Name: EnemyBullet_0
+  m_Name: MeleeEnemy_0
   m_EditorClassIdentifier: 
-  poolKey: EnemyBullet_0
-  prefab: {fileID: 131238, guid: 75babf244cf17b442b3305101df6234d, type: 3}
-  poolNumber: 50
+  poolKey: MeleeEnemy_0
+  prefab: {fileID: 111886, guid: 62cb930d870de6d4f85bb5102d2b0894, type: 3}
+  poolNumber: 100
   resizablePool: 0

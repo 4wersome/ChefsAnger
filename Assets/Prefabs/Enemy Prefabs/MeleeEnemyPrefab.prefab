@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 85160764802478390}
   - component: {fileID: 7472380438177905223}
   - component: {fileID: 2767332103336827356}
+  - component: {fileID: 7511835250222842223}
   - component: {fileID: 1342870967290031343}
   - component: {fileID: 2521998608383692213}
   m_Layer: 8
@@ -324,7 +325,19 @@ MonoBehaviour:
   healthModule:
     maxHP: 5
     defence: 0
-  projectileToSpawn: {fileID: 0}
+  enemyDrops: []
+--- !u!114 &7511835250222842223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acbb591a88c152145a4897399fd79ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &1342870967290031343
 CapsuleCollider:
   m_ObjectHideFlags: 0

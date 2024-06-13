@@ -72,6 +72,11 @@ public class Pooler : MonoBehaviour {
         ExtendExistingPool(data.PoolKey, data.Prefab, (int)(pool[data.PoolKey].Length * 1.33f));
         return GetPooledObject(data);
     }
+    
+    public GameObject[] GetObjectPool (PoolData data) {
+        if (!pool.ContainsKey(data.PoolKey)) return null;
+        return pool[data.PoolKey];
+    }
 
     private void InternalAddToPool (PoolData data) {
         GameObject[] pooledObject = new GameObject[data.PoolNumber];

@@ -235,6 +235,8 @@ GameObject:
   - component: {fileID: 614200713124560701}
   - component: {fileID: 4803038540255591190}
   - component: {fileID: 3381930152240725063}
+  - component: {fileID: 5721516516189806169}
+  - component: {fileID: 1590339374129104864}
   - component: {fileID: 4348805938288237657}
   - component: {fileID: 2185250332272363330}
   m_Layer: 0
@@ -324,7 +326,40 @@ MonoBehaviour:
   healthModule:
     maxHP: 8
     defence: 2
-  projectileToSpawn: {fileID: 131238, guid: 75babf244cf17b442b3305101df6234d, type: 3}
+  enemyDrops: []
+--- !u!114 &5721516516189806169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c42bea7aacdd945bc55bfc55bf808c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageContainer:
+    damageType: 0
+    damage: 0
+    damageImpulse: {x: 0, y: 0, z: 0}
+    freezeTime: 0
+  bullets:
+  - {fileID: 11400000, guid: b7db1ca61d18fde40be12791172bbd03, type: 2}
+  bulletSpeed: 3
+  bulletLifeSpan: 3
+--- !u!114 &1590339374129104864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acbb591a88c152145a4897399fd79ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &4348805938288237657
 Rigidbody:
   m_ObjectHideFlags: 0
