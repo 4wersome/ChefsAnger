@@ -60,7 +60,7 @@ public class Spawner : MonoBehaviour {
                 isSpawnActive = false;
                 yield break;
             }
-            EnemyComponent enemy = Pooler.Instance.GetPooledObject(enemyPulled).GetComponent<EnemyComponent>();
+            EnemyComponent enemy = Pooler.Instance.GetPooledObject(enemyPulled)?.GetComponent<EnemyComponent>();
             if (enemy) {
                 //get position. based on level increase enemyStats
                 Vector3 randomPoint = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
