@@ -11,9 +11,9 @@ public class Cooldown : MonoBehaviour
     [SerializeField]
     private TMP_Text textCooldown;
     [SerializeField]
-    private KeyCode KeyboardType;
+    private KeyCode keyboardType;
     [SerializeField]
-    private KeyCode PadType;
+    private KeyCode padType;
     [SerializeField]
     private float cooldownTime;
 
@@ -31,9 +31,9 @@ public class Cooldown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyboardType)||Input.GetKeyDown(PadType))
+        if (Input.GetKeyDown(keyboardType)||Input.GetKeyDown(padType))
         {
-            UseSpell();
+            Attack();
         }
 
         if (isCoolDown)
@@ -59,7 +59,7 @@ public class Cooldown : MonoBehaviour
 
     }
 
-    public bool UseSpell()
+    public bool Attack()
     {
         if (isCoolDown)
         {

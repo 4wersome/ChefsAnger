@@ -20,7 +20,8 @@ public class Recipe : MonoBehaviour, IPickupable
     [SerializeField]
     private List<Ingredient> requiredIngredients;
     [SerializeField]
-    private Image image;
+    private Image lockImg;
+
 
     #region ReferenceGetter
     public RecipeNameEnum RecipeName {
@@ -35,7 +36,7 @@ public class Recipe : MonoBehaviour, IPickupable
     private void Awake()
     {
         SetRequiredIngredients();
-        image.enabled = true;
+        lockImg.enabled = true;
     }
 
     #region Required Ingredients
@@ -81,7 +82,7 @@ public class Recipe : MonoBehaviour, IPickupable
        foreach(Ingredient ingr in requiredIngredients){
             Debug.Log("Required Ingredient: " + ingr.IngredientType + " x" + ingr.Number);
        }
-       image.enabled = false;
+       lockImg.enabled = false;
        DeSpawnItem();
     }
     
