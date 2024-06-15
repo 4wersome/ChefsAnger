@@ -31,32 +31,36 @@ public class Cooldown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(keyboardType)||Input.GetKeyDown(padType))
+        if (cooldownTime != 0)
         {
-            Attack();
-        }
+            if (Input.GetKeyDown(keyboardType) || Input.GetKeyDown(padType))
+            {
+                Attack();
+            }
 
-        if (isCoolDown)
-        {
-            ApplyCooldown();
+            if (isCoolDown)
+            {
+                ApplyCooldown();
+            }
         }
     }
 
     void ApplyCooldown()
     {
-        cooldownTimer -= Time.deltaTime;
-        if (cooldownTimer < 0.0f)
-        {
-            isCoolDown = false;
-            textCooldown.gameObject.SetActive(false);
-            imageCooldown.fillAmount = 0.0f;
-        }
-        else
-        {
-            textCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
-            imageCooldown.fillAmount = cooldownTimer / cooldownTime;
-        }
-
+       
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer < 0.0f)
+            {
+                isCoolDown = false;
+                textCooldown.gameObject.SetActive(false);
+                imageCooldown.fillAmount = 0.0f;
+            }
+            else
+            {
+                textCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
+                imageCooldown.fillAmount = cooldownTimer / cooldownTime;
+            }
+        
     }
 
     public bool Attack()
