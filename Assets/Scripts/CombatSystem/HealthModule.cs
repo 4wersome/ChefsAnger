@@ -41,7 +41,7 @@ public class HealthModule
     }
 
     public void Reset (float levelDifficulty) {
-        maxHP += maxHP * levelDifficulty;
+        maxHP += levelDifficulty;
         defence += levelDifficulty;
         currentHP = maxHP;
     }

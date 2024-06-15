@@ -15,6 +15,7 @@ public class Damager : MonoBehaviour, IDamager {
     }
     
     protected virtual void OnTriggerEnter(Collider other) {
+        
         DealDamage(other);
     }
 

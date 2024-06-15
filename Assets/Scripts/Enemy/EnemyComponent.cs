@@ -29,6 +29,9 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
 
     #region Mono
     private void Awake() {
+#if DEBUG
+        healthModule.OnDamageTaken += (damageContainer) => Debug.Log(gameObject.name + " is being attacked by the player");
+#endif
         enemyAttackComponent = GetComponent<IEnemyAttack>();
         if(enemyDrops != null) OnSpawn += SpawnDrop;
     }
@@ -37,17 +40,13 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
     #region PublicMethods
     public void Spawn(Vector3 position) {
         transform.position = position;
-        healthModule.Reset();
         gameObject.SetActive(true);
         OnSpawn?.Invoke();
     }
     
     public void Spawn(Vector3 position, float levelDifficulty) {
-        transform.position = position;
-        
         healthModule.Reset(levelDifficulty);
-        gameObject.SetActive(true);
-        OnSpawn?.Invoke();
+        Spawn(position);
     }
     
     public void TakeDamage(DamageContainer damage) {
@@ -55,6 +54,9 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
     }
     
     public void Attack() {
+#if DEBUG
+        Debug.Log(gameObject.name + " is attacking player");
+#endif
         if (enemyAttackComponent != null) enemyAttackComponent.Attack();
         else Debug.Log("NO IEnemyAttack Component Found");
     }

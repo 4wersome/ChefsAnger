@@ -61,7 +61,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
         for (int i = 0; i < enemyTypes.Length; i++) {
             spawners[i] = gameObject.AddComponent<Spawner>();
             spawners[i].Init(enemyTypes[i].Key, timeNoise);
-            Debug.Log( i + enemyTypes[i].Key.PoolKey);
+            //Debug.Log( i + enemyTypes[i].Key.PoolKey);
         }
 
         waveStatus = startingWaveStatus;
