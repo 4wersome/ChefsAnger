@@ -12,6 +12,10 @@ public class Pan : MonoBehaviour
     }
     #endregion
 
+    public void IncreaseDamage(int amount){
+        damage.Damage += amount;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("collider found");

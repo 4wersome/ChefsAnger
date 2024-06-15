@@ -14,8 +14,11 @@ public class ThrowAnimationRedirector : MonoBehaviour
         if (throwAbility is IThrowAbility)
         {
             //TODO remove
-            IThrowAbility test = (IThrowAbility) throwAbility;
-            test.ThrowProjectile(new Vector3(5,0,5), Quaternion.identity);
+            IThrowAbility ability = (IThrowAbility) throwAbility;
+            ability.TriggerThrow();
+        } else
+        {
+            Debug.LogWarning("Referenced throwAbility (" + throwAbility + ") does not implement IThrowAbility interface");
         }
     }
 }

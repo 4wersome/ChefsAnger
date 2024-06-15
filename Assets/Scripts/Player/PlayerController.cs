@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetAnimatorMovement()
     {
-        bool value = playerRigidBody.velocity == Vector3.zero ?  false :  true;
+        bool value = playerRigidBody.velocity.magnitude <=.5f ?  false :  true;
 
         AnimatorMgnr.SetAnimatorBool(AnimatorMovingBool, value);
 

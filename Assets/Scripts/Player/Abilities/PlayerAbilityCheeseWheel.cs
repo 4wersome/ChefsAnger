@@ -9,12 +9,17 @@ public class PlayerAbilityCheeseWheel : AbilityBase, IThrowAbility
     private const string animationStateTrigger = "AbilityCheeseWheel";
    
     [SerializeField]
-    private GameObject projectilePrefab;
+    private ProjectileBase projectile;
+    [SerializeField]
+    private float throwForce = 10f;
 
     void Start()
     {
-        playerController.MovePrevented += PreventAbility;
-        playerController.MeleePrevented += PreventAbility;
+        if (projectile!=null)
+        {
+        projectile.gameObject.SetActive(false);
+            
+        }
     }
 
     void Update()
@@ -24,12 +29,14 @@ public class PlayerAbilityCheeseWheel : AbilityBase, IThrowAbility
             if (InputManager.AbilityCheeseWheelPressed() && !isPrevented && !playerController.AnimatorMgnr.CheckCurrentAnimationState(animationLayer, animationStateName))
             {
                 playerController.AnimatorMgnr.SetTriggerParameter(animationStateTrigger);
-                PreventAbility();
+
             }
             else if (playerController.AnimatorMgnr.CheckCurrentAnimationState(animationLayer, animationStateName) && isPrevented)
             {
-                UnPreventAbility();
-            } 
+
+            }
+
+            isPrevented = projectile.isActiveAndEnabled;
         }
     }
 
@@ -49,20 +56,17 @@ public class PlayerAbilityCheeseWheel : AbilityBase, IThrowAbility
         isEnabled = true;
     }
 
-    public void PrintEvent(string s)
+    public void TriggerThrow()
     {
-        Debug.Log("PrintEvent called at " + Time.time + " with a value of " + s);
-    }
-
-    public void ThrowProjectile(Vector3 forward, Quaternion rotation)
-    {
-        GameObject projectileRef = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        Rigidbody projectileRigidBody;
-        projectileRef.TryGetComponent<Rigidbody>(out projectileRigidBody);
-        if(projectileRigidBody != null)
-        {
-            projectileRigidBody.velocity = forward * 5;
-            projectileRigidBody.rotation = rotation;
-        }
+        //GameObject projectileRef = Instantiate(projectilePrefab, transform.position, transform.rotation);
+        //Rigidbody projectileRigidBody;
+        //projectileRef.TryGetComponent<Rigidbody>(out projectileRigidBody);
+        //if(projectileRigidBody != null)
+        //{
+        //    projectileRigidBody.velocity = forward * 5;
+        //    projectileRigidBody.rotation = rotation;
+        //}
+        projectile.EnableProjectile();
+        projectile.Launch(throwForce, playerController.GetForward());
     }
 }

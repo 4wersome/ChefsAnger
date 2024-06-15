@@ -9,7 +9,8 @@ public enum RecipeNameEnum
     CheeseWheel,
     PumpkinMine,
     LifeUp,
-    DefenceUp
+    DefenceUp,
+    AttackUp
 }
 
 public class Recipe : MonoBehaviour, IPickupable
@@ -61,6 +62,12 @@ public class Recipe : MonoBehaviour, IPickupable
             case RecipeNameEnum.DefenceUp:
                 requiredIngredients.Add(new Ingredient(IngredientType.Pumpkin, 2));
                 requiredIngredients.Add(new Ingredient(IngredientType.Meat, 3));
+                break;
+
+            case RecipeNameEnum.AttackUp:
+                requiredIngredients.Add(new Ingredient(IngredientType.RedApple, 1));
+                requiredIngredients.Add(new Ingredient(IngredientType.GreenApple, 1));
+                requiredIngredients.Add(new Ingredient(IngredientType.Meat, 2));
                 break;
         }
     }
