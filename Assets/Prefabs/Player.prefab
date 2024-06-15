@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredRecipe: 0
   isEnabled: 0
-  movementSpeed: 1000
+  movementSpeed: 10
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -219,7 +219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredRecipe: 0
   isEnabled: 0
-  Mine: {fileID: 0}
+  Mine: {fileID: 7298032406872366823, guid: e62ed9685b34fa94ab07002d2d7cf53b, type: 3}
+  animationIsReady: 0
 --- !u!1 &3685347251700581791
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredRecipe: 1
   isEnabled: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 8901133133392087997, guid: 46341c526ee0a974b83912563d5dee9f, type: 3}
   throwForce: 8
   canThrow: 0
 --- !u!1 &5049704651797576510
@@ -315,7 +316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredRecipe: 2
   isEnabled: 0
-  projectilePrefab: {fileID: 187170, guid: a072d3f84ecbe4349a580e30b7ccf421, type: 3}
+  projectile: {fileID: 0}
+  throwForce: 10
 --- !u!1 &7612537191513124991
 GameObject:
   m_ObjectHideFlags: 0
