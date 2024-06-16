@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum RecipeNameEnum
 {
@@ -19,6 +20,9 @@ public class Recipe : MonoBehaviour, IPickupable
     private RecipeNameEnum recipeName;
     [SerializeField]
     private List<Ingredient> requiredIngredients;
+    [SerializeField]
+    private Image lockImg;
+
 
     #region ReferenceGetter
     public RecipeNameEnum RecipeName {
@@ -33,6 +37,7 @@ public class Recipe : MonoBehaviour, IPickupable
     private void Awake()
     {
         SetRequiredIngredients();
+        lockImg.enabled = true;
     }
 
     #region Required Ingredients
@@ -84,6 +89,7 @@ public class Recipe : MonoBehaviour, IPickupable
        foreach(Ingredient ingr in requiredIngredients){
             Debug.Log("Required Ingredient: " + ingr.IngredientType + " x" + ingr.Number);
        }
+       lockImg.enabled = false;
        DeSpawnItem();
     }
     
