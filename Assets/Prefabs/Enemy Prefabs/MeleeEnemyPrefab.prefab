@@ -231,10 +231,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 413626}
-  - component: {fileID: 9549874}
+  - component: {fileID: 569806418075689778}
   - component: {fileID: 85160764802478390}
   - component: {fileID: 7472380438177905223}
   - component: {fileID: 2767332103336827356}
+  - component: {fileID: 7511835250222842223}
   - component: {fileID: 1342870967290031343}
   - component: {fileID: 2521998608383692213}
   m_Layer: 8
@@ -261,7 +262,7 @@ Transform:
   - {fileID: 479774}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &9549874
+--- !u!95 &569806418075689778
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -269,12 +270,12 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111886}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fd7d68a65822e4a44a9ef78850e64cfc, type: 3}
   m_Controller: {fileID: 9100000, guid: f903e8abac1f6b84487589d18cba7abc, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -324,8 +325,20 @@ MonoBehaviour:
   healthModule:
     maxHP: 5
     defence: 0
-    currentHP: 5
-  projectileToSpawn: {fileID: 0}
+  enemyDrops: []
+  dropChance: 0
+--- !u!114 &7511835250222842223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acbb591a88c152145a4897399fd79ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &1342870967290031343
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -372,7 +385,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
@@ -948,7 +961,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
@@ -967,11 +980,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagebleTag: Player
-  damage:
-    damageType: 0
-    damage: 0
-    damageImpulse: {x: 0, y: 0, z: 0}
-    freezeTime: 0
 --- !u!1 &139662
 GameObject:
   m_ObjectHideFlags: 0

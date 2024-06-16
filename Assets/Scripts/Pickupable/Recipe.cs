@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum RecipeNameEnum
 {
@@ -9,7 +10,8 @@ public enum RecipeNameEnum
     CheeseWheel,
     PumpkinMine,
     LifeUp,
-    DefenceUp
+    DefenceUp,
+    AttackUp
 }
 
 public class Recipe : MonoBehaviour, IPickupable
@@ -18,6 +20,9 @@ public class Recipe : MonoBehaviour, IPickupable
     private RecipeNameEnum recipeName;
     [SerializeField]
     private List<Ingredient> requiredIngredients;
+    [SerializeField]
+    private Image lockImg;
+
 
     #region ReferenceGetter
     public RecipeNameEnum RecipeName {
@@ -32,6 +37,7 @@ public class Recipe : MonoBehaviour, IPickupable
     private void Awake()
     {
         SetRequiredIngredients();
+        lockImg.enabled = true;
     }
 
     #region Required Ingredients
@@ -62,6 +68,12 @@ public class Recipe : MonoBehaviour, IPickupable
                 requiredIngredients.Add(new Ingredient(IngredientType.Pumpkin, 2));
                 requiredIngredients.Add(new Ingredient(IngredientType.Meat, 3));
                 break;
+
+            case RecipeNameEnum.AttackUp:
+                requiredIngredients.Add(new Ingredient(IngredientType.RedApple, 1));
+                requiredIngredients.Add(new Ingredient(IngredientType.GreenApple, 1));
+                requiredIngredients.Add(new Ingredient(IngredientType.Meat, 2));
+                break;
         }
     }
     #endregion
@@ -77,6 +89,7 @@ public class Recipe : MonoBehaviour, IPickupable
        foreach(Ingredient ingr in requiredIngredients){
             Debug.Log("Required Ingredient: " + ingr.IngredientType + " x" + ingr.Number);
        }
+       lockImg.enabled = false;
        DeSpawnItem();
     }
     

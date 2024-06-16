@@ -4,6 +4,7 @@ public class State {
 
     private StateMachine owner;
 
+    public string stateName { get; set; }
     private StateAction[] actions;
     private Transition[] transitions;
 

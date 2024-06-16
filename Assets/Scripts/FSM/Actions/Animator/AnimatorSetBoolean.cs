@@ -15,12 +15,16 @@ public class AnimatorSetBoolean : StateAction {
     }
 
     public override void OnEnter() {
-        if (setOnEnter) animator.SetBool(Animator.StringToHash(parameterName), setOnEnter);
-        else animator.SetBool(Animator.StringToHash(parameterName), !setOnEnter);
+        if (setOnEnter) InternalSet(true);
+        else InternalSet(false);
     }
 
     public override void OnExit() {
-        if (setOnEnter) animator.SetBool(Animator.StringToHash(parameterName), !setOnEnter);
-        else animator.SetBool(Animator.StringToHash(parameterName), setOnEnter);
+        if (setOnEnter) InternalSet(false);
+        else InternalSet(true);
+    }
+
+    private void InternalSet(bool value) {
+        animator.SetBool(Animator.StringToHash(parameterName), value);
     }
 }

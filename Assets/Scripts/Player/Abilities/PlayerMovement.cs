@@ -55,6 +55,9 @@ public class PlayerMovement : AbilityBase
         if (newForward != Vector3.zero)
             playerController.SetForward(newForward);
 
+
+        playerController.SetVelocity(finalVelocity);
+
     }
     private void MoveWithForwardKeyboard()
 

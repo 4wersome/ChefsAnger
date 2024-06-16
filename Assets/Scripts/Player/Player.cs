@@ -11,6 +11,8 @@ public class Player : MonoBehaviour, IDamageble
     private float damageInvTime;
     [SerializeField]
     private float shieldInvTime;
+    [SerializeField]
+    private Pan playerWeapon;
     #endregion
 
     #region PrivateMembers
@@ -97,6 +99,10 @@ public class Player : MonoBehaviour, IDamageble
             case RecipeNameEnum.DefenceUp:
                 // Increment Player Defence
                 healthModule.IncreaseDefence(1);
+                break;
+            case RecipeNameEnum.AttackUp:
+                // Increment Player Offence
+                playerWeapon.IncreaseDamage(1);
                 break;
             default:
                 // Unlock Ability
