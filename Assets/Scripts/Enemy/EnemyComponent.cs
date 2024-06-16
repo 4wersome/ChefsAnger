@@ -3,34 +3,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
-public class EnemyComponent : MonoBehaviour, IDamageble {
+public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
 
-    [SerializeField] private HealthModule healthModule;
+    #region privateAttribute
+    private IEnemyAttack enemyAttackComponent;
+    
+    #endregion
+    
+    #region publicAttribute
     public Action OnSpawn;
-    [SerializeField]
-    private GameObject projectileToSpawn;
+    #endregion
     
-    public HealthModule HealthModule { get => healthModule; }
-    public GameObject ProjectileToSpawn {get => projectileToSpawn;}
-    
-    private void Awake() {
-        OnSpawn?.Invoke();
-    }
+    #region SerializedField
+    [SerializeField] private HealthModule healthModule;
+    [SerializeField] private PoolData[] enemyDrops;
+    [SerializeField] [Range(0,1)] private float dropChance;
+    #endregion
 
+    #region Property
+    public PoolData[] Datas { get => enemyDrops; }
+    public HealthModule HealthModule { get => healthModule; }
+    #endregion
+
+    #region Mono
+    private void Awake() {
+#if DEBUG
+        healthModule.OnDamageTaken += (damageContainer) => Debug.Log(gameObject.name + " is being attacked by the player");
+#endif
+        enemyAttackComponent = GetComponent<IEnemyAttack>();
+        if(enemyDrops != null) OnSpawn += SpawnDrop;
+    }
+    #endregion
+    
+    #region PublicMethods
     public void Spawn(Vector3 position) {
         transform.position = position;
-        healthModule.Reset();
+        gameObject.SetActive(true);
         OnSpawn?.Invoke();
     }
-
-    public void Shoot() {
-        if(projectileToSpawn) Instantiate(projectileToSpawn ,transform.position + (transform.forward * 2), transform.rotation);
+    
+    public void Spawn(Vector3 position, float levelDifficulty) {
+        healthModule.Reset(levelDifficulty);
+        Spawn(position);
     }
     
     public void TakeDamage(DamageContainer damage) {
-        
         healthModule.TakeDamage(damage);
     }
+    
+    public void Attack() {
+#if DEBUG
+        Debug.Log(gameObject.name + " is attacking player");
+#endif
+        if (enemyAttackComponent != null) enemyAttackComponent.Attack();
+        else Debug.Log("NO IEnemyAttack Component Found");
+    }
 
+    private void SpawnDrop() {
+        if (Random.Range(0f, 1f) <= dropChance) {
+            GameObject drop = enemyDrops[Random.Range(0, enemyDrops.Length)].Prefab;
+            drop.transform.position = transform.position;
+            drop.SetActive(true);
+        }
+    }
+    #endregion
 }

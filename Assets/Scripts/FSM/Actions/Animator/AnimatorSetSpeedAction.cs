@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorSetSpeedAction : StateAction {
-    private Animator animator;
-    private Rigidbody owner;
-    private string parameterName;
-    private bool everyFrame;
+public class AnimatorSetSpeedAction : AnimatorSetFloat {
     
-    public AnimatorSetSpeedAction(Animator animator, Rigidbody owner, string parameterName, bool everyFrame = false) {
-        this.animator = animator;
+    private Rigidbody owner;
+
+    public AnimatorSetSpeedAction(Animator animator, Rigidbody owner, string parameterName, bool everyFrame = false) 
+        : base(animator, owner.velocity.magnitude, parameterName, everyFrame) {
         this.owner = owner;
-        this.parameterName = parameterName;
-        this.everyFrame = everyFrame;
     }
 
     public override void OnEnter() {
@@ -24,7 +20,7 @@ public class AnimatorSetSpeedAction : StateAction {
         InternalSet();
     }
 
-    private void InternalSet () {
+    protected override void InternalSet() {
         animator.SetFloat(Animator.StringToHash(parameterName), owner.velocity.magnitude);
     }
 }

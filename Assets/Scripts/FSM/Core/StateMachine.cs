@@ -4,6 +4,8 @@ public class StateMachine : MonoBehaviour {
 
     private State[] states;
     private State activeState;
+    
+    public State CurrentState { get => activeState; }
 
     public void Init(State[] states, State firstState) {
         this.states = states;

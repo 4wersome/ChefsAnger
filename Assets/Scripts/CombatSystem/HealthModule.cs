@@ -32,7 +32,6 @@ public class HealthModule
 
     #region PrivateAttributes
     private bool invulnerable;
-    [SerializeField]
     private float currentHP;
     #endregion
 
@@ -41,6 +40,11 @@ public class HealthModule
         currentHP = maxHP;
     }
 
+    public void Reset (float levelDifficulty) {
+        maxHP += levelDifficulty;
+        defence += levelDifficulty;
+        currentHP = maxHP;
+    }
     public void IncreaseMaxHP(int amount){
         maxHP += amount;
     }
