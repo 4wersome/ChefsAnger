@@ -65,7 +65,7 @@ public class Spawner : MonoBehaviour {
                 //get position. based on level increase enemyStats
                 Vector3 randomPoint = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
                 //per ora 25, poi sarebbe da calcolare la dimensione dello schermo
-                Vector3 spawnPosition = Player.Get().transform.position + (randomPoint.normalized * 25f);
+                Vector3 spawnPosition = Player.Get().transform.position + (randomPoint.normalized * 100f);
                 enemy.Spawn(spawnPosition, difficultyLevel);
             }
 

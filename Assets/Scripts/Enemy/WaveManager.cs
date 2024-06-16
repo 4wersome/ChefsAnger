@@ -78,7 +78,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
                 }
                 break;
             case WaveStage.EnemyAttack:
-                if (elapsedTime > waveDuration || !AreSpawnerActive()) {
+                if (elapsedTime > waveDuration) {
                     StartSafeZone();
                 }
                 break;

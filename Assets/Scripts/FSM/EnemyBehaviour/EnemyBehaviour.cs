@@ -40,7 +40,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
         //AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Run");
         SetIsKinematicAction isKinematicAction = new SetIsKinematicAction(rigidbody, false);
-        SetVelocity3DAction setVelocity = new SetVelocity3DAction(rigidbody, Player.Get().transform, transform, followSpeed);
+        SetVelocity3DAction setVelocity = new SetVelocity3DAction(rigidbody, Player.Get().transform, transform, followSpeed, true);
         AnimatorSetSpeedAction setSpeedAction = new AnimatorSetSpeedAction(animator, rigidbody, "Speed");
         
         FollowTargetAction followTargetAction = new FollowTargetAction(gameObject, Player.Get().gameObject.transform);
