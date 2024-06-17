@@ -20,12 +20,12 @@ public class PlayerPumpkinMine : AbilityBase
 
     protected override void PreventAbility()
     {
-        throw new System.NotImplementedException();
+        isEnabled = false; 
     }
 
     protected override void UnPreventAbility()
     {
-        throw new System.NotImplementedException();
+       isEnabled= true;
     }
 
     private void Update()

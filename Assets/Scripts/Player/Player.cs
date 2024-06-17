@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageble
 {
+    private const string isDeadAnimatorParameter = "PlayerDead";
+
     #region SerializeFields
     [SerializeField]
     private HealthModule healthModule;
@@ -83,7 +85,9 @@ public class Player : MonoBehaviour, IDamageble
 
     public void InternalOnDeath() {
         playerController.IsDead = true;
+       
         playerController.OnDeath?.Invoke();
+        playerController.AnimatorMgnr.SetTriggerParameter(isDeadAnimatorParameter);
     }
     #endregion
 
