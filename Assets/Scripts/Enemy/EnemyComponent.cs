@@ -69,4 +69,7 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
         }
     }
     #endregion
+
+
+
 }

@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour
         set {
             isDead = value;
             AnimatorMgnr.SetAnimatorBool(isDeadAnimatorParameter, value);
+            
         }
     }
     #endregion
