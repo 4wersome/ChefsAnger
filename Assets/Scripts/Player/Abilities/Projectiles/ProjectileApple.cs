@@ -1,9 +1,4 @@
-using Codice.Client.GameUI.Explorer;
-using PlasticGui;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class ProjectileApple : ProjectileBase
 {
@@ -21,10 +16,17 @@ public class ProjectileApple : ProjectileBase
     public bool StartPositionCalculated
     { get { return startPositionCalculated; } }
 
+    private static ProjectileApple instance;
 
     private void Awake()
 
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
         rb = GetComponent<Rigidbody>();
 
         meshRender = GetComponentInChildren<MeshRenderer>();

@@ -34,9 +34,13 @@ public class Spawner : MonoBehaviour {
         isSpawnActive = false;
         nOfKills = 0;
         foreach (GameObject enemy in Pooler.Instance.GetObjectPool(enemyPulled)) {
+
             EnemyComponent enemyComponent = enemy.GetComponent<EnemyComponent>(); 
+            if (enemyComponent!=null)
+            {
             enemyComponent.HealthModule.OnDeath += EnemyKill;
             enemyComponent.OnSpawn += EnemySpawn;
+            }
         }
     }
 

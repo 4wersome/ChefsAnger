@@ -22,16 +22,20 @@ public class PlayerMovement : AbilityBase
     private void Start()
     {
         playerController.MovePrevented += PreventAbility;
+        isEnabled = true;
     }
     private void FixedUpdate()
     {
-        Move();
-        if (!playerController.IsGamepadActive)
+        if (isEnabled)
         {
-            CalculateForwardWithMousePosition();
+
+            Move();
+            if (!playerController.IsGamepadActive)
+            {
+                CalculateForwardWithMousePosition();
+            }
+
         }
-
-
     }
 
     #region internal 
@@ -179,12 +183,12 @@ public class PlayerMovement : AbilityBase
 
     protected override void PreventAbility()
     {
-        throw new NotImplementedException();
+        isEnabled = false;
     }
 
     protected override void UnPreventAbility()
     {
-        throw new NotImplementedException();
+        isEnabled = true;
     }
 }
 

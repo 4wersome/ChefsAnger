@@ -64,9 +64,10 @@ public class DestroyableBaseObject : MonoBehaviour, IDestroyable
            float angle = i * Mathf.PI * 2 / prefabsToSpawn.Count;
            float x = Mathf.Cos(angle) * spawnRadius;
            float z = Mathf.Sin(angle) * spawnRadius;
-           Vector3 pos = transform.position + new Vector3(x, 0, z);
+           Vector3 pos = transform.position + new Vector3(x, 0.5f, z);
            float angleDegrees = -angle*Mathf.Rad2Deg;
            Quaternion rot = Quaternion.Euler(0, angleDegrees, 0);
+           prefabsToSpawn[i].SetActive(true);
            Instantiate(prefabsToSpawn[i], pos, rot);
        }
     }

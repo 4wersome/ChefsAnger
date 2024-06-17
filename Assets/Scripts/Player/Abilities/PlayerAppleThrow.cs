@@ -1,9 +1,4 @@
-using Codice.CM.WorkspaceServer.Tree;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerAppleThrow : AbilityBase
 {
