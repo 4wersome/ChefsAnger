@@ -149,6 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileDespawnTime: 2
+  damage:
+    damageType: 1
+    damage: 5
+    damageImpulse: {x: 0, y: 0, z: 0}
+    freezeTime: 0
 --- !u!1 &8301857794111242647
 GameObject:
   m_ObjectHideFlags: 0
