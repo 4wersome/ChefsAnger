@@ -57,7 +57,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
     #endregion
 
     #region Mono
-    private void Awake() {
+    private void Start() {
         spawners = new Spawner[enemyTypes.Length];
         for (int i = 0; i < enemyTypes.Length; i++) {
             spawners[i] = gameObject.AddComponent<Spawner>();
