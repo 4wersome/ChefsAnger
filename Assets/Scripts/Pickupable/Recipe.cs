@@ -25,11 +25,13 @@ public class Recipe : MonoBehaviour, IPickupable
 
 
     #region ReferenceGetter
-    public RecipeNameEnum RecipeName {
+    public RecipeNameEnum RecipeName
+    {
         get { return recipeName; }
     }
 
-    public List<Ingredient> RequiredIngredients {
+    public List<Ingredient> RequiredIngredients
+    {
         get { return requiredIngredients; }
     }
     #endregion
@@ -37,14 +39,20 @@ public class Recipe : MonoBehaviour, IPickupable
     private void Awake()
     {
         SetRequiredIngredients();
-        lockImg.enabled = true;
+        if (lockImg != null)
+        {
+            lockImg.enabled = true;
+
+        }
     }
 
     #region Required Ingredients
-    public void SetRequiredIngredients(){
+    public void SetRequiredIngredients()
+    {
         requiredIngredients = new List<Ingredient>();
 
-        switch(recipeName){
+        switch (recipeName)
+        {
             case RecipeNameEnum.AppleGrenade:
                 requiredIngredients.Add(new Ingredient(IngredientType.GreenApple, 2));
                 requiredIngredients.Add(new Ingredient(IngredientType.RedApple, 1));
@@ -79,20 +87,26 @@ public class Recipe : MonoBehaviour, IPickupable
     #endregion
 
     #region PickUp Methods
-    public PickupableItemType GetPickupableItemType(){
+    public PickupableItemType GetPickupableItemType()
+    {
         return PickupableItemType.Recipe;
     }
 
     public void OnPickup()
     {
-       Debug.Log("Picked up: " + recipeName);
-       foreach(Ingredient ingr in requiredIngredients){
+        Debug.Log("Picked up: " + recipeName);
+        foreach (Ingredient ingr in requiredIngredients)
+        {
             Debug.Log("Required Ingredient: " + ingr.IngredientType + " x" + ingr.Number);
-       }
-       lockImg.enabled = false;
-       DeSpawnItem();
+        }
+        if (lockImg != null)
+        {
+            lockImg.enabled = false;
+
+        }
+        DeSpawnItem();
     }
-    
+
     public void SpawnItemInWorld(Transform position)
     {
         gameObject.SetActive(true);
