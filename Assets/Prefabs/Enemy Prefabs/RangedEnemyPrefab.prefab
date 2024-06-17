@@ -347,8 +347,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthModule:
-    maxHP: 8
-    defence: 2
+    maxHP: 1
+    defence: 0
   enemyDrops: []
   dropChance: 0
 --- !u!114 &1590339374129104864
