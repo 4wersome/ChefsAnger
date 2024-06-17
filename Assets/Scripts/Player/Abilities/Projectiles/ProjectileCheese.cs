@@ -8,6 +8,8 @@ public class ProjectileCheese : ProjectileBase
 {
     [SerializeField]
     private float projectileDespawnTime = 2f;
+    [SerializeField]
+    private DamageContainer damage;
 
     private bool despawnTimerRunning = false;
     private float despawnTimerElapsedTime = 0f;
@@ -60,6 +62,14 @@ public class ProjectileCheese : ProjectileBase
         if (collision.gameObject.layer == (int) Layers.Enemy) {
             StartDespawnTimer();
         }
+
+        IDamageble damageble = collision.gameObject.GetComponent<IDamageble>();
+        if (damageble == null)
+        {
+            Debug.Log("Damageble not found ");
+            return;
+        }
+        damageble.TakeDamage(damage);
     }
 
     private void StartDespawnTimer()
