@@ -12,8 +12,13 @@ public enum WaveStage { Safe, EnemyAttack }
 
 [Serializable]
 public class DictionaryItem {
-    public PoolData Key;
-    public int Value;
+    public PoolData ObjectPoolType;
+    public int levelStartSpawn;
+    public int levelStopSpawn;
+
+    public bool CanSpawn(int level) {
+        return level >= levelStartSpawn && (levelStopSpawn <= 0 || level < levelStopSpawn);
+    }
 }
 public class WaveManager : MonoBehaviour, IPoolRequester {
 
@@ -32,7 +37,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
     [SerializeField][Range(0f, 0.5f)][Tooltip("Time disturbance between each enemy spawn")] 
     private float timeNoise;
     
-    [SerializeField][Range(1, 10)] private float levelDifficultyGrowth;
+    [SerializeField][Range(1, 10)] private int levelDifficultyGrowth;
     [SerializeField][Tooltip("Number Of enemy at the first wave")] private int numberOfEnemy;
     #endregion
 
@@ -48,7 +53,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
         get {
             PoolData[] poolData = new PoolData[enemyTypes.Length];
             for (int i = 0; i < enemyTypes.Length; i++) {
-                poolData[i] = enemyTypes[i].Key;
+                poolData[i] = enemyTypes[i].ObjectPoolType;
             }
             
             return poolData;
@@ -58,16 +63,17 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
 
     #region Mono
     private void Start() {
-        spawners = new Spawner[enemyTypes.Length];
-        for (int i = 0; i < enemyTypes.Length; i++) {
-            spawners[i] = gameObject.AddComponent<Spawner>();
-            spawners[i].Init(enemyTypes[i].Key, timeNoise);
-            //Debug.Log( i + enemyTypes[i].Key.PoolKey);
-
-          
+        if (spawners == null) {
+            spawners = new Spawner[enemyTypes.Length];
+            for (int i = 0; i < enemyTypes.Length; i++) {
+                spawners[i] = gameObject.AddComponent<Spawner>();
+                spawners[i].Init(enemyTypes[i].ObjectPoolType, timeNoise);
+                //Debug.Log( i + enemyTypes[i].Key.PoolKey);
+            }
         }
-        elapsedTime = safeDuration;
+        elapsedTime = 0;
         waveStatus = startingWaveStatus;
+        StartWaveStage();
         //ResetTimer();
     }
 
@@ -100,22 +106,42 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
     private void StartNextWave() {
         waveStatus = WaveStage.EnemyAttack;
         ResetTimer();
-        //in base al livello decidi quanti nemici spawnare e di che tipo
         level++;
-        float fuzzyDifficulty = level * levelDifficultyGrowth * 0.5f;
+        int fuzzyDifficulty = (int) (level * levelDifficultyGrowth * 0.5f);
+        numberOfEnemy += fuzzyDifficulty;
+        int nOfActiveSpawner = NumberOfActiveSpawn(fuzzyDifficulty);
         
-        //ogni x aumenta il numero di nemici da spawnare
-        numberOfEnemy += (int)fuzzyDifficulty;
-        //Debug.Log("Level: " + level + ", Difficulty: " + fuzzyDifficulty);
-        //decidi, in base alla difficolta, quale e quanti spawner prendere
         for (int i = 0; i < enemyTypes.Length; i++) {
-            if (enemyTypes[i].Value <= fuzzyDifficulty) {
-                //Debug.Log("Start Spawn " + enemyTypes[i].Key.PoolKey);
-                spawners[i].StartSpawn(numberOfEnemy, waveDuration, fuzzyDifficulty );
+            if (enemyTypes[i].CanSpawn(fuzzyDifficulty)) {
+                spawners[i].StartSpawn(numberOfEnemy/nOfActiveSpawner, waveDuration, fuzzyDifficulty);
             }
         }
     }
 
+    private void StartWaveStage() {
+        switch (waveStatus) {
+            case WaveStage.EnemyAttack:
+                
+                StartNextWave();
+                break;
+            case WaveStage.Safe:
+                break;
+            default:
+#if DEBUG
+                Debug.Log("Wave Stage Missing Initial SetUp");
+#endif
+                break;
+        }
+    }
+
+    private int NumberOfActiveSpawn(int levelDifficulty) {
+        int nActiveSpawners = 0;
+        foreach (DictionaryItem enemyType in enemyTypes) {
+            if (enemyType.CanSpawn(levelDifficulty)) nActiveSpawners++;
+        }
+
+        return nActiveSpawners;
+    }
     private void StartSafeZone() {
         waveStatus = WaveStage.Safe;
         ResetTimer();
