@@ -67,8 +67,8 @@ public class DestroyableBaseObject : MonoBehaviour, IDestroyable
            Vector3 pos = transform.position + new Vector3(x, 0, z);
            float angleDegrees = -angle*Mathf.Rad2Deg;
            Quaternion rot = Quaternion.Euler(0, angleDegrees, 0);
-           Instantiate(prefabsToSpawn[i], pos, rot);
            prefabsToSpawn[i].SetActive(true);
+           Instantiate(prefabsToSpawn[i], pos, rot);
        }
     }
     #endregion

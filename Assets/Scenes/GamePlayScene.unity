@@ -2264,6 +2264,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 151116140270337051, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
+      propertyPath: damage.damage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4273928890350180286, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3600,6 +3604,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4078749178074868345, guid: 650079d287331e14da089c2dea4fe04b, type: 3}
+      propertyPath: spawnRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078749178074868345, guid: 650079d287331e14da089c2dea4fe04b, type: 3}
       propertyPath: prefabsToSpawn.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -4927,6 +4935,10 @@ PrefabInstance:
     - target: {fileID: 3384356917553563690, guid: 49d2c06e42768f94a8eb2bcdb8e2d261, type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3384356917553788166, guid: 49d2c06e42768f94a8eb2bcdb8e2d261, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.73
       objectReference: {fileID: 0}
     - target: {fileID: 3416278885104037217, guid: 49d2c06e42768f94a8eb2bcdb8e2d261, type: 3}
       propertyPath: m_Layer
