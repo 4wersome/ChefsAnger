@@ -1841,7 +1841,7 @@ PrefabInstance:
     - target: {fileID: 2286256868725024766, guid: a7fada45ba7164649a95314f45da7209, type: 3}
       propertyPath: lockImg
       value: 
-      objectReference: {fileID: 1974010937}
+      objectReference: {fileID: 1618299769}
     - target: {fileID: 2286256868725024766, guid: a7fada45ba7164649a95314f45da7209, type: 3}
       propertyPath: recipeName
       value: 1
@@ -2346,6 +2346,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 33573495216225838, guid: 5868192c511bb0c4683da77de7265e95, type: 3}
+      propertyPath: m_Name
+      value: AppleGrenadeLock
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803682199909538868, guid: 5868192c511bb0c4683da77de7265e95, type: 3}
+      propertyPath: m_Name
+      value: PumpkinMineLock
+      objectReference: {fileID: 0}
     - target: {fileID: 1979063646122668666, guid: 5868192c511bb0c4683da77de7265e95, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -150.99998
@@ -2478,11 +2486,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: AppleGrenadeUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8799369320941099024, guid: 5868192c511bb0c4683da77de7265e95, type: 3}
+      propertyPath: m_Name
+      value: CheeseWheelLock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5868192c511bb0c4683da77de7265e95, type: 3}
+--- !u!114 &1618299768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1907412714621468396, guid: 5868192c511bb0c4683da77de7265e95, type: 3}
+  m_PrefabInstance: {fileID: 1618299767}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1618299769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2610869921543237253, guid: 5868192c511bb0c4683da77de7265e95, type: 3}
+  m_PrefabInstance: {fileID: 1618299767}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1630065051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6937318025983667647, guid: 664757d9b1855e444a2b15737a2970f8, type: 3}
@@ -2882,7 +2916,7 @@ PrefabInstance:
     - target: {fileID: 2286256868725024766, guid: a7fada45ba7164649a95314f45da7209, type: 3}
       propertyPath: lockImg
       value: 
-      objectReference: {fileID: 1974010937}
+      objectReference: {fileID: 1618299768}
     - target: {fileID: 2286256868725024766, guid: a7fada45ba7164649a95314f45da7209, type: 3}
       propertyPath: recipeName
       value: 2
