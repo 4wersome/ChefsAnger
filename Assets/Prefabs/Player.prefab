@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b8a5716b663a24b8dbc6567fbc18a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredRecipe: 0
+  requiredRecipe: 3
   isEnabled: 0
   Mine: {fileID: 7298032406872366823, guid: e62ed9685b34fa94ab07002d2d7cf53b, type: 3}
   animationIsReady: 0
@@ -400,6 +400,7 @@ MonoBehaviour:
   damageInvTime: 0
   shieldInvTime: 0
   playerWeapon: {fileID: 0}
+  CameraDistanceToPlayer: {x: 0, y: 0, z: 0}
   playerController: {fileID: -600400313923066015}
   playerInventory: {fileID: 1398694670894487947}
 --- !u!114 &3938206307300249135

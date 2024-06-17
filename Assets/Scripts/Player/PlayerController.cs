@@ -123,6 +123,14 @@ public class PlayerController : MonoBehaviour
             ability.StopAbility();
         }
     }
+
+    public void UnpreventAllAbilities()
+    {
+        foreach (AbilityBase ability in abilities)
+        {
+            ability.ResumeAbility();
+        }
+    }
     public void UnlockAbility(RecipeNameEnum recipeName){
         foreach(AbilityBase ability in abilities){
             if(ability.RequiredRecipe != RecipeNameEnum.None && ability.RequiredRecipe == recipeName){

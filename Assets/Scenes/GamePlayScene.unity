@@ -2337,6 +2337,10 @@ PrefabInstance:
       propertyPath: playerWeapon
       value: 
       objectReference: {fileID: 2087614076}
+    - target: {fileID: 1520043293434886860, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
+      propertyPath: CameraDistanceToPlayer.y
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3874200686535874190, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: m_TagString
       value: Player
@@ -2414,11 +2418,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
---- !u!1 &1607309022 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7612537191513124991, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
-  m_PrefabInstance: {fileID: 1524918177}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1618299767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2842,7 +2841,6 @@ GameObject:
   - component: {fileID: 1735485295}
   - component: {fileID: 1735485294}
   - component: {fileID: 1735485293}
-  - component: {fileID: 1735485296}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2924,20 +2922,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1735485296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735485292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3f4070c4daebe447a400c1e9957a1d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 1607309022}
-  DistanceToPlayer: {x: 0, y: 15, z: 0}
 --- !u!1001 &1738804695
 PrefabInstance:
   m_ObjectHideFlags: 0

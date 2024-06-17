@@ -17,11 +17,17 @@ public class ProjectileMine : ProjectileBase
     
 
     public bool IsExploded { get { return isExploded; } }
-
+    private static ProjectileMine instance;
     #region Mono
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
         rb = GetComponent<Rigidbody>();
     }
     private void Start()

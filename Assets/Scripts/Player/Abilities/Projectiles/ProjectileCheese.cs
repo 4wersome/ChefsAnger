@@ -16,8 +16,15 @@ public class ProjectileCheese : ProjectileBase
     private float projectileCurrentLifetime = 0f;
     private float projectileLifetimeMax = 2f;
 
+    private static ProjectileCheese instance;
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
         rb = GetComponent<Rigidbody>();
     }
 
