@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Timers;
 using Unity.Properties;
 using UnityEditor;
 using UnityEngine;
@@ -62,18 +63,20 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
             spawners[i] = gameObject.AddComponent<Spawner>();
             spawners[i].Init(enemyTypes[i].Key, timeNoise);
             //Debug.Log( i + enemyTypes[i].Key.PoolKey);
-        }
 
+          
+        }
+        elapsedTime = safeDuration;
         waveStatus = startingWaveStatus;
-        ResetTimer();
+        //ResetTimer();
     }
 
     private void Update() {
         elapsedTime += Time.deltaTime;
+
         switch (waveStatus) {
             case WaveStage.Safe:
                 if (elapsedTime > safeDuration) {
-                    
                     StartNextWave();
                 }
                 break;

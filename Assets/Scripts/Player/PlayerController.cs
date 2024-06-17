@@ -5,10 +5,11 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     private const string AnimatorMovingBool = "isMoving";
-    private const string isDeadAnimatorParameter = "PlayerDead";
     private const string animatorIsAttackingBoolName = "isAttacking";
     private const string animatorIdleStateName = "Idle";
     private const string animatorMovingStateName = "Movement";
+    private const string isDeadAnimatorParameter = "PlayerDead";
+
 
 
     #region Serialized
@@ -34,12 +35,14 @@ public class PlayerController : MonoBehaviour
     #region abilityMove
     public Action MovePrevented;
     #endregion
-
+    
+    
     private UnityAction<GlobalEventArgs> EnableGamepad;
     private void Awake()
     {
         //Global Event to Cast in the UI to Enable the pad controls
         EnableGamepad += SetGamepadActive;
+        OnDeath += PreventAllAbilities;
         GlobalEventManager.AddListener(GlobalEventIndex.EnableGamepad, EnableGamepad);
 
         //search for all the abilities in the player 
@@ -49,11 +52,17 @@ public class PlayerController : MonoBehaviour
         {
             ability.Init(this);
         }
+
+
     }
 
     void Update()
     {
+        if (!isDead)
+        {
         SetAnimatorMovement();
+
+        }
 
     }
 
@@ -106,6 +115,14 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Abilities
+
+    private  void PreventAllAbilities()
+    {
+        foreach (AbilityBase ability in abilities)
+        {
+            ability.StopAbility();
+        }
+    }
     public void UnlockAbility(RecipeNameEnum recipeName){
         foreach(AbilityBase ability in abilities){
             if(ability.RequiredRecipe != RecipeNameEnum.None && ability.RequiredRecipe == recipeName){
@@ -126,7 +143,8 @@ public class PlayerController : MonoBehaviour
         }
         set {
             isDead = value;
-            AnimatorMgnr.SetAnimatorBool(isDeadAnimatorParameter, value);
+          
+
         }
     }
     #endregion

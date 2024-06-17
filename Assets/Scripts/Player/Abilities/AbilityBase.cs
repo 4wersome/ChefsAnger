@@ -25,6 +25,11 @@ public abstract class AbilityBase : MonoBehaviour
     protected abstract void PreventAbility();
     protected abstract void UnPreventAbility();
 
+    public void StopAbility()
+    {
+        PreventAbility();
+    }
+
     public virtual void UnlockAbility(){
         isEnabled = true;
         Debug.Log("Ability Enabled: " + this);
