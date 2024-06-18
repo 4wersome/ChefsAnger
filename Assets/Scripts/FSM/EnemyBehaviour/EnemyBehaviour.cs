@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class EnemyBehaviour : MonoBehaviour {
@@ -16,13 +17,27 @@ public class EnemyBehaviour : MonoBehaviour {
     #region MonoBehaviour
     void Start() {
         stateMachine = GetComponent<StateMachine>();
+        NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
+        Animator animator = GetComponent<Animator>();
+        State follow, attack, death;
+        if (agent) {
+            agent.speed = followSpeed;
+            follow = SetUpNavAgentMovementState(agent, animator);
+            attack = SetUpNavAgentAttackState(animator);
+            death = SetUpNavAgentDeathState(animator);
+        }
+        else {
+            Rigidbody rigidbody = GetComponent<Rigidbody>();
+            follow = SetUpMovementState(animator, rigidbody);
+            attack = SetUpAttackState(animator, rigidbody);
+            death = SetUpDeathState(animator, rigidbody);
+            death.stateName = "DeathState";
+        }
         
-        State follow = SetUpBaseMovementState();
-        follow.stateName = "FollowState";
-        State attack = SetUpAttackState();
-        attack.stateName = "AttackState";
-        State death = SetUpDeathState();
         death.stateName = "DeathState";
+        attack.stateName = "AttackState";
+        follow.stateName = "FollowState";
+
         
         follow.SetUpMe(new Transition[] { FollowToAttack(follow, attack), StateToDeath(follow, death)});
         attack.SetUpMe(new Transition[] { AttackToFollow(attack, follow), StateToDeath(attack, death)});
@@ -32,12 +47,24 @@ public class EnemyBehaviour : MonoBehaviour {
     #endregion
 
     #region StateSetUp
-    protected State SetUpBaseMovementState(){
+    protected State SetUpNavAgentMovementState(NavMeshAgent agent, Animator animator){
+        State state = new State();
+
+        AnimatorSetFloat setAnimatorFloatAction = new AnimatorSetFloat(animator, agent.speed, "Speed");
+        NavAgentFollowAction followTargetAction = new NavAgentFollowAction(agent, Player.Get().gameObject.transform);
+#if DEBUG
+        DebugAction debugAction = new DebugAction("MovementEnter", "MovementExit");
+        state.SetUpMe(new StateAction[] { setAnimatorFloatAction, followTargetAction, debugAction });
+#else
+        state.SetUpMe(new StateAction[] { setAnimatorFloatAction, followTargetAction });
+#endif
+        
+        
+        return state;
+    }
+    protected State SetUpMovementState(Animator animator, Rigidbody rigidbody){
         State state = new State();
         
-        Animator animator = GetComponent<Animator>();
-        Rigidbody rigidbody = GetComponent<Rigidbody>();
-
         //AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Run");
         SetIsKinematicAction isKinematicAction = new SetIsKinematicAction(rigidbody, false);
         SetVelocity3DAction setVelocity = new SetVelocity3DAction(rigidbody, Player.Get().transform, transform, followSpeed, true);
@@ -55,14 +82,29 @@ public class EnemyBehaviour : MonoBehaviour {
         return state;
     }
 
-    protected State SetUpAttackState(){
+    protected State SetUpNavAgentAttackState(Animator animator){
+        State state = new State();
+        
+        
+        AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Attack");
+        AnimatorSetBoolean setBoolean = new AnimatorSetBoolean(animator, "AttackEnded", false);
+        AnimatorSetFloat setAnimatorSpeed = new AnimatorSetFloat(animator, 0, "Speed");
+        
+#if DEBUG
+        DebugAction debugAction = new DebugAction("AttackEnter", "AttackExit");
+        state.SetUpMe(new StateAction[] { setAnimatorSpeed, setBoolean, setTrigger, debugAction });
+#else
+        state.SetUpMe(new StateAction[] { setAnimatorSpeed, setBoolean, setTrigger });
+#endif
+        return state;
+    }
+    
+    protected State SetUpAttackState(Animator animator, Rigidbody rigidbody){
         State state = new State();
 
-        Rigidbody rb = GetComponent<Rigidbody>();
-        SetVelocity3DAction stopAction = new SetVelocity3DAction(rb, Vector3.zero, followSpeed);
+        SetVelocity3DAction stopAction = new SetVelocity3DAction(rigidbody, Vector3.zero, followSpeed);
         //SetIsKinematicAction isKinematicAction = new SetIsKinematicAction(rb, true);
         
-        Animator animator = GetComponent<Animator>();
         AnimatorTriggerAction setTrigger = new AnimatorTriggerAction(animator, "Attack");
         AnimatorSetBoolean setBoolean = new AnimatorSetBoolean(animator, "AttackEnded", false);
         AnimatorSetFloat setAnimatorSpeed = new AnimatorSetFloat(animator, 0, "Speed");
@@ -73,17 +115,13 @@ public class EnemyBehaviour : MonoBehaviour {
 #else
         state.SetUpMe(new StateAction[] {  stopAction, setAnimatorSpeed, setBoolean, setTrigger });
 #endif
-        
-        
-
         return state;
     }
     
-    protected State SetUpDeathState(){
+    protected State SetUpDeathState(Animator animator, Rigidbody rigidbody){
         State state = new State();
-        SetVelocity3DAction stopAction = new SetVelocity3DAction(GetComponent<Rigidbody>(), Vector3.zero, followSpeed);
+        SetVelocity3DAction stopAction = new SetVelocity3DAction(rigidbody, Vector3.zero, followSpeed);
         
-        Animator animator = GetComponent<Animator>();
         AnimatorTriggerAction triggerDeath = new AnimatorTriggerAction(animator, "Death");
         //to implement a time delay for the visibility (or a gradual as for the material)
         SetVisibleAction setVisible = new SetVisibleAction(gameObject);
@@ -92,6 +130,22 @@ public class EnemyBehaviour : MonoBehaviour {
         state.SetUpMe(new StateAction[] { stopAction, triggerDeath, setVisible, debugAction });
 #else
         state.SetUpMe(new StateAction[] { stopAction, triggerDeath, setVisible });
+#endif
+        return state;
+    }
+    protected State SetUpNavAgentDeathState(Animator animator){
+        State state = new State();
+        
+        AnimatorTriggerAction triggerDeath = new AnimatorTriggerAction(animator, "Death");
+        
+        //to implement a time delay for the visibility (or a gradual as for the material)
+        SetVisibleAction setVisible = new SetVisibleAction(gameObject);
+        
+#if DEBUG
+        DebugAction debugAction = new DebugAction("DeathEnter", "DeathExit");
+        state.SetUpMe(new StateAction[] { triggerDeath, setVisible, debugAction });
+#else
+        state.SetUpMe(new StateAction[] { triggerDeath, setVisible });
 #endif
         return state;
     }

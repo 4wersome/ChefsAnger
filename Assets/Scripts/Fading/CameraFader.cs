@@ -12,7 +12,7 @@ public class CameraFader : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
         if (player) {
             Vector3 dir = player.transform.position - transform.position;
             Ray ray = new Ray(transform.position, dir);

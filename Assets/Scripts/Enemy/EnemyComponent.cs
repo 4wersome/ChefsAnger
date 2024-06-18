@@ -62,7 +62,7 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
     }
 
     private void SpawnDrop() {
-        if (Random.Range(0f, 1f) <= dropChance) {
+        if (enemyDrops.Length > 0 && Random.Range(0f, 1f) <= dropChance) {
             GameObject drop = enemyDrops[Random.Range(0, enemyDrops.Length)].Prefab;
             drop.transform.position = transform.position;
             drop.SetActive(true);

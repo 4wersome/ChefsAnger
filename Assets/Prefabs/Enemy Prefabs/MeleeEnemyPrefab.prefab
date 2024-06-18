@@ -298,7 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 5
   distanceToStartAttack: 1
-  distanceToStopAttack: 3
+  distanceToStopAttack: 2
 --- !u!114 &7472380438177905223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
     maxHP: 3
     defence: 0
   enemyDrops: []
-  dropChance: 0
+  dropChance: 0.5
 --- !u!114 &7511835250222842223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,7 +386,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0

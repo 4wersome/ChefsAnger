@@ -56,20 +56,41 @@ public class Spawner : MonoBehaviour {
         spawnCoroutine = StartCoroutine(SpawnCoroutine(levelDiffulty));
     }
     #endregion
+
+    #region Mono
+    //DA FARE: spawncoroutine fatta con timer update invece che Coroutine
+    private void Update() {
+        
+    }
+    #endregion
     
     #region PrivateMethods
     private IEnumerator SpawnCoroutine(float difficultyLevel) {
+        WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
         while (isSpawnActive) {
             if (activeEnemies >= nOfEnemyToSpawn) {
                 isSpawnActive = false;
                 yield break;
             }
             EnemyComponent enemy = Pooler.Instance.GetPooledObject(enemyPulled)?.GetComponent<EnemyComponent>();
+            RaycastHit hit;
+            Vector3 randomPoint, spawnPosition;
             if (enemy) {
-                //get position. based on level increase enemyStats
-                Vector3 randomPoint = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
-                //per ora 25, poi sarebbe da calcolare la dimensione dello schermo
-                Vector3 spawnPosition = Player.Get().transform.position + (randomPoint.normalized * 100f);
+                do {
+                    //get position. based on level increase enemyStats
+                    randomPoint = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+                    //per ora 25, poi sarebbe da calcolare la dimensione dello schermo
+                    spawnPosition = Player.Get().transform.position + (randomPoint.normalized * Random.Range(25f, 35f));
+#if DEBUG
+                    Debug.Log("Searching for Position");
+                    Debug.DrawRay(spawnPosition, Vector3.up*5f, Color.yellow, 15f);
+#endif
+                    yield return waitForFixedUpdate;
+                } while (Physics.SphereCast(spawnPosition, 1f, Vector3.up, out hit, 10f));
+#if DEBUG
+                Debug.DrawRay(spawnPosition, Vector3.up*5f, Color.green, 15f);
+                Debug.Log("Position Found");
+#endif
                 enemy.Spawn(spawnPosition, difficultyLevel);
             }
 
