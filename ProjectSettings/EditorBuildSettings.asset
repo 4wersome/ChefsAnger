@@ -4,27 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/MainMenuScene.unity
-    guid: 7331cef1b6fdc4f49abf65712d5f8a86
-  - enabled: 1
-    path: Assets/Scenes/GamePlayScene.unity
-    guid: 26304da5d560f0046b126d37c0a159f4
-  - enabled: 1
-    path: Assets/Scenes/GameOverScene.unity
-    guid: 1a83be3bd86b4c043ab64db063b20c61
-  - enabled: 0
-    path: Assets/Scenes/VerticalScenes/SceneSelector.unity
-    guid: ffeb7fa3ac30f164b87740b147b92746
-  - enabled: 0
-    path: Assets/Scenes/VerticalScenes/MeleeAttack.unity
-    guid: 6dccfa106113e6b4d9883bf53363df4e
-  - enabled: 0
-    path: Assets/Scenes/VerticalScenes/Pickables.unity
-    guid: 871c4487233304f48ae2b1d89a244c2f
-  - enabled: 0
-    path: Assets/Scenes/VerticalScenes/Enemies.unity
-    guid: 493e199e6847f4a4084063c924b748b0
-  m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: d6a15a72732ebfb418ee7d64ba5679b7, type: 2}
+  m_Scenes: []
+  m_configObjects: {}
