@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 441438}
   - component: {fileID: 3309862}
   - component: {fileID: 2336410}
-  - component: {fileID: 64607980942226920}
-  - component: {fileID: 64407017604939894}
+  - component: {fileID: 2792079997539088120}
   m_Layer: 0
   m_Name: SM_Bld_Hut_01_Snow
   m_TagString: Untagged
@@ -85,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64607980942226920
-MeshCollider:
+--- !u!65 &2792079997539088120
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,29 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43768803022869284, guid: c0455346219b8944e8be5f4c6bcdb896, type: 2}
---- !u!64 &64407017604939894
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 153292}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43285485026646238, guid: c0455346219b8944e8be5f4c6bcdb896, type: 2}
+  serializedVersion: 3
+  m_Size: {x: 5.2131896, y: 2.82987, z: 6.3384156}
+  m_Center: {x: 0.00000071525574, y: 1.414935, z: 0}

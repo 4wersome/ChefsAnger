@@ -400,7 +400,7 @@ MonoBehaviour:
   damageInvTime: 0
   shieldInvTime: 0
   playerWeapon: {fileID: 0}
-  CameraDistanceToPlayer: {x: 0, y: 0, z: 0}
+  CameraDistanceToPlayer: {x: 0, y: 15, z: 0}
   playerController: {fileID: -600400313923066015}
   playerInventory: {fileID: 1398694670894487947}
 --- !u!114 &3938206307300249135

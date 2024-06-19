@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 468672}
   - component: {fileID: 3369498}
   - component: {fileID: 2322952}
-  - component: {fileID: 64560038092987174}
-  - component: {fileID: 64947676699942202}
+  - component: {fileID: 736575563062994436}
   m_Layer: 11
   m_Name: SM_Bld_Fence_01
   m_TagString: Untagged
@@ -85,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64560038092987174
-MeshCollider:
+--- !u!65 &736575563062994436
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,29 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43512406539196220, guid: e6bc6bc354b68f74dbf9beb47905696f, type: 2}
---- !u!64 &64947676699942202
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171590}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43574318568564300, guid: e6bc6bc354b68f74dbf9beb47905696f, type: 2}
+  serializedVersion: 3
+  m_Size: {x: 3.8127594, y: 1.2452495, z: 0.264664}
+  m_Center: {x: 0.008339703, y: 0.62262475, z: 0}
