@@ -2480,10 +2480,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2087614076}
     - target: {fileID: 1520043293434886860, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
-      propertyPath: healthModule.maxHP
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1520043293434886860, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: CameraDistanceToPlayer.y
       value: 15
       objectReference: {fileID: 0}

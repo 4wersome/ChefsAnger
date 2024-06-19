@@ -1339,6 +1339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 459056}
   - component: {fileID: 236666228309847138}
+  - component: {fileID: 8467154102778115602}
   m_Layer: 8
   m_Name: Hand_R
   m_TagString: Untagged
@@ -1382,6 +1383,27 @@ MonoBehaviour:
     damage: 3
     damageImpulse: {x: 0, y: 0, z: 0}
     freezeTime: 0
+--- !u!135 &8467154102778115602
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136116}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.14859541
+  m_Center: {x: 0.17731406, y: 0.00000000263455, z: 2.007061e-10}
 --- !u!1 &139662
 GameObject:
   m_ObjectHideFlags: 0

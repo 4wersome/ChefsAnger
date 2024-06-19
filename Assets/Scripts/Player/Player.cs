@@ -82,14 +82,10 @@ public class Player : MonoBehaviour, IDamageble
     }
     private void Update()
     {
-      if (!playerController.IsDead)
-        {
+   
         Camera.main.transform.position = transform.position + CameraDistanceToPlayer;
-        }    
-      else
-        {
-            Camera.main.transform.position += new Vector3(0, -0.05f, 0);
-        }
+        
+
     }
 
 
@@ -117,6 +113,8 @@ public class Player : MonoBehaviour, IDamageble
     public void TakeDamage(DamageContainer damage)
     {
         healthModule.TakeDamage(damage);
+        Debug.Log("" +
+            "taking dmg ");
     }
 
     public void InternalOnDamageTaken(DamageContainer container)
