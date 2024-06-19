@@ -33,6 +33,7 @@ public class Damager : MonoBehaviour, IDamager
     {
         if (other.gameObject.tag == "Player")
         {
+            Debug.Log("ddamage taken");
             IDamageble dmg = other.GetComponentInParent<IDamageble>();
             if (dmg!=null)
             {

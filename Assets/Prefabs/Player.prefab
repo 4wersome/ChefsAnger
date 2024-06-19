@@ -154,8 +154,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3672449, y: 0.09489368, z: 0.57883006}
-  m_Center: {x: -0.0000006996448, y: 0.047446553, z: -0.1057925}
+  m_Size: {x: 0.356569, y: 0.27234, z: 0.7797949}
+  m_Center: {x: -0.0053386632, y: 0.104788385, z: -0.0053091985}
 --- !u!114 &151116140270337051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
   damageInvTime: 0
   shieldInvTime: 0
   playerWeapon: {fileID: 0}
-  CameraDistanceToPlayer: {x: 0, y: 0, z: 0}
+  CameraDistanceToPlayer: {x: 0, y: 15, z: 0}
   playerController: {fileID: -600400313923066015}
   playerInventory: {fileID: 1398694670894487947}
 --- !u!114 &3938206307300249135
@@ -743,6 +743,10 @@ PrefabInstance:
     - target: {fileID: 197684, guid: da95f7d3c32f0ae409c0d2c1c8b88511, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 466442, guid: da95f7d3c32f0ae409c0d2c1c8b88511, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.262
       objectReference: {fileID: 0}
     - target: {fileID: 468426, guid: da95f7d3c32f0ae409c0d2c1c8b88511, type: 3}
       propertyPath: m_LocalPosition.x
