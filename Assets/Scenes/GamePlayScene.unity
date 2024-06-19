@@ -1154,8 +1154,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
-      propertyPath: startingWaveStatus
+      propertyPath: safeDuration
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
+      propertyPath: waveDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
+      propertyPath: startingWaveStatus
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: levelDifficultyGrowth
@@ -3669,6 +3677,10 @@ PrefabInstance:
     - target: {fileID: 151116140270337051, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: damage.damage
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3874200686535874190, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4273928890350180286, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: m_Enabled
