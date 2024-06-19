@@ -14,18 +14,22 @@ public class PlayerMeleeAttack : AbilityBase
     }
     void Update()
     {
-        if (playerController.IsGamepadActive)
+        if (!IsPrevented)
         {
-            meleeAttackPad();
-        }
-        else
-        {
-            meleeAttack();
+            if (playerController.IsGamepadActive)
+            {
+                meleeAttackPad();
+            }
+            else
+            {
+                meleeAttack();
+            }
+
         }
     }
 
     // simple  meleeAttack based on starting the animation. In The animation the Weapon Collider is enabled for a short period of time , and then gets disabled 
-    private void meleeAttack() 
+    private void meleeAttack()
     {
         if (InputManager.PlayerMelee() && !isPrevented && !playerController.AnimatorMgnr.CheckCurrentAnimationState(animationLayer, animationStateName))
         {

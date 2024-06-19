@@ -82,8 +82,14 @@ public class Player : MonoBehaviour, IDamageble
     }
     private void Update()
     {
+      if (!playerController.IsDead)
+        {
         Camera.main.transform.position = transform.position + CameraDistanceToPlayer;
-
+        }    
+      else
+        {
+            Camera.main.transform.position += new Vector3(0, -0.05f, 0);
+        }
     }
 
 
