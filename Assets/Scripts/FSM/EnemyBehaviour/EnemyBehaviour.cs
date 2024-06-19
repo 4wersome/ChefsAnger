@@ -20,6 +20,7 @@ public class EnemyBehaviour : MonoBehaviour {
         NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
         Animator animator = GetComponent<Animator>();
         State follow, attack, death;
+        
         if (agent) {
             agent.speed = followSpeed;
             follow = SetUpNavAgentMovementState(agent, animator);
@@ -34,9 +35,9 @@ public class EnemyBehaviour : MonoBehaviour {
             death.stateName = "DeathState";
         }
         
-        death.stateName = "DeathState";
-        attack.stateName = "AttackState";
         follow.stateName = "FollowState";
+        attack.stateName = "AttackState";
+        death.stateName = "DeathState";
 
         
         follow.SetUpMe(new Transition[] { FollowToAttack(follow, attack), StateToDeath(follow, death)});

@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour {
    
     private float elapsedTime;
     private float timeNoise;
+    private float timeNoised;
     
     private int activeEnemies;
     private bool isSpawnActive;
@@ -36,10 +37,9 @@ public class Spawner : MonoBehaviour {
         foreach (GameObject enemy in Pooler.Instance.GetObjectPool(enemyPulled)) {
 
             EnemyComponent enemyComponent = enemy.GetComponent<EnemyComponent>(); 
-            if (enemyComponent!=null)
-            {
-            enemyComponent.HealthModule.OnDeath += EnemyKill;
-            enemyComponent.OnSpawn += EnemySpawn;
+            if (enemyComponent!=null) {
+                enemyComponent.HealthModule.OnDeath += EnemyKill;
+                enemyComponent.OnSpawn += EnemySpawn;
             }
         }
     }
@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour {
         
         isSpawnActive = true;
         activeEnemies = 0;
-        elapsedTime = 0;
+        ResetTimer();
         
         if(spawnCoroutine != null) StopCoroutine(spawnCoroutine);
         spawnCoroutine = StartCoroutine(SpawnCoroutine(levelDiffulty));
@@ -60,7 +60,12 @@ public class Spawner : MonoBehaviour {
     #region Mono
     //DA FARE: spawncoroutine fatta con timer update invece che Coroutine
     private void Update() {
-        
+        /*if (isSpawnActive) {
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime >= timeNoised) {
+                
+            }
+        }*/
     }
     #endregion
     
@@ -77,10 +82,8 @@ public class Spawner : MonoBehaviour {
             Vector3 randomPoint, spawnPosition;
             if (enemy) {
                 do {
-                    //get position. based on level increase enemyStats
                     randomPoint = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
-                    //per ora 25, poi sarebbe da calcolare la dimensione dello schermo
-                    spawnPosition = Player.Get().transform.position + (randomPoint.normalized * Random.Range(25f, 35f));
+                    spawnPosition = Player.Get().transform.position + (randomPoint.normalized * Random.Range(30f, 40f));
 #if DEBUG
                     Debug.Log("Searching for Position");
                     Debug.DrawRay(spawnPosition, Vector3.up*5f, Color.yellow, 15f);
@@ -94,12 +97,18 @@ public class Spawner : MonoBehaviour {
                 enemy.Spawn(spawnPosition, difficultyLevel);
             }
 
-            float timeBetweenEachNoised = timeBetweenEach + Random.Range(-timeNoise, timeNoise);
-            if (timeBetweenEachNoised <= 0f) timeBetweenEachNoised = 0.1f;
-            yield return new WaitForSeconds(timeBetweenEachNoised);
+            ResetTimer();
+            yield return new WaitForSeconds(timeNoised);
         }
         StopCoroutine(spawnCoroutine);
     }
+    
+    private void ResetTimer() {
+        timeNoised = timeBetweenEach + Random.Range(-timeNoise, timeNoise);
+        if (timeNoised <= 0f) timeNoised = 0.1f;
+        elapsedTime = 0;
+    }
+    
     private void EnemyKill() => nOfKills++;
     
     private void EnemySpawn() => activeEnemies++;
