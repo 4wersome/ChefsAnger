@@ -497,6 +497,7 @@ MonoBehaviour:
   followSpeed: 5
   distanceToStartAttack: 1
   distanceToStopAttack: 2
+  ragdollDuration: 5
 --- !u!114 &7472380438177905223
 MonoBehaviour:
   m_ObjectHideFlags: 0

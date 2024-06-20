@@ -893,16 +893,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
+      propertyPath: timeNoise
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: safeDuration
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
+      propertyPath: waveDuration
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: numberOfEnemy
-      value: 80
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: startingWaveStatus
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
+      propertyPath: enemyTypes.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: levelDifficultyGrowth
@@ -926,7 +938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4685716504517028859, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7829057331866076663, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2072,7 +2084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341d4cfc1bb79b443b095c48a4a4873d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeSpeed: 1
+  fadeSpeed: 5
   fadeAmount: 0.126
 --- !u!1 &1331553574
 GameObject:
@@ -2492,7 +2504,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 151116140270337051, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: damage.damage
-      value: 2
+      value: 205
       objectReference: {fileID: 0}
     - target: {fileID: 798965009555501452, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: m_Enabled
@@ -2508,7 +2520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1520043293434886860, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: CameraDistanceToPlayer.y
-      value: 4
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1520043293434886860, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
       propertyPath: CameraDistanceToPlayer.z
@@ -3041,6 +3053,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413974, guid: 58b397f39ca4fb94c88718a8a7a87142, type: 3}
   m_PrefabInstance: {fileID: 1133506315}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1722488595 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3874200686535946776, guid: 08a2e310ffac4504fa7ed4ac94db0c38, type: 3}
+  m_PrefabInstance: {fileID: 1524918177}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1735485292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3127,13 +3144,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735485292}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
   m_LocalPosition: {x: 0, y: 1, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
 --- !u!114 &1735485296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3146,6 +3163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a59aca7e88ae24db4ec672660de204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookAt: {fileID: 1722488595}
 --- !u!1001 &1738804695
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5244,6 +5262,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 2658255306453991378, guid: 176823e09b09bfb4b88b0682d2bb797e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73a218a11f45e99438d80e2da4ac24fe, type: 2}
     - target: {fileID: 2926723636209265944, guid: 176823e09b09bfb4b88b0682d2bb797e, type: 3}
       propertyPath: m_Name
       value: Houses

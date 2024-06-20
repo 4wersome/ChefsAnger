@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3309862}
   - component: {fileID: 2336410}
   - component: {fileID: 2792079997539088120}
+  - component: {fileID: 8095270416995834220}
   m_Layer: 0
   m_Name: SM_Bld_Hut_01_Snow
   m_TagString: Untagged
@@ -105,3 +106,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.2131896, y: 2.82987, z: 6.3384156}
   m_Center: {x: 0.00000071525574, y: 1.414935, z: 0}
+--- !u!114 &8095270416995834220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341d4cfc1bb79b443b095c48a4a4873d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 5
+  fadeAmount: 0.2
