@@ -65,7 +65,7 @@ public  class Player : MonoBehaviour, IDamageble
     {
         if (instance != this) return;
         ResetHealth();
-        playerController.SetIsKinematic(false);
+       
         healthModule.OnDamageTaken += InternalOnDamageTaken;
         healthModule.OnDeath += InternalOnDeath;
         playerInventory.OnRecipeCompleted += InternalOnRecipeCompleted;
@@ -78,8 +78,10 @@ public  class Player : MonoBehaviour, IDamageble
     private void OnSceneLoaded (UnityEngine.SceneManagement.Scene scene , LoadSceneMode mode)
     {
         ResetHealth();
+        playerController.SetIsKinematic(false);
         playerController.UnpreventAllAbilities();
         transform.position = new Vector3 (7,0,12);
+        GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerSpawn, null);
     }
     private void Update()
     {
@@ -115,6 +117,7 @@ public  class Player : MonoBehaviour, IDamageble
     public void TakeDamage(DamageContainer damage)
     {
         healthModule.TakeDamage(damage);
+        
         GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAOnPlayerTakingDmg, null);
     }
 
