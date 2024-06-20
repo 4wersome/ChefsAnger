@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3306052}
   - component: {fileID: 2399646}
   - component: {fileID: 2966908445675492610}
+  - component: {fileID: 4363803830968699480}
+  - component: {fileID: 6790699747519788140}
   m_Layer: 0
   m_Name: SM_Env_TreePine_01
   m_TagString: Untagged
@@ -105,3 +107,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0609903, y: 2.4440856, z: 0.94071186}
   m_Center: {x: -0.16083932, y: 1.2220428, z: -0.018137276}
+--- !u!65 &4363803830968699480
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146544}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7437036, y: 4.919879, z: 2.1935298}
+  m_Center: {x: 0.009286066, y: 4.812858, z: 0.062287293}
+--- !u!114 &6790699747519788140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341d4cfc1bb79b443b095c48a4a4873d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 5
+  fadeAmount: 0.2
