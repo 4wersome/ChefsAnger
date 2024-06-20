@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour, IDamageble
+public  class Player : MonoBehaviour, IDamageble
 {
     private const string isDeadAnimatorParameter = "PlayerDead";
     private const string playerResetParameter = "PlayerReset";
@@ -105,6 +105,7 @@ public class Player : MonoBehaviour, IDamageble
         if (playerController.IsDead)
         {
             playerController.AnimatorMgnr.SetTriggerParameter(playerResetParameter);
+            GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerSpawn, null);
         }
 
         healthModule.Reset();
@@ -117,6 +118,7 @@ public class Player : MonoBehaviour, IDamageble
     public void TakeDamage(DamageContainer damage)
     {
         healthModule.TakeDamage(damage);
+        GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAOnPlayerTakingDmg, null);
     }
 
     public void InternalOnDamageTaken(DamageContainer container)
@@ -135,7 +137,7 @@ public class Player : MonoBehaviour, IDamageble
         playerController.AnimatorMgnr.SetTriggerParameter(isDeadAnimatorParameter);
 
         StartCoroutine(OnDeathSceneCoroutine());
-
+        GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerDeath, null);
 
 
     }
