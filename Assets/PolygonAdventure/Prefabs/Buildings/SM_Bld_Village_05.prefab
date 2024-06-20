@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3393260}
   - component: {fileID: 2313562}
   - component: {fileID: 7719251663199392829}
+  - component: {fileID: 974403795756638368}
   m_Layer: 0
   m_Name: SM_Bld_Village_05
   m_TagString: Untagged
@@ -105,3 +106,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.1896825, y: 3.2885613, z: 4.0749464}
   m_Center: {x: 0, y: 1.6442807, z: 0}
+--- !u!114 &974403795756638368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341d4cfc1bb79b443b095c48a4a4873d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 5
+  fadeAmount: 0.2

@@ -65,6 +65,7 @@ public  class Player : MonoBehaviour, IDamageble
     {
         if (instance != this) return;
         ResetHealth();
+        playerController.SetIsKinematic(false);
         healthModule.OnDamageTaken += InternalOnDamageTaken;
         healthModule.OnDeath += InternalOnDeath;
         playerInventory.OnRecipeCompleted += InternalOnRecipeCompleted;
@@ -82,14 +83,10 @@ public  class Player : MonoBehaviour, IDamageble
     }
     private void Update()
     {
-      if (!playerController.IsDead)
-        {
+   
         Camera.main.transform.position = transform.position + CameraDistanceToPlayer;
-        }    
-      else
-        {
-            Camera.main.transform.position += new Vector3(0, -0.05f, 0);
-        }
+        
+
     }
 
 

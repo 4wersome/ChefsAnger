@@ -5,23 +5,27 @@ using UnityEngine;
 public class AnimatorSetBoolean : StateAction {
 
     private Animator animator;
-    private bool setOnEnter;
-    private string parameterName;
+    private bool valueToSet;
 
-    public AnimatorSetBoolean(Animator animator, string parameterName, bool setOnEnter = true) {
+    public AnimatorSetBoolean(Animator animator, string parameterName, bool valueToSet, bool setOnEnter = true, bool setOnExit = true) {
         this.animator = animator;
+        this.valueToSet = valueToSet;
         this.setOnEnter = setOnEnter;
+        this.setOnExit = setOnExit;
         this.parameterName = parameterName;
     }
 
+    private bool setOnEnter;
+    private bool setOnExit;
+    private string parameterName;
+
+
     public override void OnEnter() {
-        if (setOnEnter) InternalSet(true);
-        else InternalSet(false);
+        if (setOnEnter) InternalSet(valueToSet);
     }
 
     public override void OnExit() {
-        if (setOnEnter) InternalSet(false);
-        else InternalSet(true);
+        if (setOnExit) InternalSet(!valueToSet);
     }
 
     private void InternalSet(bool value) {

@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         //Global Event to Cast in the UI to Enable the pad controls
         EnableGamepad += SetGamepadActive;
         OnDeath += PreventAllAbilities;
+        OnDeath += InternalOnDeath;
         GlobalEventManager.AddListener(GlobalEventIndex.EnableGamepad, EnableGamepad);
 
         //search for all the abilities in the player 
@@ -155,5 +156,9 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+
+    private void InternalOnDeath() => SetIsKinematic(true);
+    
+    public void SetIsKinematic(bool value) => playerRigidBody.isKinematic = value;
     #endregion
 }

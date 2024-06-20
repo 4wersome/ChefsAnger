@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3348760}
   - component: {fileID: 2311056}
   - component: {fileID: 3504328334099623786}
+  - component: {fileID: 2707006376350670344}
   m_Layer: 0
   m_Name: SM_Env_Tree_010
   m_TagString: Untagged
@@ -103,5 +104,19 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1553217, y: 2.0825574, z: 0.96613026}
-  m_Center: {x: -0.23669845, y: 1.0412787, z: 0.14492792}
+  m_Size: {x: 1.1553216, y: 5.4828873, z: 0.96613026}
+  m_Center: {x: -0.23669845, y: 2.7414436, z: 0.14492792}
+--- !u!114 &2707006376350670344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341d4cfc1bb79b443b095c48a4a4873d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 5
+  fadeAmount: 0.2

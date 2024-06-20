@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthModule:
-    maxHP: 5
+    maxHP: 1
     defence: 0
   damageInvTime: 0
   shieldInvTime: 0

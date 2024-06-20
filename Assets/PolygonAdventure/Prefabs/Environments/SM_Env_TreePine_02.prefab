@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3314980}
   - component: {fileID: 2355712}
   - component: {fileID: 6305682305955465143}
+  - component: {fileID: 1855154075500713813}
   m_Layer: 0
   m_Name: SM_Env_TreePine_02
   m_TagString: Untagged
@@ -103,5 +104,19 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.89061624, y: 1.7665799, z: 0.8734797}
-  m_Center: {x: -0.106567234, y: 0.88328993, z: -0.17645216}
+  m_Size: {x: 1.2134812, y: 4.597454, z: 1.0309854}
+  m_Center: {x: 0.05486524, y: 2.298727, z: -0.097699404}
+--- !u!114 &1855154075500713813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341d4cfc1bb79b443b095c48a4a4873d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 5
+  fadeAmount: 0.2
