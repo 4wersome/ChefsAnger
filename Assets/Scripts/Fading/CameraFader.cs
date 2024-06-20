@@ -8,7 +8,7 @@ public class CameraFader : MonoBehaviour {
     private GameObject player;
     // Start is called before the first frame update
     void Start() {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider>().gameObject;
     }
 
     // Update is called once per frame
@@ -20,7 +20,9 @@ public class CameraFader : MonoBehaviour {
             if (Physics.Raycast(ray, out hit)) {
                 if(hit.collider == null) return;
                 if(hit.collider.gameObject == player) {
-                    if (fader != null) fader.DoFade = false;
+                    if (fader != null) {
+                        fader.DoFade = false;
+                    }
                 }
                 else {
                     fader = hit.collider.gameObject.GetComponent<ObjectFader>();

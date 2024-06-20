@@ -65,6 +65,7 @@ public class Player : MonoBehaviour, IDamageble
     {
         if (instance != this) return;
         ResetHealth();
+        playerController.SetIsKinematic(false);
         healthModule.OnDamageTaken += InternalOnDamageTaken;
         healthModule.OnDeath += InternalOnDeath;
         playerInventory.OnRecipeCompleted += InternalOnRecipeCompleted;
