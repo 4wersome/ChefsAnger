@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 471866}
   - component: {fileID: 3382942}
   - component: {fileID: 2345360}
-  - component: {fileID: 64293905260965912}
-  - component: {fileID: 64208363408701164}
   - component: {fileID: 8462713270173523778}
+  - component: {fileID: 6801379967579079377}
+  - component: {fileID: 8349831832684843031}
   m_Layer: 9
   m_Name: PotionStall
   m_TagString: Untagged
@@ -86,50 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64293905260965912
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162386}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43471422687147268, guid: cddc7a78e3fda7c438445be347550aa5, type: 2}
---- !u!64 &64208363408701164
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162386}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43873278378102456, guid: cddc7a78e3fda7c438445be347550aa5, type: 2}
 --- !u!114 &8462713270173523778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,3 +103,36 @@ MonoBehaviour:
     maxHP: 4
     defence: 0
   spawnRadius: 0.1
+--- !u!65 &6801379967579079377
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162386}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.1594534, y: 2.2700865, z: 2.193264}
+  m_Center: {x: -0.010941029, y: 1.1350433, z: 0.030148745}
+--- !u!114 &8349831832684843031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acbb591a88c152145a4897399fd79ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

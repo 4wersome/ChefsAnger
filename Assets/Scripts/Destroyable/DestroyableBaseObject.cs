@@ -2,27 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyableBaseObject : MonoBehaviour, IDestroyable
-{
+public class DestroyableBaseObject : MonoBehaviour, IDestroyable, IPoolRequester {
     [SerializeField]
-    private List<GameObject> prefabsToSpawn;
+    private PoolData[] prefabsToSpawn;
     [SerializeField]
     private HealthModule healthModule;
     [SerializeField]
     private float spawnRadius;
 
     #region ReferenceGetter
-    public List<GameObject> PrefabsToSpawn {
+    /*public List<GameObject> PrefabsToSpawn {
         get { return prefabsToSpawn; }
-    }
+    }*/
+    public PoolData[] Datas { get => prefabsToSpawn; }
     #endregion
 
+    /*
     public DestroyableBaseObject(List<GameObject> prefabsToSpawn){
         this.prefabsToSpawn = prefabsToSpawn;
-    }
+    }*/
 
     #region Mono
-    public void Start(){
+    public void Awake(){
         healthModule.Reset();
         healthModule.OnDamageTaken += InternalOnDamageTaken;
         healthModule.OnDeath += InternalOnDeath;
@@ -59,17 +60,23 @@ public class DestroyableBaseObject : MonoBehaviour, IDestroyable
 
     #region Internal Methods
     public void SpawnPrefabsInCircle(){
-        for (int i = 0; i < prefabsToSpawn.Count; i++)
-       {
-           float angle = i * Mathf.PI * 2 / prefabsToSpawn.Count;
-           float x = Mathf.Cos(angle) * spawnRadius;
-           float z = Mathf.Sin(angle) * spawnRadius;
-           Vector3 pos = transform.position + new Vector3(x, 0.5f, z);
-           float angleDegrees = -angle*Mathf.Rad2Deg;
-           Quaternion rot = Quaternion.Euler(0, angleDegrees, 0);
-           prefabsToSpawn[i].SetActive(true);
-           Instantiate(prefabsToSpawn[i], pos, rot);
-       }
+        for (int i = 0; i < prefabsToSpawn.Length; i++) {
+            float angle = i * Mathf.PI * 2 / prefabsToSpawn.Length;
+            float x = Mathf.Cos(angle) * spawnRadius;
+            float z = Mathf.Sin(angle) * spawnRadius;
+            Vector3 pos = transform.position + new Vector3(x, 0.5f, z);
+            float angleDegrees = -angle * Mathf.Rad2Deg;
+            Quaternion rot = Quaternion.Euler(0, angleDegrees, 0);
+            GameObject destroyableToSpawn = Pooler.Instance.GetPooledObject(prefabsToSpawn[i]);
+
+            if (destroyableToSpawn) {
+                destroyableToSpawn.SetActive(true);
+                destroyableToSpawn.transform.position = pos;
+                destroyableToSpawn.transform.rotation = rot;
+            }
+        }
     }
     #endregion
+
+    
 }

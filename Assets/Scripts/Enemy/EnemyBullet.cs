@@ -7,15 +7,21 @@ public class EnemyBullet : Damager {
     
     [SerializeField] private LayerMask destroyLayer;
     
-    private Rigidbody rigidbody;
     private Coroutine destroyOverTime;
-    
+
+    #region Property
+    public Vector3 Velocity {
+        get => GetComponent<Rigidbody>().velocity;
+        set => GetComponent<Rigidbody>().velocity = value;
+    }
+    #endregion
     #region Mono
     private void Awake() {
-        rigidbody = GetComponent<Rigidbody>();
+        
     }
 
     protected override void OnTriggerEnter(Collider other) {
+        Debug.Log("SONO ENTRATOOO");
         base.OnTriggerEnter(other);
         //if (((1 << other.gameObject.layer) & destroyLayer.value) == 0) return;
         Destroy();
@@ -23,9 +29,6 @@ public class EnemyBullet : Damager {
     #endregion
 
     #region PublicMethods
-    public Vector2 GetVelocity() => rigidbody.velocity;
-    public void SetVelocity(Vector2 newVelocity) => rigidbody.velocity = newVelocity;
-
     public void Shoot(Vector3 startPos, float bulletSpeed, float bulletDuration) {
         gameObject.SetActive(true);
         transform.position = startPos;
@@ -35,7 +38,7 @@ public class EnemyBullet : Damager {
 
     public void Shoot(float bulletSpeed) {
         Vector3 direction = Player.Get().transform.position - transform.position;
-        rigidbody.velocity = direction.normalized * bulletSpeed;
+        Velocity = direction.normalized * bulletSpeed;
         
         Quaternion rotation =  Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 436948}
   - component: {fileID: 3338170}
   - component: {fileID: 2349202}
-  - component: {fileID: 64043446686749520}
-  - component: {fileID: 64298615671803336}
-  m_Layer: 11
+  - component: {fileID: 1684080226858609128}
+  - component: {fileID: 8318630225923446894}
+  m_Layer: 9
   m_Name: SM_Bld_Stall_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,8 +85,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64043446686749520
-MeshCollider:
+--- !u!65 &1684080226858609128
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,29 +103,25 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43684190414481538, guid: 87ebff220a4a2eb4885e4440ef2bef6a, type: 2}
---- !u!64 &64298615671803336
-MeshCollider:
+  serializedVersion: 3
+  m_Size: {x: 2.1036112, y: 2.5379825, z: 1.8869324}
+  m_Center: {x: -0.0004299879, y: 1.2147636, z: 0.066179276}
+--- !u!114 &8318630225923446894
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43021916174260370, guid: 87ebff220a4a2eb4885e4440ef2bef6a, type: 2}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d9711d8bbf49440a99254e8b222a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsToSpawn:
+  - {fileID: 11400000, guid: 14d04a9e3ea29094a9f90e081a05dc20, type: 2}
+  - {fileID: 11400000, guid: 62bfeb85649888743a20f14f118f2ac7, type: 2}
+  healthModule:
+    maxHP: 5
+    defence: 0
+  spawnRadius: 0.4
