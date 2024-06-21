@@ -96,6 +96,7 @@ public enum GlobalEventIndex {
     PlayerHealthUpdated,
     PlayerMovement,
     EnableGamepad,
+    UIRecipeUnlock
 
     
 }
