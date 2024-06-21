@@ -16,13 +16,12 @@ public class Pan : MonoBehaviour
         damage.Damage += amount;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("collider found");
+    private void OnTriggerEnter(Collider other) {
+        //Debug.Log("collider found");
         IDamageble damageble = other.GetComponent<IDamageble>();
         if (damageble == null)
         {
-            Debug.Log("Damageble not found ");
+            //Debug.Log("Damageble not found ");
             return;
         }
         damageble.TakeDamage(damage);

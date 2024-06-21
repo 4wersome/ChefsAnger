@@ -1,22 +1,18 @@
 using UnityEngine;
 
-public class Damager : MonoBehaviour, IDamager
-{
+public class Damager : MonoBehaviour, IDamager {
 
     [SerializeField] protected string damagebleTag = "Player";
 
     [SerializeField]
-    private DamageContainer damageContainer;
+    protected DamageContainer damageContainer;
 
-    public DamageContainer DamageContainer
-    {
+    public DamageContainer DamageContainer {
         get => damageContainer;
         set => damageContainer = value;
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-
+    protected virtual void OnTriggerEnter(Collider other) {
         DealDamage(other);
     }
 
@@ -29,14 +25,11 @@ public class Damager : MonoBehaviour, IDamager
 
 
 
-    protected virtual void DealDamage(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
+    protected virtual void DealDamage(Collider other) {
+        if (other.gameObject.CompareTag(damagebleTag)) {
             Debug.Log("ddamage taken");
             IDamageble dmg = other.GetComponentInParent<IDamageble>();
-            if (dmg!=null)
-            {
+            if (dmg != null) {
                 dmg.TakeDamage(DamageContainer);
             }
         }

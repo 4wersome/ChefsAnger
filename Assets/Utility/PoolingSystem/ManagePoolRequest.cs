@@ -10,7 +10,9 @@ public class ManagePoolRequest : MonoBehaviour
         foreach(IPoolRequester requester in requesters) {
             foreach(PoolData data in requester.Datas) {
                 Pooler.Instance.AddToPool(data);
+#if DEBUG
                 Debug.Log("added " + data.PoolKey);
+#endif
             }
         }
     }

@@ -23,7 +23,7 @@ public class EnemyBullet : Damager {
     protected override void OnTriggerEnter(Collider other) {
         Debug.Log("SONO ENTRATOOO");
         base.OnTriggerEnter(other);
-        //if (((1 << other.gameObject.layer) & destroyLayer.value) == 0) return;
+        if (((1 << other.gameObject.layer) & destroyLayer.value) == 0) return;
         Destroy();
     }
     #endregion
