@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour, IDamageble
+public  class Player : MonoBehaviour, IDamageble
 {
     private const string isDeadAnimatorParameter = "PlayerDead";
     private const string playerResetParameter = "PlayerReset";
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour, IDamageble
     {
         if (instance != this) return;
         ResetHealth();
-        playerController.SetIsKinematic(false);
+       
         healthModule.OnDamageTaken += InternalOnDamageTaken;
         healthModule.OnDeath += InternalOnDeath;
         playerInventory.OnRecipeCompleted += InternalOnRecipeCompleted;
@@ -78,8 +78,10 @@ public class Player : MonoBehaviour, IDamageble
     private void OnSceneLoaded (UnityEngine.SceneManagement.Scene scene , LoadSceneMode mode)
     {
         ResetHealth();
+        playerController.SetIsKinematic(false);
         playerController.UnpreventAllAbilities();
         transform.position = new Vector3 (7,0,12);
+        GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerSpawn, null);
     }
     private void Update()
     {
@@ -102,6 +104,7 @@ public class Player : MonoBehaviour, IDamageble
         if (playerController.IsDead)
         {
             playerController.AnimatorMgnr.SetTriggerParameter(playerResetParameter);
+            GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerSpawn, null);
         }
 
         healthModule.Reset();
@@ -114,8 +117,8 @@ public class Player : MonoBehaviour, IDamageble
     public void TakeDamage(DamageContainer damage)
     {
         healthModule.TakeDamage(damage);
-        Debug.Log("" +
-            "taking dmg ");
+        
+        GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAOnPlayerTakingDmg, null);
     }
 
     public void InternalOnDamageTaken(DamageContainer container)
@@ -134,7 +137,7 @@ public class Player : MonoBehaviour, IDamageble
         playerController.AnimatorMgnr.SetTriggerParameter(isDeadAnimatorParameter);
 
         StartCoroutine(OnDeathSceneCoroutine());
-
+        GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerDeath, null);
 
 
     }

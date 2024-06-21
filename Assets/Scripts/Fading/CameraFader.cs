@@ -10,6 +10,9 @@ public class CameraFader : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider>().gameObject;
+     
+            lookAt = player.transform;
+        
     }
 
     // Update is called once per frame

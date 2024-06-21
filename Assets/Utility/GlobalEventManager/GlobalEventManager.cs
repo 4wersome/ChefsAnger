@@ -90,10 +90,13 @@ public class GlobalEventArgs : EventArgs {
 
 
 public enum GlobalEventIndex {
-    PlayerDeath,
+    CAMERAPlayerSpawn,
+    CAMERAPlayerDeath,
+    CAMERAOnPlayerTakingDmg,
     PlayerHealthUpdated,
     PlayerMovement,
     EnableGamepad,
+
     
 }
 
