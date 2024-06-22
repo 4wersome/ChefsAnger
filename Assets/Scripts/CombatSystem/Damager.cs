@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Damager : MonoBehaviour, IDamager {
 
-    [SerializeField] protected string damagebleTag = "Player";
+    [FormerlySerializedAs("damagebleTag")] [SerializeField] protected string[] damagebleTags;
 
     [SerializeField]
     protected DamageContainer damageContainer;
@@ -26,11 +27,14 @@ public class Damager : MonoBehaviour, IDamager {
 
 
     protected virtual void DealDamage(Collider other) {
-        if (other.gameObject.CompareTag(damagebleTag)) {
-            Debug.Log("ddamage taken");
-            IDamageble dmg = other.GetComponentInParent<IDamageble>();
-            if (dmg != null) {
-                dmg.TakeDamage(DamageContainer);
+        foreach (string damagebleTag in damagebleTags) {
+            if (other.gameObject.CompareTag(damagebleTag)) {
+                Debug.Log("ddamage taken");
+                IDamageble dmg = other.GetComponentInParent<IDamageble>();
+                if (dmg != null) {
+                    dmg.TakeDamage(DamageContainer);
+                }
+                return;
             }
         }
     }

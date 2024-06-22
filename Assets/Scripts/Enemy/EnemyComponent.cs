@@ -30,7 +30,7 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
     #region Mono
     private void Awake() {
 #if DEBUG
-        //healthModule.OnDamageTaken += (damageContainer) => Debug.Log(gameObject.name + " is being attacked by the player");
+        healthModule.OnDamageTaken += (damageContainer) => Debug.Log(gameObject.name + " is being attacked");
 #endif
         enemyAttackComponent = GetComponent<IEnemyAttack>();
         if(enemyDrops != null) OnSpawn += SpawnDrop;

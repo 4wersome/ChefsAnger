@@ -10,9 +10,6 @@ public class CameraFader : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider>().gameObject;
-     
-            lookAt = player.transform;
-        
     }
 
     // Update is called once per frame
@@ -32,10 +29,17 @@ public class CameraFader : MonoBehaviour {
                     }
                 }
                 else {
-                    fader = hit.collider.gameObject.GetComponent<ObjectFader>();
-                    if (fader) fader.DoFade = true;
+                    ObjectFader objectFader = hit.collider.gameObject.GetComponent<ObjectFader>();
+                    if (objectFader) {
+                        objectFader.DoFade = true;
+                        if (fader != objectFader) {
+                            if (fader == null) fader = objectFader;
+                            fader.DoFade = false;
+                            fader = objectFader;
+                        }
+                        fader.DoFade = true;
+                    } 
                 }
-                
             }
         }
     }

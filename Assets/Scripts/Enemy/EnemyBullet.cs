@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : Damager {
+public class EnemyBullet : Damager, IDamageble {
     
     [SerializeField] private LayerMask destroyLayer;
     
@@ -20,16 +20,23 @@ public class EnemyBullet : Damager {
         
     }
 
+    public void TakeDamage(DamageContainer damage) {
+        Debug.Log("bullet colpito");
+        gameObject.layer = LayerMask.NameToLayer("Ignore Player");
+        gameObject.GetComponent<Rigidbody>().velocity *= -1;
+    }
     protected override void OnTriggerEnter(Collider other) {
-        Debug.Log("SONO ENTRATOOO");
         base.OnTriggerEnter(other);
+        Debug.Log(other.gameObject.name);
         if (((1 << other.gameObject.layer) & destroyLayer.value) == 0) return;
+        Debug.Log("bullet destroy");
         Destroy();
     }
     #endregion
 
     #region PublicMethods
     public void Shoot(Vector3 startPos, float bulletSpeed, float bulletDuration) {
+        gameObject.layer = LayerMask.NameToLayer("ignoreEnemy");
         gameObject.SetActive(true);
         transform.position = startPos;
         Shoot(bulletSpeed);
@@ -58,5 +65,4 @@ public class EnemyBullet : Damager {
         yield return new WaitForSeconds(bulletDuration);
         Destroy();
     }
-    
 }

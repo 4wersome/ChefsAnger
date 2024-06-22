@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 5604022676236589684}
   m_Layer: 8
   m_Name: RangedEnemyPrefab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -525,15 +525,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageContainer:
     damageType: 1
-    damage: 2
+    damage: 5
     damageImpulse: {x: 0, y: 0, z: 0}
     freezeTime: 0
   hasCD: 1
   abilityCooldown: 0.1
   bullets:
   - {fileID: 11400000, guid: b7db1ca61d18fde40be12791172bbd03, type: 2}
+  throwOffset: {x: 0.3, y: 1, z: 0}
   bulletSpeed: 6
-  bulletLifeSpan: 5.8
+  bulletLifeSpan: 7
 --- !u!114 &8354165769551011936
 MonoBehaviour:
   m_ObjectHideFlags: 0
