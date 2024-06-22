@@ -46,6 +46,13 @@ public class Recipe : MonoBehaviour, IPickupable
         }
     }
 
+    #region Public Methods
+    public void ChangeIntoPowerUpRecipe(){
+        recipeName = (RecipeNameEnum) Random.Range(4, System.Enum.GetValues(typeof(RecipeNameEnum)).Length);
+        SetRequiredIngredients();
+    }
+    #endregion
+
     #region Required Ingredients
     public void SetRequiredIngredients()
     {
