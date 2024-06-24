@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class Pan : MonoBehaviour
 {
     [SerializeField]
     private DamageContainer damage;
+
+    [SerializeField]
+    private EventReference onHitSound;
 
     #region Mono
     private void Awake() {
@@ -25,6 +29,7 @@ public class Pan : MonoBehaviour
             Debug.Log("Damageble not found ");
             return;
         }
+        Audiomngr.Instance.PlayeOneShot(onHitSound, transform.position);
         damageble.TakeDamage(damage);
     }
 
