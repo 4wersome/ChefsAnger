@@ -13,24 +13,29 @@ public class PlayerPumpkinMine : AbilityBase
 
     [SerializeField]
     private bool animationIsReady;
-    
 
 
 
+    private void Awake()
+    {
+        requiredRecipe = RecipeNameEnum.PumpkinMine;
+        isEnabled = false;
+        isPrevented = false; 
+    }
 
     protected override void PreventAbility()
     {
-        isEnabled = false; 
+        isPrevented=false; 
     }
 
     protected override void UnPreventAbility()
     {
-       isEnabled= true;
+       isPrevented= true;
     }
 
     private void Update()
     {
-        if (isEnabled)
+        if (isEnabled && !isPrevented)
         {
 
 

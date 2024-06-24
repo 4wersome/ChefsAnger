@@ -30,8 +30,14 @@ public abstract class AbilityBase : MonoBehaviour
         PreventAbility();
     }
 
+
+    public void ResumeAbility ()
+    {
+        UnPreventAbility();
+    }
     public virtual void UnlockAbility(){
         isEnabled = true;
+        isPrevented = false;
         Debug.Log("Ability Enabled: " + this);
     }
 }

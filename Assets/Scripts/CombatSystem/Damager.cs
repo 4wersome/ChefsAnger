@@ -1,9 +1,4 @@
-using Codice.Client.BaseCommands;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Damager : MonoBehaviour, IDamager
 {
@@ -38,6 +33,7 @@ public class Damager : MonoBehaviour, IDamager
     {
         if (other.gameObject.tag == "Player")
         {
+            Debug.Log("ddamage taken");
             IDamageble dmg = other.GetComponentInParent<IDamageble>();
             if (dmg!=null)
             {

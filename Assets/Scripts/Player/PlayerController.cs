@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         //Global Event to Cast in the UI to Enable the pad controls
         EnableGamepad += SetGamepadActive;
         OnDeath += PreventAllAbilities;
+        OnDeath += InternalOnDeath;
         GlobalEventManager.AddListener(GlobalEventIndex.EnableGamepad, EnableGamepad);
 
         //search for all the abilities in the player 
@@ -123,6 +124,14 @@ public class PlayerController : MonoBehaviour
             ability.StopAbility();
         }
     }
+
+    public void UnpreventAllAbilities()
+    {
+        foreach (AbilityBase ability in abilities)
+        {
+            ability.ResumeAbility();
+        }
+    }
     public void UnlockAbility(RecipeNameEnum recipeName){
         foreach(AbilityBase ability in abilities){
             if(ability.RequiredRecipe != RecipeNameEnum.None && ability.RequiredRecipe == recipeName){
@@ -147,5 +156,9 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+
+    private void InternalOnDeath() => SetIsKinematic(true);
+    
+    public void SetIsKinematic(bool value) => playerRigidBody.isKinematic = value;
     #endregion
 }

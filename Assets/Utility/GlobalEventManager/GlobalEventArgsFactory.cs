@@ -13,7 +13,7 @@ public static class GlobalEventArgsFactory
     static GlobalEventArgsFactory()
     {
         methodDebugString = new Dictionary<GlobalEventIndex, EventDebug>();
-        methodDebugString.Add(GlobalEventIndex.PlayerDeath, new EventDebug(PlayerDeathDebug));
+        methodDebugString.Add(GlobalEventIndex.CAMERAPlayerDeath, new EventDebug(PlayerDeathDebug));
         methodDebugString.Add(GlobalEventIndex.PlayerHealthUpdated, new EventDebug(PlayerHealthUpdatedDebug));
         methodDebugString.Add(GlobalEventIndex.PlayerMovement, new EventDebug(PlayerPositionDebug));
     }
@@ -26,7 +26,7 @@ public static class GlobalEventArgsFactory
 
 
 
-
+    
     #region PlayerDeath
     public static GlobalEventArgs PlayerDeathFactory()
     {
