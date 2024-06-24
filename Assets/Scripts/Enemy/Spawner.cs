@@ -20,7 +20,8 @@ public class Spawner : MonoBehaviour {
     
     private int activeEnemies;
     private bool isSpawnActive;
-    private Coroutine spawnCoroutine;
+    private bool canSpanwEnemy;
+    private float levelDiffulty;
     #endregion
 
     #region Property
@@ -47,29 +48,59 @@ public class Spawner : MonoBehaviour {
     public void StartSpawn(int nOfEnemyToSpawn, float waveDuration, float levelDiffulty) {
         this.nOfEnemyToSpawn = nOfEnemyToSpawn;
         timeBetweenEach = waveDuration / nOfEnemyToSpawn;
-        
+        this.levelDiffulty = levelDiffulty;
         isSpawnActive = true;
         activeEnemies = 0;
         ResetTimer();
         
-        if(spawnCoroutine != null) StopCoroutine(spawnCoroutine);
-        spawnCoroutine = StartCoroutine(SpawnCoroutine(levelDiffulty));
+        //if(spawnCoroutine != null) StopCoroutine(spawnCoroutine);
+        //spawnCoroutine = StartCoroutine(SpawnCoroutine(levelDiffulty));
     }
     #endregion
 
     #region Mono
     //DA FARE: spawncoroutine fatta con timer update invece che Coroutine
-    private void Update() {
-        /*if (isSpawnActive) {
-            elapsedTime += Time.deltaTime;
+    private void FixedUpdate() {
+        if (isSpawnActive) {
             if (elapsedTime >= timeNoised) {
+                if (activeEnemies >= nOfEnemyToSpawn) isSpawnActive = false;
+                else {
+                    EnemyComponent enemy = Pooler.Instance.GetPooledObject(enemyPulled)?.GetComponent<EnemyComponent>();
+                    RaycastHit hit;
+                    if (enemy) {
+                        Vector3 randomPoint = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+                        Vector3 spawnPosition = Player.Get().transform.position + (randomPoint.normalized * Random.Range(30f, 40f));
+#if DEBUG
+                        Debug.Log("Searching for Position");
+                        Debug.DrawRay(spawnPosition, Vector3.up*5f, Color.yellow, 15f);
+#endif
+                        //yield return waitForFixedUpdate;
+                            
+                        canSpanwEnemy = Physics.SphereCast(spawnPosition, 1f, Vector3.up, out hit, 10f);
+                        
+                        if (canSpanwEnemy) {
+#if DEBUG
+                            Debug.DrawRay(spawnPosition, Vector3.up*5f, Color.green, 15f);
+                            Debug.Log("Position Found");
+#endif
+                            canSpanwEnemy = false;
+                            enemy.Spawn(spawnPosition, levelDiffulty);
+                            ResetTimer();
+                        }
+                        
+                    }
+                }
                 
             }
-        }*/
+            else {
+                elapsedTime += Time.fixedDeltaTime;
+            }
+        }
     }
     #endregion
     
     #region PrivateMethods
+    /*
     private IEnumerator SpawnCoroutine(float difficultyLevel) {
         WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
         while (isSpawnActive) {
@@ -102,7 +133,7 @@ public class Spawner : MonoBehaviour {
         }
         StopCoroutine(spawnCoroutine);
     }
-    
+    */
     private void ResetTimer() {
         timeNoised = timeBetweenEach + Random.Range(-timeNoise, timeNoise);
         if (timeNoised <= 0f) timeNoised = 0.1f;

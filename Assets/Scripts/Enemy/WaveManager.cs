@@ -11,8 +11,8 @@ using UnityEngine.Serialization;
 public enum WaveStage { Safe, EnemyAttack }
 
 [Serializable]
-public class DictionaryItem {
-    public PoolData ObjectPoolType;
+public class EnemyTypePoolData {
+    public PoolData enemyPoolType;
     public int levelStartSpawn;
     public int levelStopSpawn;
 
@@ -20,12 +20,13 @@ public class DictionaryItem {
         return level >= levelStartSpawn && (levelStopSpawn <= 0 || level < levelStopSpawn);
     }
 }
+
 public class WaveManager : MonoBehaviour, IPoolRequester {
 
     #region SerializedField
     //[SerializeField] private PoolData[] enemyTypes;
     [SerializeField][Tooltip("List of different type of enemy and the level they starts to spawn")] 
-    private DictionaryItem[] enemyTypes;
+    private EnemyTypePoolData[] enemyTypes;
     
     [SerializeField][Tooltip("Final Level to reach")] private int victoryLevel;
     [SerializeField] private bool isInfinite;
@@ -53,7 +54,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
         get {
             PoolData[] poolData = new PoolData[enemyTypes.Length];
             for (int i = 0; i < enemyTypes.Length; i++) {
-                poolData[i] = enemyTypes[i].ObjectPoolType;
+                poolData[i] = enemyTypes[i].enemyPoolType;
             }
             
             return poolData;
@@ -67,7 +68,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
             spawners = new Spawner[enemyTypes.Length];
             for (int i = 0; i < enemyTypes.Length; i++) {
                 spawners[i] = gameObject.AddComponent<Spawner>();
-                spawners[i].Init(enemyTypes[i].ObjectPoolType, timeNoise);
+                spawners[i].Init(enemyTypes[i].enemyPoolType, timeNoise);
                 //Debug.Log( i + enemyTypes[i].Key.PoolKey);
             }
         }
@@ -136,7 +137,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
 
     private int NumberOfActiveSpawn(int levelDifficulty) {
         int nActiveSpawners = 0;
-        foreach (DictionaryItem enemyType in enemyTypes) {
+        foreach (EnemyTypePoolData enemyType in enemyTypes) {
             if (enemyType.CanSpawn(levelDifficulty)) nActiveSpawners++;
         }
 

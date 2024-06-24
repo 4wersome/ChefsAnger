@@ -962,15 +962,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: safeDuration
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: waveDuration
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: numberOfEnemy
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: startingWaveStatus
@@ -984,6 +984,10 @@ PrefabInstance:
       propertyPath: levelDifficultyGrowth
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
+      propertyPath: enemyTypes.Array.data[0].enemyPoolType
+      value: 
+      objectReference: {fileID: 11400000, guid: 2616e08d731d67c4abdfb04b3a580f3d, type: 2}
     - target: {fileID: 749516897663454064, guid: 1570e0bb723961c439c5db7e9115f0de, type: 3}
       propertyPath: enemyTypes.Array.data[0].ObjectPoolType
       value: 

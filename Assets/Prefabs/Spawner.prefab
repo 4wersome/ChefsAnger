@@ -46,12 +46,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypes:
-  - Key: {fileID: 11400000, guid: 7df7fe6655c302f4ca1a396db25b9363, type: 2}
-    Value: 0
-  - Key: {fileID: 11400000, guid: 2616e08d731d67c4abdfb04b3a580f3d, type: 2}
-    Value: 5
+  - enemyPoolType: {fileID: 11400000, guid: 7df7fe6655c302f4ca1a396db25b9363, type: 2}
+    levelStartSpawn: 0
+    levelStopSpawn: 0
+  - enemyPoolType: {fileID: 11400000, guid: 2616e08d731d67c4abdfb04b3a580f3d, type: 2}
+    levelStartSpawn: 0
+    levelStopSpawn: 0
   victoryLevel: 15
   isInfinite: 0
+  startingWaveStatus: 0
   safeDuration: 15
   waveDuration: 80
   timeNoise: 0.166
