@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utility.PoolingSystem;
 using Random = UnityEngine.Random;
 
 public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {

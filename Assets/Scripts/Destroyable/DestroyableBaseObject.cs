@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility.PoolingSystem;
 
 public class DestroyableBaseObject : MonoBehaviour, IDestroyable, IPoolRequester {
     [SerializeField]
@@ -59,7 +60,7 @@ public class DestroyableBaseObject : MonoBehaviour, IDestroyable, IPoolRequester
     #endregion
 
     #region Internal Methods
-    public void SpawnPrefabsInCircle(){
+    private void SpawnPrefabsInCircle(){
         for (int i = 0; i < prefabsToSpawn.Length; i++) {
             float angle = i * Mathf.PI * 2 / prefabsToSpawn.Length;
             float x = Mathf.Cos(angle) * spawnRadius;
@@ -78,5 +79,12 @@ public class DestroyableBaseObject : MonoBehaviour, IDestroyable, IPoolRequester
     }
     #endregion
 
-    
+    #region PublicMethods
+    public void SpawnObject(Transform spawnTransform) {
+        transform.position = spawnTransform.position;
+        transform.rotation = spawnTransform.rotation;
+        healthModule.Reset();
+        gameObject.SetActive(true);
+    }
+    #endregion
 }

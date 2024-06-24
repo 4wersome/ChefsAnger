@@ -7,24 +7,22 @@ using System.Timers;
 using Unity.Properties;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
-public enum WaveStage { Safe, EnemyAttack }
+using Utility.PoolingSystem;
+using WaveManagment.SerializedPoolClass;
+using Random = UnityEngine.Random;
 
-[Serializable]
-public class EnemyTypePoolData {
-    public PoolData enemyPoolType;
-    public int levelStartSpawn;
-    public int levelStopSpawn;
-
-    public bool CanSpawn(int level) {
-        return level >= levelStartSpawn && (levelStopSpawn <= 0 || level < levelStopSpawn);
-    }
-}
+public enum WaveStage { Safe, EnemyAttack, DestroyableSpawn }
 
 public class WaveManager : MonoBehaviour, IPoolRequester {
 
     #region SerializedField
-    //[SerializeField] private PoolData[] enemyTypes;
+    [SerializeField] private PoolData[] destroyables;
+    [SerializeField] private GameObject [] destroyableSpawnPositions;
+    [SerializeField] [Range(1,5)] private int numberOfWave;
+    [SerializeField] private int maxNumeberOfDestroyable;
+    
     [SerializeField][Tooltip("List of different type of enemy and the level they starts to spawn")] 
     private EnemyTypePoolData[] enemyTypes;
     
@@ -52,11 +50,16 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
     #region Property
     public PoolData[] Datas {
         get {
-            PoolData[] poolData = new PoolData[enemyTypes.Length];
-            for (int i = 0; i < enemyTypes.Length; i++) {
+            PoolData[] poolData = new PoolData[enemyTypes.Length+destroyables.Length];
+            int i = 0;
+            for (; i < enemyTypes.Length; i++) {
                 poolData[i] = enemyTypes[i].enemyPoolType;
             }
-            
+
+            foreach (PoolData destroyable in destroyables) {
+                poolData[i] = destroyable;
+                i++;
+            }
             return poolData;
         }
     }
@@ -64,6 +67,11 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
 
     #region Mono
     private void Start() {
+        if (maxNumeberOfDestroyable >= destroyables.Length) maxNumeberOfDestroyable = destroyables.Length;
+        if (maxNumeberOfDestroyable < 0) maxNumeberOfDestroyable = 1;
+        foreach (GameObject destroyableSpawnPosition in destroyableSpawnPositions) {
+            destroyableSpawnPosition.SetActive(true);
+        }
         if (spawners == null) {
             spawners = new Spawner[enemyTypes.Length];
             for (int i = 0; i < enemyTypes.Length; i++) {
@@ -76,20 +84,33 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
         waveStatus = startingWaveStatus;
         StartWaveStage();
         //ResetTimer();
+        
     }
 
     private void Update() {
         elapsedTime += Time.deltaTime;
 
         switch (waveStatus) {
+            case WaveStage.EnemyAttack:
+                if (elapsedTime > waveDuration) {
+                    if (level % numberOfWave == 0) {
+                        StartRespawnDestroyableZone();
+                    }
+                    else {
+                        StartSafeZone();
+                    }
+                }
+                break;
+            
             case WaveStage.Safe:
                 if (elapsedTime > safeDuration) {
                     StartNextWave();
                 }
                 break;
-            case WaveStage.EnemyAttack:
-                if (elapsedTime > waveDuration) {
-                    StartSafeZone();
+            
+            case WaveStage.DestroyableSpawn:
+                if (elapsedTime > safeDuration) {
+                    StartNextWave();
                 }
                 break;
         }
@@ -118,21 +139,19 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
             }
         }
     }
-
-    private void StartWaveStage() {
-        switch (waveStatus) {
-            case WaveStage.EnemyAttack:
-                
-                StartNextWave();
-                break;
-            case WaveStage.Safe:
-                break;
-            default:
-#if DEBUG
-                Debug.Log("Wave Stage Missing Initial SetUp");
-#endif
-                break;
-        }
+    
+    private void StartSafeZone() {
+        waveStatus = WaveStage.Safe;
+        ResetTimer();
+        //eventuale reward per aver ucciso tutti i nemici prima della durata della wave
+    }
+    
+    private void StartRespawnDestroyableZone() {
+        waveStatus = WaveStage.DestroyableSpawn;
+        RespawnDestroyable();
+        ResetTimer();
+        
+        //eventuale reward per aver ucciso tutti i nemici prima della durata della wave
     }
 
     private int NumberOfActiveSpawn(int levelDifficulty) {
@@ -143,10 +162,48 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
 
         return nActiveSpawners;
     }
-    private void StartSafeZone() {
-        waveStatus = WaveStage.Safe;
-        ResetTimer();
-        //eventuale reward per aver ucciso tutti i nemici prima della durata della wave
+    
+    private void StartWaveStage() {
+        switch (waveStatus) {
+            case WaveStage.EnemyAttack:
+                StartNextWave();
+                break;
+            
+            case WaveStage.Safe:
+                StartSafeZone();
+                break;
+            
+            case WaveStage.DestroyableSpawn:
+                StartRespawnDestroyableZone();
+                break;
+            
+            default:
+                StartSafeZone();
+#if DEBUG
+                Debug.LogWarning("Wave Stage Missing Initial SetUp");
+#endif
+                break;
+        }
+    }
+
+
+    private void RespawnDestroyable() {
+        List<GameObject> freePosition = new List<GameObject>();
+        foreach (GameObject spawnPosition in destroyableSpawnPositions) {
+            if(spawnPosition.activeSelf) freePosition.Add(spawnPosition);
+        }
+        
+        int nOfItem = Math.Clamp(Random.Range(1, maxNumeberOfDestroyable), 0, freePosition.Count);
+        
+        for (int i = 0; i < nOfItem; i++) {
+            DestroyableBaseObject destroyableBaseObject = Pooler.Instance.GetPooledObject(destroyables[Random.Range(0, destroyables.Length)])?.GetComponent<DestroyableBaseObject>();
+            if (destroyableBaseObject) {
+                GameObject spawnPos = freePosition[Random.Range(0, freePosition.Count)];
+                destroyableBaseObject.SpawnObject(spawnPos.transform);
+                freePosition.Remove(spawnPos);
+                if(freePosition.Count<=0) return;
+            }
+        }
     }
 
     private void ResetTimer() {

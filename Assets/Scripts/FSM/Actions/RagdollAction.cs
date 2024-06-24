@@ -40,7 +40,7 @@ public class RagdollAction : StateAction {
 
     private void SetColliderState(bool state) {
         foreach (Collider collider in colliders) {
-            collider.enabled = state;
+            if(!collider.isTrigger) collider.enabled = state;
         }
         mainCollider.enabled = !state;
     }

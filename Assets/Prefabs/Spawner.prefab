@@ -45,6 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0619e9fe41784340a4d7f3f673a5e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyables:
+  - {fileID: 11400000, guid: 140f616ae45138248964f6fe35918209, type: 2}
+  - {fileID: 11400000, guid: dbf53eb9dc524e44580e5ace9305f3c4, type: 2}
+  - {fileID: 11400000, guid: 477e70e49d1903846892f171acaead81, type: 2}
+  - {fileID: 11400000, guid: 690d9340a41a5bc46b1d127012e44f34, type: 2}
+  - {fileID: 11400000, guid: 59febfeb697bc5f488d8de1626193fd4, type: 2}
+  - {fileID: 11400000, guid: d5cd228a712a87e4f9fb5dc15efc220e, type: 2}
+  - {fileID: 11400000, guid: 0844f138c12c9874cb1f6d2a8f43f687, type: 2}
+  - {fileID: 11400000, guid: 9fb5426e1526eef41ae12be0cff0abf9, type: 2}
+  - {fileID: 11400000, guid: dc5833fefe4b9ab4e8ae339abea288a8, type: 2}
+  - {fileID: 11400000, guid: c59b18c01ecd67742a347340b87c7d83, type: 2}
+  destroyableSpawnPositions: []
+  numberOfWave: 1
+  maxNumeberOfDestroyable: 0
   enemyTypes:
   - enemyPoolType: {fileID: 11400000, guid: 7df7fe6655c302f4ca1a396db25b9363, type: 2}
     levelStartSpawn: 0
