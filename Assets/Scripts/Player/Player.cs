@@ -82,6 +82,7 @@ public  class Player : MonoBehaviour, IDamageble
         playerController.UnpreventAllAbilities();
         transform.position = new Vector3 (7,0,12);
         GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerSpawn, null);
+       
     }
     private void Update()
     {
@@ -111,6 +112,7 @@ public  class Player : MonoBehaviour, IDamageble
         NotifyHealthUpdatedGlobal();
         playerController.IsDead = false;
 
+        
 
     }
 
@@ -135,10 +137,11 @@ public  class Player : MonoBehaviour, IDamageble
 
         playerController.OnDeath?.Invoke();
         playerController.AnimatorMgnr.SetTriggerParameter(isDeadAnimatorParameter);
+        
 
         StartCoroutine(OnDeathSceneCoroutine());
         GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerDeath, null);
-
+        Audiomngr.Instance.PlayeOneShot(FMODEventMAnager.Instance.PlayerDeath, transform.position);
 
     }
     #endregion
