@@ -114,6 +114,8 @@ public  class Player : MonoBehaviour, IDamageble
 
     }
 
+
+
     public void TakeDamage(DamageContainer damage)
     {
         healthModule.TakeDamage(damage);
@@ -141,6 +143,8 @@ public  class Player : MonoBehaviour, IDamageble
 
 
     }
+
+   
     #endregion
 
     #region Inventory
