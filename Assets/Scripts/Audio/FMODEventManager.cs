@@ -23,6 +23,12 @@ public class FMODEventMAnager : MonoBehaviour
     [field: Header("Music")]
     [field: SerializeField]
     public EventReference GameplayMusic { get; private set; }
+    [field: SerializeField]
+    public EventReference GameOverMusic { get; private set; }
+    [field: SerializeField]
+    public EventReference MainMenuMusic { get; private set; }
+
+
 
     public static FMODEventMAnager Instance { get; private set; }
     private void Awake()

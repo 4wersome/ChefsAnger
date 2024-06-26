@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7925541206467815256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GameOverMusic
+  m_EditorClassIdentifier: 
+  Path: event:/GameOverMusic
+  Guid:
+    Data1: 1622766537
+    Data2: 1323361092
+    Data3: 1301334660
+    Data4: -2054026116
+  Banks:
+  - {fileID: 8190188692670952092}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 130008
 --- !u!114 &-5811406997357367085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +123,7 @@ MonoBehaviour:
   Path: ../../../ChefAngerFmodAudio/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638549090812024808
+  lastModified: 638550181057276241
   FileSizes:
   - Name: Desktop
     Value: 51424
@@ -116,7 +143,7 @@ MonoBehaviour:
   Path: ../../../ChefAngerFmodAudio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638549109233177137
+  lastModified: 638550181261087269
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -171,13 +198,42 @@ MonoBehaviour:
   - {fileID: -8460579646038848504}
   - {fileID: -5189093515356775256}
   - {fileID: -5811406997357367085}
+  - {fileID: 1773204746410419708}
+  - {fileID: -7925541206467815256}
   EditorParameters: []
   MasterBanks:
   - {fileID: -942685601038544704}
   StringsBanks:
   - {fileID: 6411417151219709374}
-  cacheTime: 638549109897493527
+  cacheTime: 638550181285784819
   cacheVersion: 131618
+--- !u!114 &1773204746410419708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainMenuMusic
+  m_EditorClassIdentifier: 
+  Path: event:/MainMenuMusic
+  Guid:
+    Data1: 1298027202
+    Data2: 1190679717
+    Data3: -313884541
+    Data4: -1410100376
+  Banks:
+  - {fileID: 8190188692670952092}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 78132
 --- !u!114 &5939022085414356407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,10 +276,10 @@ MonoBehaviour:
   Path: ../../../ChefAngerFmodAudio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638549109233177137
+  lastModified: 638550181261097587
   FileSizes:
   - Name: Desktop
-    Value: 1046
+    Value: 1142
   Exists: 1
 --- !u!114 &8190188692670952092
 MonoBehaviour:
@@ -240,8 +296,8 @@ MonoBehaviour:
   Path: ../../../ChefAngerFmodAudio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638549109897493527
+  lastModified: 638550181285784819
   FileSizes:
   - Name: Desktop
-    Value: 1174944
+    Value: 4173728
   Exists: 1
