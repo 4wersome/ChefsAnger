@@ -27,6 +27,7 @@ public class Pan : MonoBehaviour
             Debug.Log("Damageble not found ");
             return;
         }
+        
         Audiomngr.Instance.PlayeOneShot(FMODEventMAnager.Instance.panOnHit, transform.position);
         damageble.TakeDamage(damage);
     }

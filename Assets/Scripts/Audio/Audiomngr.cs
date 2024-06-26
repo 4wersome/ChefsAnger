@@ -4,11 +4,29 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 public class Audiomngr : MonoBehaviour
 {
     private const string GameplaySceneName = "GamePlaySceneBACKUP";
     private const string MainMenuSceneName = "MainMenuScene";
     private const string GameOverSceneName = "GameOverScene";
+
+
+    [Header("Volume")]
+    [Range(0, 1)]
+    public float mastervolume = 1f;
+    [Range(0, 1)]
+    public float MusicVolume = 1f;
+    [Range(0, 1)]
+    public float SFXVolume = 1f;
+
+    private Bus MasterBus;
+    private Bus MusicBus;
+    private Bus SfxBus;
+
+
+
+
 
     public static Audiomngr Instance { get; private set; }
 
@@ -20,10 +38,25 @@ public class Audiomngr : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this);
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        MasterBus = RuntimeManager.GetBus("bus:/");
+        MusicBus = RuntimeManager.GetBus("bus:/Music");
+        SfxBus = RuntimeManager.GetBus("bus:/SFX");
+
+
+    }
+
+    private void Update()
+    {
+        MasterBus.setVolume(mastervolume);
+        MusicBus.setVolume(MusicVolume);
+        SfxBus.setVolume(SFXVolume);
+
     }
 
     public void PlayeOneShot(EventReference sound, Vector3 worldPos)
     {
+
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
@@ -47,7 +80,7 @@ public class Audiomngr : MonoBehaviour
 
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
     {
-       StopMusic();
+        StopMusic();
         switch (scene.name)
         {
             case GameplaySceneName:

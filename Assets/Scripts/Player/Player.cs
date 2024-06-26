@@ -207,6 +207,7 @@ public  class Player : MonoBehaviour, IDamageble
 
     private void NotifyHealthUpdatedGlobal()
     {
+
         GlobalEventManager.CastEvent(GlobalEventIndex.PlayerHealthUpdated,
         GlobalEventArgsFactory.PlayerHealthUpdatedFactory(healthModule.MaxHP, healthModule.CurrentHP));
     }
