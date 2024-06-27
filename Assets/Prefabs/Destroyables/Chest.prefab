@@ -94,8 +94,9 @@ GameObject:
   - component: {fileID: 473108}
   - component: {fileID: 3399184}
   - component: {fileID: 2371242}
-  - component: {fileID: 64991458236366632}
   - component: {fileID: 7059346827761792209}
+  - component: {fileID: 2325042742792053109}
+  - component: {fileID: 8604944819904169860}
   m_Layer: 9
   m_Name: Chest
   m_TagString: Untagged
@@ -169,8 +170,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64991458236366632
-MeshCollider:
+--- !u!114 &7059346827761792209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d9711d8bbf49440a99254e8b222a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsToSpawn: []
+  healthModule:
+    maxHP: 3
+    defence: 0
+  spawnRadius: 0
+--- !u!65 &2325042742792053109
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -187,11 +205,10 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43231211540474392, guid: a98b0911cdf30a04c95f397995c4bf98, type: 2}
---- !u!114 &7059346827761792209
+  serializedVersion: 3
+  m_Size: {x: 1.2340127, y: 0.3999274, z: 0.6730182}
+  m_Center: {x: 0, y: 0.1999637, z: -0.009048149}
+--- !u!114 &8604944819904169860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,13 +217,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 158026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7d9711d8bbf49440a99254e8b222a91, type: 3}
+  m_Script: {fileID: 11500000, guid: acbb591a88c152145a4897399fd79ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsToSpawn:
-  - {fileID: 0}
-  healthModule:
-    maxHP: 3
-    defence: 0
-    currentHP: 0
-  spawnRadius: 0

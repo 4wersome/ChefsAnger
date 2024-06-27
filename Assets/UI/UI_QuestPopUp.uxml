@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="PopUp" style="flex-grow: 0; position: relative; height: 150px; width: 306px; top: 60%; left: 5%; bottom: 5%; right: 5%;">
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text" style="bottom: -1%; -unity-text-align: middle-center; white-space: normal; flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>

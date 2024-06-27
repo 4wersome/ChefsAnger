@@ -1,22 +1,19 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class Damager : MonoBehaviour, IDamager
-{
+public class Damager : MonoBehaviour, IDamager {
 
-    [SerializeField] protected string damagebleTag = "Player";
+    [FormerlySerializedAs("damagebleTag")] [SerializeField] protected string[] damagebleTags;
 
     [SerializeField]
-    private DamageContainer damageContainer;
+    protected DamageContainer damageContainer;
 
-    public DamageContainer DamageContainer
-    {
+    public DamageContainer DamageContainer {
         get => damageContainer;
         set => damageContainer = value;
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-
+    protected virtual void OnTriggerEnter(Collider other) {
         DealDamage(other);
     }
 
@@ -29,15 +26,15 @@ public class Damager : MonoBehaviour, IDamager
 
 
 
-    protected virtual void DealDamage(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("ddamage taken");
-            IDamageble dmg = other.GetComponentInParent<IDamageble>();
-            if (dmg!=null)
-            {
-                dmg.TakeDamage(DamageContainer);
+    protected virtual void DealDamage(Collider other) {
+        foreach (string damagebleTag in damagebleTags) {
+            if (other.gameObject.CompareTag(damagebleTag)) {
+                Debug.Log("ddamage taken");
+                IDamageble dmg = other.GetComponentInParent<IDamageble>();
+                if (dmg != null) {
+                    dmg.TakeDamage(DamageContainer);
+                }
+                return;
             }
         }
     }

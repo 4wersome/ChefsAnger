@@ -17,6 +17,10 @@ public static class InputManager
         get { return input.Player; }
     }
 
+    public static bool OpenPause()
+    {
+        return input.Player.OpenPause.WasPressedThisFrame();
+    }
     public static bool AbilityCheeseWheelPressed()
     {
         return input.Player.AbilityCheeseWheel.WasPressedThisFrame();
@@ -53,6 +57,8 @@ public static class InputManager
         get { return input.Player.MovementPad.ReadValue<Vector2>(); }
     }
     #endregion
+
+
 
     public static Vector2 RightAxis
     {

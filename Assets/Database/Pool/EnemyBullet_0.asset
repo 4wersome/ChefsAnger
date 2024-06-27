@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolKey: EnemyBullet_0
   prefab: {fileID: 131238, guid: 75babf244cf17b442b3305101df6234d, type: 3}
-  poolNumber: 50
+  poolNumber: 30
   resizablePool: 0

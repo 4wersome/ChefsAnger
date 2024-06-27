@@ -98,6 +98,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenPause"",
+                    ""type"": ""Button"",
+                    ""id"": ""63bdc40d-be0e-4a32-91f8-82b93e9f5fa4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -265,6 +274,28 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""AbilityPumpkinMine"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebaaea32-b39d-4938-aeec-f6f8a9564004"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""OpenPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d124316-4db3-4539-ac4d-8af92f9b9c92"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""OpenPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -309,6 +340,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Player_AbilityCheeseWheel = m_Player.FindAction("AbilityCheeseWheel", throwIfNotFound: true);
         m_Player_AbilityAppleThrow = m_Player.FindAction("AbilityAppleThrow", throwIfNotFound: true);
         m_Player_AbilityPumpkinMine = m_Player.FindAction("AbilityPumpkinMine", throwIfNotFound: true);
+        m_Player_OpenPause = m_Player.FindAction("OpenPause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -378,6 +410,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AbilityCheeseWheel;
     private readonly InputAction m_Player_AbilityAppleThrow;
     private readonly InputAction m_Player_AbilityPumpkinMine;
+    private readonly InputAction m_Player_OpenPause;
     public struct PlayerActions
     {
         private @Inputs m_Wrapper;
@@ -390,6 +423,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         public InputAction @AbilityCheeseWheel => m_Wrapper.m_Player_AbilityCheeseWheel;
         public InputAction @AbilityAppleThrow => m_Wrapper.m_Player_AbilityAppleThrow;
         public InputAction @AbilityPumpkinMine => m_Wrapper.m_Player_AbilityPumpkinMine;
+        public InputAction @OpenPause => m_Wrapper.m_Player_OpenPause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -423,6 +457,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @AbilityPumpkinMine.started += instance.OnAbilityPumpkinMine;
             @AbilityPumpkinMine.performed += instance.OnAbilityPumpkinMine;
             @AbilityPumpkinMine.canceled += instance.OnAbilityPumpkinMine;
+            @OpenPause.started += instance.OnOpenPause;
+            @OpenPause.performed += instance.OnOpenPause;
+            @OpenPause.canceled += instance.OnOpenPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -451,6 +488,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @AbilityPumpkinMine.started -= instance.OnAbilityPumpkinMine;
             @AbilityPumpkinMine.performed -= instance.OnAbilityPumpkinMine;
             @AbilityPumpkinMine.canceled -= instance.OnAbilityPumpkinMine;
+            @OpenPause.started -= instance.OnOpenPause;
+            @OpenPause.performed -= instance.OnOpenPause;
+            @OpenPause.canceled -= instance.OnOpenPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -496,5 +536,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         void OnAbilityCheeseWheel(InputAction.CallbackContext context);
         void OnAbilityAppleThrow(InputAction.CallbackContext context);
         void OnAbilityPumpkinMine(InputAction.CallbackContext context);
+        void OnOpenPause(InputAction.CallbackContext context);
     }
 }

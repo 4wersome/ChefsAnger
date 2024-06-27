@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility.PoolingSystem;
 
 public enum EnemyBulletType {
     EnemyApple
@@ -9,6 +10,7 @@ public class EnemyThrowAttack : BaseEnemyAttack, IEnemyAttack, IPoolRequester {
     
     [SerializeField] 
     private PoolData[] bullets;
+    [SerializeField] private Vector3 throwOffset;
     [SerializeField] private float bulletSpeed = 3;
     [SerializeField] [Range(1,15)] private float bulletLifeSpan = 3;
     public PoolData[] Datas { get => bullets; }
@@ -21,7 +23,7 @@ public class EnemyThrowAttack : BaseEnemyAttack, IEnemyAttack, IPoolRequester {
             if (bullet) {
                 bullet.DamageContainer = damageContainer;
                 Debug.Log("proiettile spawnato");
-                bullet.Shoot(gameObject.transform.position, bulletSpeed, bulletLifeSpan);
+                bullet.Shoot(gameObject.transform.position + throwOffset, bulletSpeed, bulletLifeSpan);
             }
             ResetTimer();
         }
