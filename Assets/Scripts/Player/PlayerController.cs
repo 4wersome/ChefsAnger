@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        if (Audiomngr.Instance == null) return;
         playerFootsteps = Audiomngr.Instance.CreateEventInstance(FMODEventMAnager.Instance.PlayerRunning);
     }
 

@@ -182,7 +182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d9711d8bbf49440a99254e8b222a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsToSpawn: []
+  prefabsToSpawn:
+  - {fileID: 11400000, guid: 4d4b24247da7b9a48bc0264d21a9c04b, type: 2}
+  - {fileID: 11400000, guid: 1adac72ee575ac2478af1f82b2e885e6, type: 2}
+  - {fileID: 11400000, guid: cf0e0294a7530244db23d11161e3747f, type: 2}
   healthModule:
     maxHP: 3
     defence: 0
@@ -206,8 +209,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2340127, y: 0.3999274, z: 0.6730182}
-  m_Center: {x: 0, y: 0.1999637, z: -0.009048149}
+  m_Size: {x: 1.2340127, y: 1.127875, z: 0.6730182}
+  m_Center: {x: 0, y: 0.5639375, z: -0.009048164}
 --- !u!114 &8604944819904169860
 MonoBehaviour:
   m_ObjectHideFlags: 0

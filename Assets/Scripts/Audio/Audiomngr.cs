@@ -56,18 +56,20 @@ public class Audiomngr : MonoBehaviour
 
     public void PlayeOneShot(EventReference sound, Vector3 worldPos)
     {
-
+        if (Instance == null) return;
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
     public EventInstance CreateEventInstance(EventReference eventReference)
     {
+        
         EventInstance instance = RuntimeManager.CreateInstance(eventReference);
         return instance;
     }
 
     public void InitializeMusic(EventReference musicReference)
     {
+        if (Instance == null) return;
         musicEventInstance = CreateEventInstance(musicReference);
         musicEventInstance.start();
 

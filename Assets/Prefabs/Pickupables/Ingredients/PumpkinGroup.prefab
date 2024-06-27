@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 64522486081379514}
   - component: {fileID: 64842018543340382}
   - component: {fileID: 4660037088060648860}
+  - component: {fileID: -3325489958080172948}
   m_Layer: 9
   m_Name: PumpkinGroup
   m_TagString: Untagged
@@ -144,3 +145,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientType: 3
   number: 3
+--- !u!114 &-3325489958080172948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0be537930a98ff4f85e15a4bf0128e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemScaleMultiplier: 1.5
+  rotationSpeed: 2
