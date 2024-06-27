@@ -2,7 +2,8 @@
     "name": "Chef_Inputs",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:e3a30edeb2a4a5c46aec05c0a4faf5bd"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
