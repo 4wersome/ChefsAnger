@@ -32,82 +32,97 @@ public class PlayerInventory : MonoBehaviour
     {
         IPickupable pickupable = other.GetComponent<IPickupable>();
 
-        if(pickupable != null){
+        if (pickupable != null)
+        {
             pickupable.OnPickup();
             PickItem(pickupable);
         }
     }
 
-    private void PickItem(IPickupable item){
+    private void PickItem(IPickupable item)
+    {
 
-        switch (item.GetPickupableItemType()){
+        switch (item.GetPickupableItemType())
+        {
 
             case PickupableItemType.Ingredient:
-                Ingredient ingredient = (Ingredient) item;
+                Ingredient ingredient = (Ingredient)item;
                 PickIngredient(ingredient);
                 break;
 
             case PickupableItemType.Recipe:
-                Recipe recipe = (Recipe) item;
+                Recipe recipe = (Recipe)item;
                 AddRecipe(recipe);
                 break;
 
             case PickupableItemType.Potion:
-                Potion potion = (Potion) item;
+                Potion potion = (Potion)item;
                 PickPotion(potion);
                 break;
 
             case PickupableItemType.Shield:
-                Shield shield = (Shield) item;
+                Shield shield = (Shield)item;
                 PickShield(shield);
                 break;
         }
     }
 
     #region Ingredients
-    public void SetUpIngredients(){
+    public void SetUpIngredients()
+    {
         IngredientInventory = new Dictionary<IngredientType, int>();
-        foreach(IngredientType type in Enum.GetValues(typeof(IngredientType))){
+        foreach (IngredientType type in Enum.GetValues(typeof(IngredientType)))
+        {
             IngredientInventory.Add(type, 0);
         }
     }
 
-    public void PickIngredient(Ingredient ingredient){
+    public void PickIngredient(Ingredient ingredient)
+    {
         IngredientInventory[ingredient.IngredientType] += ingredient.Number;
         OnIngredientGot?.Invoke(ingredient);
         TryToCompleteRecipes();
     }
 
-    public void ConsumeIngredient(Ingredient ingredient){
-        if(IngredientInventory[ingredient.IngredientType] <= 0){
+    public void ConsumeIngredient(Ingredient ingredient)
+    {
+        if (IngredientInventory[ingredient.IngredientType] <= 0)
+        {
             return;
         }
-        
+
         IngredientInventory[ingredient.IngredientType] -= ingredient.Number;
 
-        if(IngredientInventory[ingredient.IngredientType] <= 0){
+        if (IngredientInventory[ingredient.IngredientType] <= 0)
+        {
             IngredientInventory[ingredient.IngredientType] = 0;
         }
     }
     #endregion
 
     #region Recipes
-    public void AddRecipe(Recipe recipe){
+    public void AddRecipe(Recipe recipe)
+    {
         UncompletedRecipes.Add(recipe);
         OnRecipeFound?.Invoke(recipe);
         TryToCompleteRecipes();
     }
 
-    public void CompleteRecipe(Recipe recipe){
+    public void CompleteRecipe(Recipe recipe)
+    {
         CompletedRecipes.Add(recipe);
         UncompletedRecipes.Remove(recipe);
         OnRecipeCompleted?.Invoke(recipe);
+        GlobalEventManager.CastEvent(GlobalEventIndex.UIRecipeUnlock, GlobalEventArgsFactory.UIRecipeCompletedFactory(recipe));
     }
 
-    private void TryToCompleteRecipes(){
-        foreach(Recipe recipe in UncompletedRecipes){
+    private void TryToCompleteRecipes()
+    {
+        foreach (Recipe recipe in UncompletedRecipes)
+        {
             bool completed = CheckRecipeCompletition(recipe);
-            if(completed){
+            if (completed)
+            {
                 RemoveUsedIngredients(recipe);
                 CompleteRecipe(recipe);
                 break;
@@ -115,28 +130,35 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    private bool CheckRecipeCompletition(Recipe recipe){
-        foreach(Ingredient ingredient in recipe.RequiredIngredients){
-            if(IngredientInventory[ingredient.IngredientType] < ingredient.Number){
+    private bool CheckRecipeCompletition(Recipe recipe)
+    {
+        foreach (Ingredient ingredient in recipe.RequiredIngredients)
+        {
+            if (IngredientInventory[ingredient.IngredientType] < ingredient.Number)
+            {
                 return false;
             }
         }
         return true;
     }
 
-    private void RemoveUsedIngredients(Recipe recipe){
-        foreach(Ingredient ingredient in recipe.RequiredIngredients){
+    private void RemoveUsedIngredients(Recipe recipe)
+    {
+        foreach (Ingredient ingredient in recipe.RequiredIngredients)
+        {
             ConsumeIngredient(ingredient);
         }
     }
     #endregion
 
     #region Temporary PowerUp
-    public void PickPotion(Potion potion){
+    public void PickPotion(Potion potion)
+    {
         OnPotionGot?.Invoke(potion);
     }
-    
-    public void PickShield(Shield shield){
+
+    public void PickShield(Shield shield)
+    {
         OnShieldGot?.Invoke(shield);
     }
     #endregion
