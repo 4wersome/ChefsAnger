@@ -40,8 +40,11 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
     [SerializeField][Tooltip("Number Of enemy at the first wave")] private int numberOfEnemy;
     #endregion
 
+    public Action OnVictory;
+
     #region privateAttribute
     private int level;
+    private bool waveMng;
     private Spawner[] spawners;
     private WaveStage waveStatus;
     private float elapsedTime;
@@ -82,37 +85,40 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
         }
         elapsedTime = 0;
         waveStatus = startingWaveStatus;
+        waveMng = true;
         StartWaveStage();
         //ResetTimer();
         
     }
 
     private void Update() {
-        elapsedTime += Time.deltaTime;
+        if (waveMng) {
+            elapsedTime += Time.deltaTime;
 
-        switch (waveStatus) {
-            case WaveStage.EnemyAttack:
-                if (elapsedTime > waveDuration) {
-                    if (level % numberOfWave == 0) {
-                        StartRespawnDestroyableZone();
+            switch (waveStatus) {
+                case WaveStage.EnemyAttack:
+                    if (elapsedTime > waveDuration) {
+                        if (level % numberOfWave == 0) {
+                            StartRespawnDestroyableZone();
+                        }
+                        else {
+                            StartSafeZone();
+                        }
                     }
-                    else {
-                        StartSafeZone();
+                    break;
+            
+                case WaveStage.Safe:
+                    if (elapsedTime > safeDuration) {
+                        StartNextWave();
                     }
-                }
-                break;
+                    break;
             
-            case WaveStage.Safe:
-                if (elapsedTime > safeDuration) {
-                    StartNextWave();
-                }
-                break;
-            
-            case WaveStage.DestroyableSpawn:
-                if (elapsedTime > safeDuration) {
-                    StartNextWave();
-                }
-                break;
+                case WaveStage.DestroyableSpawn:
+                    if (elapsedTime > safeDuration) {
+                        StartNextWave();
+                    }
+                    break;
+            }
         }
     }
     #endregion
@@ -208,6 +214,10 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
 
     private void ResetTimer() {
         elapsedTime = 0;
+        if (level < victoryLevel) {
+            OnVictory?.Invoke();
+            if (!isInfinite) waveMng = false;
+        }
         //Debug.Log("Wave State: " + waveStatus);
     }
     #endregion
