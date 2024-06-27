@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{416beed4-e5f5-4f63-8da7-b95ffdcc6b38}">
+		<property name="assetPath">
+			<value>SFX/Enemies/roblox-death-sound_ytkBL7X.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.65306122448979587</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d7f604ec-6907-447b-9730-393ac1cfe171}</destination>
+		</relationship>
+	</object>
+</objects>

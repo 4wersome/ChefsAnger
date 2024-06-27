@@ -9,7 +9,8 @@ public enum ExtendedVariableType {
     String,
     Vector2,
     Vector3,
-    UInt
+    UInt,
+    Recipe
 }
 
 
@@ -46,6 +47,7 @@ public class ExtendedVariable
     private Vector2 vector2Value;
     [SerializeField]
     private Vector3 vector3Value;
+    [SerializeField] Recipe RecipeValue;
     #endregion
 
     #region Methods
@@ -74,6 +76,8 @@ public class ExtendedVariable
                 return vector3Value;
             case ExtendedVariableType.UInt:
                 return uIntValue;
+            case ExtendedVariableType.Recipe:
+                return RecipeValue;
             default:
                 return null;
         }
@@ -107,6 +111,10 @@ public class ExtendedVariable
             case ExtendedVariableType.UInt:
                 uIntValue = (uint)value;
                 break;
+            case ExtendedVariableType.Recipe:
+                RecipeValue = (Recipe)value;
+                break;
+
         }
     }
 

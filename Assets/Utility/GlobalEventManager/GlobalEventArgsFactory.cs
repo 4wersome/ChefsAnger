@@ -109,6 +109,20 @@ public static class GlobalEventArgsFactory
 
     #endregion
 
+    #region UIRecipeCompleted
+    public static GlobalEventArgs UIRecipeCompletedFactory(Recipe recipe)
+    {
+        GlobalEventArgs message = new GlobalEventArgs();
+        message.args = new ExtendedVariable[1];
+        message.args[0] = new ExtendedVariable("Recipe", ExtendedVariableType.Recipe, recipe);
+        return message;
+    }
+
+    public static void UIRecipeCompletedParses(GlobalEventArgs message, out Recipe recipe)
+    {
+        recipe = (Recipe)message.args[0].GetValue();
+    }
+    #endregion
 
 
 }

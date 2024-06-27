@@ -7,6 +7,8 @@ public class Pan : MonoBehaviour
     [SerializeField]
     private DamageContainer damage;
 
+
+
     #region Mono
     private void Awake() {
     }
@@ -24,6 +26,8 @@ public class Pan : MonoBehaviour
             //Debug.Log("Damageble not found ");
             return;
         }
+        
+        Audiomngr.Instance.PlayeOneShot(FMODEventMAnager.Instance.panOnHit, transform.position);
         damageble.TakeDamage(damage);
     }
 
