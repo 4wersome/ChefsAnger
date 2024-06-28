@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthModule:
-    maxHP: 5
+    maxHP: 3
     defence: 0
   enemyDrops:
   - {fileID: 11400000, guid: fd6043f561edf8f499fa906dd8a34ad3, type: 2}
