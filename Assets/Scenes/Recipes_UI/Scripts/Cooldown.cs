@@ -16,6 +16,8 @@ public class Cooldown : MonoBehaviour
     private KeyCode padType;
     [SerializeField]
     private float cooldownTime;
+    [SerializeField]
+    private Image lockImage;
 
     //variable for looking after the cooldown
     private bool isCoolDown = false;
@@ -24,6 +26,7 @@ public class Cooldown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         textCooldown.gameObject.SetActive(false);
         imageCooldown.fillAmount = 0.0f;
     }
@@ -31,6 +34,8 @@ public class Cooldown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (lockImage == null) return;
+        if (lockImage.IsActive()) return;
         if (cooldownTime != 0)
         {
             if (Input.GetKeyDown(keyboardType) || Input.GetKeyDown(padType))
@@ -48,19 +53,20 @@ public class Cooldown : MonoBehaviour
     void ApplyCooldown()
     {
        
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer < 0.0f)
-            {
-                isCoolDown = false;
-                textCooldown.gameObject.SetActive(false);
-                imageCooldown.fillAmount = 0.0f;
-            }
-            else
-            {
-                textCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
-                imageCooldown.fillAmount = cooldownTimer / cooldownTime;
-            }
-        
+
+        cooldownTimer -= Time.deltaTime;
+        if (cooldownTimer < 0.0f)
+        {
+            isCoolDown = false;
+            textCooldown.gameObject.SetActive(false);
+            imageCooldown.fillAmount = 0.0f;
+        }
+        else
+        {
+            textCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
+            imageCooldown.fillAmount = cooldownTimer / cooldownTime;
+        }
+
     }
 
     public bool Attack()

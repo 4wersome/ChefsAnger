@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 491730}
   - component: {fileID: 3395222}
   - component: {fileID: 2314324}
-  - component: {fileID: 64867119035785684}
-  - component: {fileID: 64599532859838442}
+  - component: {fileID: 2044686962110720169}
   - component: {fileID: -466542257452553772}
   m_Layer: 9
   m_Name: Shield
@@ -86,8 +85,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64867119035785684
-MeshCollider:
+--- !u!65 &2044686962110720169
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,32 +103,9 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43216267321712792, guid: c8b1c9ddd82158c4ab47303f7df3e197, type: 2}
---- !u!64 &64599532859838442
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170018}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43095292951242244, guid: c8b1c9ddd82158c4ab47303f7df3e197, type: 2}
+  serializedVersion: 3
+  m_Size: {x: 0.49355072, y: 0.84498763, z: 0.09049874}
+  m_Center: {x: -0.00000014901161, y: 0.42249382, z: -0.001525294}
 --- !u!114 &-466542257452553772
 MonoBehaviour:
   m_ObjectHideFlags: 0

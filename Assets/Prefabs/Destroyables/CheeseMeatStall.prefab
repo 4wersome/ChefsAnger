@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 456058}
   - component: {fileID: 3329274}
   - component: {fileID: 2359488}
-  - component: {fileID: 64910415155337614}
-  - component: {fileID: 64017068625309334}
   - component: {fileID: -618121546762654266}
+  - component: {fileID: 5247904282235813803}
+  - component: {fileID: 5235360226195996929}
   m_Layer: 9
   m_Name: CheeseMeatStall
   m_TagString: Untagged
@@ -86,50 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64910415155337614
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116484}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43049497898551394, guid: e2cf7897ae25481479c19e437a8d74eb, type: 2}
---- !u!64 &64017068625309334
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116484}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43258406967547298, guid: e2cf7897ae25481479c19e437a8d74eb, type: 2}
 --- !u!114 &-618121546762654266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,3 +103,36 @@ MonoBehaviour:
     maxHP: 3
     defence: 0
   spawnRadius: 0.1
+--- !u!65 &5247904282235813803
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116484}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5570025, y: 2.1817083, z: 1.7669146}
+  m_Center: {x: -0.039043665, y: 1.0908542, z: 0.059296608}
+--- !u!114 &5235360226195996929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acbb591a88c152145a4897399fd79ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

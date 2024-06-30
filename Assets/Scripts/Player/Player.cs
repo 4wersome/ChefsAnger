@@ -82,6 +82,7 @@ public  class Player : MonoBehaviour, IDamageble
         playerController.UnpreventAllAbilities();
         transform.position = new Vector3 (7,0,12);
         GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerSpawn, null);
+       
     }
     private void Update()
     {
@@ -111,6 +112,7 @@ public  class Player : MonoBehaviour, IDamageble
         NotifyHealthUpdatedGlobal();
         playerController.IsDead = false;
 
+        
 
     }
 
@@ -137,10 +139,11 @@ public  class Player : MonoBehaviour, IDamageble
 
         playerController.OnDeath?.Invoke();
         playerController.AnimatorMgnr.SetTriggerParameter(isDeadAnimatorParameter);
+        
 
         StartCoroutine(OnDeathSceneCoroutine());
         GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerDeath, null);
-
+        Audiomngr.Instance.PlayeOneShot(FMODEventMAnager.Instance.PlayerDeath, transform.position);
 
     }
 
@@ -178,6 +181,7 @@ public  class Player : MonoBehaviour, IDamageble
     public void InternalOnPotionGot(Potion potion)
     {
         healthModule.HealDamage(potion.HealAmount);
+        
         if (healthModule.CurrentHP == healthModule.MaxHP)
         {
             Debug.Log("Full Healed!");
@@ -186,6 +190,7 @@ public  class Player : MonoBehaviour, IDamageble
         {
             Debug.Log("Healed of: " + potion.HealAmount + "HP");
         }
+        GlobalEventManager.CastEvent(GlobalEventIndex.PlayerHealthUpdated, GlobalEventArgsFactory.PlayerHealthUpdatedFactory(healthModule.MaxHP,healthModule.CurrentHP));
     }
 
     // Shield
@@ -208,6 +213,7 @@ public  class Player : MonoBehaviour, IDamageble
 
     private void NotifyHealthUpdatedGlobal()
     {
+
         GlobalEventManager.CastEvent(GlobalEventIndex.PlayerHealthUpdated,
         GlobalEventArgsFactory.PlayerHealthUpdatedFactory(healthModule.MaxHP, healthModule.CurrentHP));
     }

@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 3563167743974825751}
   m_Layer: 8
   m_Name: MeleeEnemyPrefab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -526,7 +526,7 @@ MonoBehaviour:
     maxHP: 3
     defence: 0
   enemyDrops: []
-  dropChance: 0.5
+  dropChance: 0.75
 --- !u!114 &7511835250222842223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,7 +1378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c4df9f8bc56854893c3f22441392c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagebleTag: Player
+  damagebleTags: []
   damageContainer:
     damageType: 0
     damage: 3

@@ -3,30 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : Damager {
+public class EnemyBullet : Damager, IDamageble {
     
     [SerializeField] private LayerMask destroyLayer;
     
-    private Rigidbody rigidbody;
     private Coroutine destroyOverTime;
-    
+
+    #region Property
+    public Vector3 Velocity {
+        get => GetComponent<Rigidbody>().velocity;
+        set => GetComponent<Rigidbody>().velocity = value;
+    }
+    #endregion
     #region Mono
     private void Awake() {
-        rigidbody = GetComponent<Rigidbody>();
+        
     }
 
+    public void TakeDamage(DamageContainer damage) {
+        Debug.Log("bullet colpito");
+        gameObject.layer = LayerMask.NameToLayer("Ignore Player");
+        gameObject.GetComponent<Rigidbody>().velocity *= -1;
+    }
     protected override void OnTriggerEnter(Collider other) {
         base.OnTriggerEnter(other);
-        //if (((1 << other.gameObject.layer) & destroyLayer.value) == 0) return;
+        Debug.Log(other.gameObject.name);
+        if (((1 << other.gameObject.layer) & destroyLayer.value) == 0) return;
+        Debug.Log("bullet destroy");
         Destroy();
     }
     #endregion
 
     #region PublicMethods
-    public Vector2 GetVelocity() => rigidbody.velocity;
-    public void SetVelocity(Vector2 newVelocity) => rigidbody.velocity = newVelocity;
-
     public void Shoot(Vector3 startPos, float bulletSpeed, float bulletDuration) {
+        gameObject.layer = LayerMask.NameToLayer("ignoreEnemy");
         gameObject.SetActive(true);
         transform.position = startPos;
         Shoot(bulletSpeed);
@@ -35,7 +45,7 @@ public class EnemyBullet : Damager {
 
     public void Shoot(float bulletSpeed) {
         Vector3 direction = Player.Get().transform.position - transform.position;
-        rigidbody.velocity = direction.normalized * bulletSpeed;
+        Velocity = direction.normalized * bulletSpeed;
         
         Quaternion rotation =  Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;
@@ -55,5 +65,4 @@ public class EnemyBullet : Damager {
         yield return new WaitForSeconds(bulletDuration);
         Destroy();
     }
-    
 }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using FMOD.Studio;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     public PlayerAnimatorMngr AnimatorMgnr;
-    
+
     [SerializeField]
     private bool isGamepadActive;
     #endregion
@@ -29,15 +30,43 @@ public class PlayerController : MonoBehaviour
     private AbilityBase[] abilities;
     public bool IsGamepadActive { get { return isGamepadActive; } }
 
+    #region Audio
+
+    private EventInstance playerFootsteps;
+
+
+    private void UpdateSound()
+    {
+        if (AnimatorMgnr.GetAnimatorBool(AnimatorMovingBool)&& !IsDead)
+        {
+            
+            PLAYBACK_STATE playbackstate;
+            playerFootsteps.getPlaybackState(out playbackstate);
+
+            if (playbackstate.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerFootsteps.start();
+            }
+        }
+            else
+            {
+                playerFootsteps.stop(STOP_MODE.IMMEDIATE);
+            }
+    }
+    #endregion
+
+
     #region abilityMelee
     public Action MeleePrevented;
     #endregion
     #region abilityMove
     public Action MovePrevented;
     #endregion
-    
-    
+
+
     private UnityAction<GlobalEventArgs> EnableGamepad;
+
+    #region mono
     private void Awake()
     {
         //Global Event to Cast in the UI to Enable the pad controls
@@ -57,15 +86,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Update()
+
+    private void Start()
+    {
+        if (Audiomngr.Instance == null) return;
+        playerFootsteps = Audiomngr.Instance.CreateEventInstance(FMODEventMAnager.Instance.PlayerRunning);
+    }
+
+    void FixedUpdate()
     {
         if (!isDead)
         {
-        SetAnimatorMovement();
-
+            SetAnimatorMovement();
         }
+            UpdateSound();
 
     }
+
+    #endregion
 
     #region public
     public Vector3 GetForward()
@@ -91,7 +129,7 @@ public class PlayerController : MonoBehaviour
     public void SetVelocity(Vector3 velocity)
     {
         playerRigidBody.velocity = velocity;
-    }    
+    }
 
     public void SetRotation(Quaternion rot)
     {
@@ -108,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetAnimatorMovement()
     {
-        bool value = playerRigidBody.velocity.magnitude <=.5f ?  false :  true;
+        bool value = playerRigidBody.velocity.magnitude <= .5f ? false : true;
 
         AnimatorMgnr.SetAnimatorBool(AnimatorMovingBool, value);
 
@@ -117,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
     #region Abilities
 
-    private  void PreventAllAbilities()
+    private void PreventAllAbilities()
     {
         foreach (AbilityBase ability in abilities)
         {
@@ -132,9 +170,12 @@ public class PlayerController : MonoBehaviour
             ability.ResumeAbility();
         }
     }
-    public void UnlockAbility(RecipeNameEnum recipeName){
-        foreach(AbilityBase ability in abilities){
-            if(ability.RequiredRecipe != RecipeNameEnum.None && ability.RequiredRecipe == recipeName){
+    public void UnlockAbility(RecipeNameEnum recipeName)
+    {
+        foreach (AbilityBase ability in abilities)
+        {
+            if (ability.RequiredRecipe != RecipeNameEnum.None && ability.RequiredRecipe == recipeName)
+            {
                 ability.UnlockAbility();
                 break;
             }
@@ -146,19 +187,22 @@ public class PlayerController : MonoBehaviour
     private bool isDead;
     public Action<DamageContainer> OnDamageTaken;
     public Action OnDeath;
-    public bool IsDead {
-        get {
+    public bool IsDead
+    {
+        get
+        {
             return isDead;
         }
-        set {
+        set
+        {
             isDead = value;
-          
+
 
         }
     }
 
     private void InternalOnDeath() => SetIsKinematic(true);
-    
+
     public void SetIsKinematic(bool value) => playerRigidBody.isKinematic = value;
     #endregion
 }

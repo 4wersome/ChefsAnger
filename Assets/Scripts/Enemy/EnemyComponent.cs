@@ -1,8 +1,10 @@
 using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utility.PoolingSystem;
 using Random = UnityEngine.Random;
 
 public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
@@ -30,10 +32,12 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
     #region Mono
     private void Awake() {
 #if DEBUG
-        healthModule.OnDamageTaken += (damageContainer) => Debug.Log(gameObject.name + " is being attacked by the player");
+        healthModule.OnDamageTaken += (damageContainer) => Debug.Log(gameObject.name + " is being attacked");
 #endif
+
         enemyAttackComponent = GetComponent<IEnemyAttack>();
-        if(enemyDrops != null) OnSpawn += SpawnDrop;
+        if(enemyDrops != null) healthModule.OnDeath += SpawnDrop;
+        healthModule.OnDeath += InternalOnDeath;
     }
     #endregion
     
@@ -55,19 +59,31 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
     
     public void Attack() {
 #if DEBUG
-        Debug.Log(gameObject.name + " is attacking player");
+        //Debug.Log(gameObject.name + " is attacking player");
 #endif
         if (enemyAttackComponent != null) enemyAttackComponent.Attack();
-        else Debug.Log("NO IEnemyAttack Component Found");
+        //else Debug.Log("NO IEnemyAttack Component Found");
     }
 
     private void SpawnDrop() {
         if (enemyDrops.Length > 0 && Random.Range(0f, 1f) <= dropChance) {
-            GameObject drop = enemyDrops[Random.Range(0, enemyDrops.Length)].Prefab;
-            drop.transform.position = transform.position;
-            drop.SetActive(true);
+            PoolData data = enemyDrops[Random.Range(0, enemyDrops.Length)];
+            GameObject drop = Pooler.Instance.GetPooledObject(data);
+            if (drop) {
+                drop.transform.position = transform.position;
+                drop.SetActive(true);
+                Debug.Log("Spawn Drop");
+
+            }
+            
         }
     }
     #endregion
 
+
+    private void InternalOnDeath()
+    {
+        
+        Audiomngr.Instance.PlayeOneShot(FMODEventMAnager.Instance.EnemyMeleeOnDeath, transform.position);
+    }
 }

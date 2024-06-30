@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2374688}
   - component: {fileID: 65367492720459438}
   - component: {fileID: -4181970519267946149}
+  - component: {fileID: 4865413797837815161}
   m_Layer: 9
   m_Name: Crate
   m_TagString: Untagged
@@ -104,8 +105,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7665404, y: 0.76653725, z: 0.766537}
-  m_Center: {x: 0.000000059604645, y: 0.38326862, z: 0}
+  m_Size: {x: 0.7665404, y: 1.6528047, z: 0.766537}
+  m_Center: {x: 0.000000059604645, y: 0.82640237, z: 0}
 --- !u!114 &-4181970519267946149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,9 +119,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d9711d8bbf49440a99254e8b222a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsToSpawn: []
+  prefabsToSpawn:
+  - {fileID: 11400000, guid: 14d04a9e3ea29094a9f90e081a05dc20, type: 2}
+  - {fileID: 11400000, guid: cf0e0294a7530244db23d11161e3747f, type: 2}
+  - {fileID: 11400000, guid: fd6043f561edf8f499fa906dd8a34ad3, type: 2}
   healthModule:
     maxHP: 2
     defence: 0
-    currentHP: 0
   spawnRadius: 0.5
+--- !u!114 &4865413797837815161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acbb591a88c152145a4897399fd79ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
