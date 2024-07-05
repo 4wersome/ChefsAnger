@@ -66,14 +66,17 @@ MonoBehaviour:
   - enemyPoolType: {fileID: 11400000, guid: 2616e08d731d67c4abdfb04b3a580f3d, type: 2}
     levelStartSpawn: 0
     levelStopSpawn: 0
-  victoryLevel: 15
+  - enemyPoolType: {fileID: 11400000, guid: aa407e540261165459142fa3968ddfe6, type: 2}
+    levelStartSpawn: 0
+    levelStopSpawn: 0
+  victoryLevel: 3
   isInfinite: 0
   startingWaveStatus: 0
   safeDuration: 15
   waveDuration: 80
   timeNoise: 0.166
   levelDifficultyGrowth: 4
-  numberOfEnemy: 15
+  numberOfEnemy: 10
 --- !u!114 &7878338628782549066
 MonoBehaviour:
   m_ObjectHideFlags: 0

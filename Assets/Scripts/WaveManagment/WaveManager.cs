@@ -86,6 +86,8 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
         elapsedTime = 0;
         waveStatus = startingWaveStatus;
         waveMng = true;
+        OnVictory += () => isInfinite = true;
+        OnVictory += () => safeDuration = 0f;
         StartWaveStage();
         //ResetTimer();
         
@@ -214,7 +216,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
 
     private void ResetTimer() {
         elapsedTime = 0;
-        if (level < victoryLevel) {
+        if (level == victoryLevel) {
             OnVictory?.Invoke();
             if (!isInfinite) waveMng = false;
         }

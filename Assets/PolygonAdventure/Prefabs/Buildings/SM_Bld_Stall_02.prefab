@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3329274}
   - component: {fileID: 2359488}
   - component: {fileID: 4685151125333626543}
-  - component: {fileID: 949051803819154246}
+  - component: {fileID: 1498192656534330162}
   m_Layer: 9
   m_Name: SM_Bld_Stall_02
   m_TagString: Untagged
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.7274382, y: 1.7231992, z: 1.8086774}
   m_Center: {x: -0.13568187, y: 0.8615996, z: 0.18380511}
---- !u!114 &949051803819154246
+--- !u!114 &1498192656534330162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,9 +120,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabsToSpawn:
   - {fileID: 11400000, guid: ed45e0043f90b9245bce597f3f4afe4d, type: 2}
+  - {fileID: 11400000, guid: ed45e0043f90b9245bce597f3f4afe4d, type: 2}
   - {fileID: 11400000, guid: 70ad2da35595fc442b7d41cb3fce76a7, type: 2}
-  - {fileID: 11400000, guid: cf0e0294a7530244db23d11161e3747f, type: 2}
+  - {fileID: 11400000, guid: 70ad2da35595fc442b7d41cb3fce76a7, type: 2}
+  - {fileID: 11400000, guid: 70ad2da35595fc442b7d41cb3fce76a7, type: 2}
+  - {fileID: 11400000, guid: 70ad2da35595fc442b7d41cb3fce76a7, type: 2}
   healthModule:
     maxHP: 5
     defence: 0
-  spawnRadius: 0.5
+  spawnRadius: 0.2

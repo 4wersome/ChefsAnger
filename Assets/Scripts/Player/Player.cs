@@ -186,6 +186,7 @@ public  class Player : MonoBehaviour, IDamageble
     public void InternalOnPotionGot(Potion potion)
     {
         healthModule.HealDamage(potion.HealAmount);
+        
         if (healthModule.CurrentHP == healthModule.MaxHP)
         {
             Debug.Log("Full Healed!");
@@ -194,6 +195,7 @@ public  class Player : MonoBehaviour, IDamageble
         {
             Debug.Log("Healed of: " + potion.HealAmount + "HP");
         }
+        GlobalEventManager.CastEvent(GlobalEventIndex.PlayerHealthUpdated, GlobalEventArgsFactory.PlayerHealthUpdatedFactory(healthModule.MaxHP,healthModule.CurrentHP));
     }
 
     // Shield

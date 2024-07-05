@@ -175,6 +175,7 @@ public class PlayerInventory : MonoBehaviour
     public void PickPotion(Potion potion)
     {
         OnPotionGot?.Invoke(potion);
+        
     }
 
     public void PickShield(Shield shield)
