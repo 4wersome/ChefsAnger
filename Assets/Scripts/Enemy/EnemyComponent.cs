@@ -80,10 +80,12 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
     }
     #endregion
 
-
+    
     private void InternalOnDeath()
     {
         
         Audiomngr.Instance.PlayeOneShot(FMODEventMAnager.Instance.EnemyMeleeOnDeath, transform.position);
+        ScoreManager.instance.AddPoint();
+        
     }
 }
