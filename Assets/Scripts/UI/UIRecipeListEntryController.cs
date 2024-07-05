@@ -19,7 +19,7 @@ public class UIRecipeListEntryController
     public void SetEntryData(UIRecipeListEntryData data)
     {
         ingredientNameLabel.text = data.IngredientType.ToString();
-        ingredientNameLabel.text = data.CurrentQuantity.ToString();
-        ingredientNameLabel.text = data.RequiredQuantity.ToString();
+        currentNumberLabel.text = data.CurrentQuantity.ToString();
+        requiredNumberLabel.text = data.RequiredQuantity.ToString();
     }
 }

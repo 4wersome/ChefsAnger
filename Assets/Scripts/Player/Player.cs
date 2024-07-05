@@ -68,6 +68,7 @@ public  class Player : MonoBehaviour, IDamageble
        
         healthModule.OnDamageTaken += InternalOnDamageTaken;
         healthModule.OnDeath += InternalOnDeath;
+        playerInventory.OnIngredientGot += InternalOnIngredientGot;
         playerInventory.OnRecipeFound += InternalOnRecipeFound;
         playerInventory.OnRecipeCompleted += InternalOnRecipeCompleted;
         playerInventory.OnPotionGot += InternalOnPotionGot;
@@ -139,6 +140,12 @@ public  class Player : MonoBehaviour, IDamageble
     #endregion
 
     #region Inventory
+    // Ingredient Got
+    public void InternalOnIngredientGot(Ingredient ingredient)
+    {
+        GlobalEventManager.CastEvent(GlobalEventIndex.IngredientObtained, GlobalEventArgsFactory.IngredientObtainedFactory(ingredient));
+    }
+
     // Recipe Found
     public void InternalOnRecipeFound(Recipe recipe)
     {

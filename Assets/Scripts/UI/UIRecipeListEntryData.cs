@@ -11,9 +11,4 @@ public class UIRecipeListEntryData
     public IngredientType IngredientType { get { return ingredientType; } set { ingredientType = value; } }
     public int CurrentQuantity { get{ return currentQuantity; } set { currentQuantity = value; } }
     public int RequiredQuantity { get{ return requiredQuantity; } set { requiredQuantity = value; } }
-
-    public void UpdateQuantity(int value)
-    {
-        currentQuantity += value;
-    }
 }

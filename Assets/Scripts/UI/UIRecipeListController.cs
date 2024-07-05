@@ -40,6 +40,7 @@ public class UIRecipeListController : MonoBehaviour
 
         //Initialize List View Data
         currentRecipeIngredientsData = new List<UIRecipeListEntryData>();
+        currentRecipeIngredientsData.Add(new UIRecipeListEntryData());
 
         // Initialize Visual Elements
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
@@ -67,12 +68,12 @@ public class UIRecipeListController : MonoBehaviour
     }
 
     private void OnDisable() {
-        NewIngredientFound -= OnIngredientGet;
-        NewRecipeFound -= OnRecipeGet;
-        RecipeCompleted -= OnRecipeComplete;
         GlobalEventManager.RemoveListener(GlobalEventIndex.IngredientObtained, NewIngredientFound);
         GlobalEventManager.RemoveListener(GlobalEventIndex.RecipeObtained, NewRecipeFound);
         GlobalEventManager.RemoveListener(GlobalEventIndex.RecipeCompleted, RecipeCompleted);
+        NewIngredientFound -= OnIngredientGet;
+        NewRecipeFound -= OnRecipeGet;
+        RecipeCompleted -= OnRecipeComplete;
     }
     #endregion
 
@@ -121,17 +122,29 @@ public class UIRecipeListController : MonoBehaviour
 
         currentRecipeIngredientsData.Clear();
 
-        UIRecipeListEntryData entryData = new UIRecipeListEntryData();
         foreach (Ingredient ingredient in recipe.RequiredIngredients)
         {
+            UIRecipeListEntryData entryData = new UIRecipeListEntryData();
             entryData.IngredientType = ingredient.IngredientType;
             entryData.RequiredQuantity = ingredient.Number;
-            entryData.RequiredQuantity = inventory[ingredient.IngredientType];
+            entryData.CurrentQuantity = inventory[ingredient.IngredientType];
 
             currentRecipeIngredientsData.Add(entryData);
         }
 
-        recipeListView.itemsSource = currentRecipeIngredientsData;
+        recipeListView.Refresh();
+    }
+
+    private void UpdateRecipeIngredientsData(Ingredient ingredient){
+        
+        foreach (UIRecipeListEntryData entryData in currentRecipeIngredientsData)
+        {
+            if(entryData.IngredientType == ingredient.IngredientType){
+                entryData.CurrentQuantity = inventory[ingredient.IngredientType];
+                break;
+            }
+        }
+        recipeListView.Refresh();
     }
     #endregion
 
@@ -141,8 +154,8 @@ public class UIRecipeListController : MonoBehaviour
         foreach (Ingredient ingredient in recipe.RequiredIngredients)
         {
             ConsumeIngredient(ingredient);
+            UpdateRecipeIngredientsData(ingredient);
         }
-        ResetRecipeIngredientsData(recipes[currentRecipeIndex]);
     }
 
     private void ConsumeIngredient(Ingredient ingredient)
@@ -160,7 +173,7 @@ public class UIRecipeListController : MonoBehaviour
     private void OnIngredientGet(GlobalEventArgs message) {
         GlobalEventArgsFactory.IngredientObtainedParses(message, out Ingredient ingredient);
         inventory[ingredient.IngredientType] += ingredient.Number;
-        ResetRecipeIngredientsData(recipes[currentRecipeIndex]);
+        UpdateRecipeIngredientsData(ingredient);
     }
 
     private void OnRecipeGet(GlobalEventArgs message) {
@@ -177,8 +190,11 @@ public class UIRecipeListController : MonoBehaviour
     }
 
     private void OnPreviousButtonClicked(){
-        if(recipes.Count >= 1){
-            currentRecipeIndex = (currentRecipeIndex - 1)%(recipes.Count);
+        if(recipes.Count > 1){
+            currentRecipeIndex = currentRecipeIndex - 1;
+            if(currentRecipeIndex < 0){
+                currentRecipeIndex = recipes.Count - 1;
+            }
             ChangeShownRecipe();
         }
     }
