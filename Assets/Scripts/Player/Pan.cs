@@ -7,7 +7,7 @@ public class Pan : MonoBehaviour
     [SerializeField]
     private DamageContainer damage;
 
-
+    public float DamageOutput { get { return damage.Damage; } }
 
     #region Mono
     private void Awake() {

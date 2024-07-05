@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 0; flex-direction: row; justify-content: center; align-items: flex-start; align-self: center; -unity-background-scale-mode: scale-to-fit;">
+        <ui:Label tabindex="-1" text="IngredientName" parse-escape-sequences="true" display-tooltip-when-elided="true" name="IngredientName" style="flex-shrink: 1; height: auto; font-size: 12px;" />
+        <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CurrentNumber" style="font-size: 12px;" />
+        <ui:Label tabindex="-1" text="/" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Separator" style="font-size: 12px;" />
+        <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RequiredNumber" style="font-size: 12px;" />
+    </ui:VisualElement>
+</ui:UXML>
