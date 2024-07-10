@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(this);
     }
     void Start()
     {

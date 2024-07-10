@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private const string animatorIdleStateName = "Idle";
     private const string animatorMovingStateName = "Movement";
     private const string isDeadAnimatorParameter = "PlayerDead";
+    private const string PlayerPrefsGamepadEnabledName = "GamepadEnabled";
 
 
 
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isGamepadActive;
     #endregion
+
+    
 
     private AbilityBase[] abilities;
     public bool IsGamepadActive { get { return isGamepadActive; } }
@@ -82,7 +85,8 @@ public class PlayerController : MonoBehaviour
         {
             ability.Init(this);
         }
-
+        
+        isGamepadActive = (PlayerPrefs.GetInt(PlayerPrefsGamepadEnabledName) != 0);
 
     }
 
