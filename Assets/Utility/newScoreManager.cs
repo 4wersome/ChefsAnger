@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour
+public class newScoreManager : MonoBehaviour
 {
     private const string PlayerPrefCurrentScore = "Score";
 
-    public static ScoreManager instance;
+    public static newScoreManager instance;
 
     [SerializeField]
     private Text scoreText;
@@ -36,4 +36,3 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt(PlayerPrefCurrentScore, score);
     }
 }
-
