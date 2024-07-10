@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class LeaderBoardSystem : MonoBehaviour
 {
-    private const string PlayerPrefCurrentScore = "Score";
+    private const string PlayerPrefsLastScoreName = "LastScore";
 
     private int leaderboardSize = 5;
     private int[] scores;
@@ -23,7 +23,7 @@ public class LeaderBoardSystem : MonoBehaviour
     private void Awake()
     {
         scores = new int[leaderboardSize];
-        lastScore = PlayerPrefs.GetInt(PlayerPrefCurrentScore);
+        lastScore = PlayerPrefs.GetInt(PlayerPrefsLastScoreName);
 
     }
 

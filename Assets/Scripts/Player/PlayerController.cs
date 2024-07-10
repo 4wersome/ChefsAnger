@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     private const string isDeadAnimatorParameter = "PlayerDead";
     private const string PlayerPrefsGamepadEnabledName = "GamepadEnabled";
 
+    private const string PlayerPrefsLastScoreName = "LastScore";
+    private const string PlayerPrefCurrentScore = "Score";
+
 
 
     #region Serialized
@@ -205,7 +208,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void InternalOnDeath() => SetIsKinematic(true);
+    private void InternalOnDeath()
+    {
+        SetIsKinematic(true);
+        PlayerPrefs.SetInt(PlayerPrefsLastScoreName, PlayerPrefs.GetInt(PlayerPrefCurrentScore));
+        PlayerPrefs.SetInt(PlayerPrefCurrentScore,0);
+
+    }
 
     public void SetIsKinematic(bool value) => playerRigidBody.isKinematic = value;
     #endregion

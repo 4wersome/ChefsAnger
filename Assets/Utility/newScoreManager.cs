@@ -9,7 +9,7 @@ public class newScoreManager : MonoBehaviour
 
     public static newScoreManager instance;
 
-    [SerializeField]
+   
     private Text scoreText;
     int score = 0;
 
@@ -34,5 +34,16 @@ public class newScoreManager : MonoBehaviour
             scoreText.text = "SCORE: " + score.ToString();
 
         PlayerPrefs.SetInt(PlayerPrefCurrentScore, score);
+    }
+    public void updateScoreText(Text textToUpdate, bool isHighscore)
+    {
+        if (!isHighscore)
+        {
+        textToUpdate.text ="SCORE: " + score.ToString();
+        }
+        else
+        {
+            textToUpdate.text = "HIGHSCORE: " + PlayerPrefs.GetInt($"LeaderScore0").ToString();
+        }
     }
 }
