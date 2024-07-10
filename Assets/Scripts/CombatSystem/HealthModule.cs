@@ -25,6 +25,9 @@ public class HealthModule
     public float CurrentHP {
         get { return currentHP; }
     }
+    public float Defence {
+        get { return defence; }
+    }
     public bool IsDead {
         get { return currentHP <= 0; }
     }

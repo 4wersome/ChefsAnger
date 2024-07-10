@@ -124,5 +124,58 @@ public static class GlobalEventArgsFactory
     }
     #endregion
 
+    #region IngredientObtained
+    public static GlobalEventArgs IngredientObtainedFactory(Ingredient ingredient)
+    {
+        GlobalEventArgs message = new GlobalEventArgs();
+        message.args = new ExtendedVariable[1];
+        message.args[0] = new ExtendedVariable("Ingredient", ExtendedVariableType.Ingredient, ingredient);
+        return message;
+    }
 
+    public static void IngredientObtainedParses(GlobalEventArgs message, out Ingredient ingredient)
+    {
+        ingredient = (Ingredient)message.args[0].GetValue();
+    }
+    #endregion
+
+    #region PlayerDefenceUpdated
+    public static GlobalEventArgs PlayerDefenceUpdatedFactory(float currentDefence)
+    {
+        GlobalEventArgs message = new GlobalEventArgs();
+        message.args = new ExtendedVariable[1];
+        message.args[1] = new ExtendedVariable("CurrenctDefence", ExtendedVariableType.Float, currentDefence);
+        return message;
+    }
+
+    public static void PlayerDefenceUpdatedParser(GlobalEventArgs message, out float currentDefence)
+    {
+        currentDefence = (float)message.args[0].GetValue();
+    }
+
+    public static string PlayerDefenceUpdatedDebug(GlobalEventArgs message)
+    {
+        return "CurrentDefence: " + message.args[0].GetValue().ToString();
+    }
+    #endregion
+
+    #region PlayerAttackUpdated
+    public static GlobalEventArgs PlayerAttackUpdatedFactory(float currentAttack)
+    {
+        GlobalEventArgs message = new GlobalEventArgs();
+        message.args = new ExtendedVariable[1];
+        message.args[1] = new ExtendedVariable("CurrentAttack", ExtendedVariableType.Float, currentAttack);
+        return message;
+    }
+
+    public static void PlayerAttackUpdatedParser(GlobalEventArgs message, out float currentAttack)
+    {
+        currentAttack = (float)message.args[0].GetValue();
+    }
+
+    public static string PlayerAttackUpdatedDebug(GlobalEventArgs message)
+    {
+        return "CurrentAttack: " + message.args[0].GetValue().ToString();
+    }
+    #endregion
 }

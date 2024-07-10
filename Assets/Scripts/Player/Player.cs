@@ -68,6 +68,8 @@ public  class Player : MonoBehaviour, IDamageble
        
         healthModule.OnDamageTaken += InternalOnDamageTaken;
         healthModule.OnDeath += InternalOnDeath;
+        playerInventory.OnIngredientGot += InternalOnIngredientGot;
+        playerInventory.OnRecipeFound += InternalOnRecipeFound;
         playerInventory.OnRecipeCompleted += InternalOnRecipeCompleted;
         playerInventory.OnPotionGot += InternalOnPotionGot;
         playerInventory.OnShieldGot += InternalOnShieldGot;
@@ -91,13 +93,7 @@ public  class Player : MonoBehaviour, IDamageble
         
 
     }
-
-
     #endregion
-
-
-
-
 
     #region HealthModule
     public void ResetHealth()
@@ -111,12 +107,7 @@ public  class Player : MonoBehaviour, IDamageble
         healthModule.Reset();
         NotifyHealthUpdatedGlobal();
         playerController.IsDead = false;
-
-        
-
     }
-
-
 
     public void TakeDamage(DamageContainer damage)
     {
@@ -146,11 +137,21 @@ public  class Player : MonoBehaviour, IDamageble
         Audiomngr.Instance.PlayeOneShot(FMODEventMAnager.Instance.PlayerDeath, transform.position);
 
     }
-
-   
     #endregion
 
     #region Inventory
+    // Ingredient Got
+    public void InternalOnIngredientGot(Ingredient ingredient)
+    {
+        GlobalEventManager.CastEvent(GlobalEventIndex.IngredientObtained, GlobalEventArgsFactory.IngredientObtainedFactory(ingredient));
+    }
+
+    // Recipe Found
+    public void InternalOnRecipeFound(Recipe recipe)
+    {
+        GlobalEventManager.CastEvent(GlobalEventIndex.RecipeObtained, GlobalEventArgsFactory.UIRecipeCompletedFactory(recipe));
+    }
+
     // Recipe Completition
     public void InternalOnRecipeCompleted(Recipe recipe)
     {
@@ -160,14 +161,17 @@ public  class Player : MonoBehaviour, IDamageble
             case RecipeNameEnum.LifeUp:
                 // Increment Player Max HP
                 healthModule.IncreaseMaxHP(1);
+                NotifyHealthUpdatedGlobal();
                 break;
             case RecipeNameEnum.DefenceUp:
                 // Increment Player Defence
                 healthModule.IncreaseDefence(1);
+                NotifyDefenceUpdatedGlobal();
                 break;
             case RecipeNameEnum.AttackUp:
                 // Increment Player Offence
                 playerWeapon.IncreaseDamage(1);
+                NotifyAttackUpdatedGlobal();
                 break;
             default:
                 // Unlock Ability
@@ -175,6 +179,7 @@ public  class Player : MonoBehaviour, IDamageble
                 break;
         }
         Debug.Log("Completed Recipe: " + recipeName);
+        GlobalEventManager.CastEvent(GlobalEventIndex.RecipeCompleted, GlobalEventArgsFactory.UIRecipeCompletedFactory(recipe));
     }
 
     // Potion
@@ -213,9 +218,20 @@ public  class Player : MonoBehaviour, IDamageble
 
     private void NotifyHealthUpdatedGlobal()
     {
-
         GlobalEventManager.CastEvent(GlobalEventIndex.PlayerHealthUpdated,
         GlobalEventArgsFactory.PlayerHealthUpdatedFactory(healthModule.MaxHP, healthModule.CurrentHP));
+    }
+
+    private void NotifyDefenceUpdatedGlobal()
+    {
+        GlobalEventManager.CastEvent(GlobalEventIndex.PlayerDefenceUpdated,
+        GlobalEventArgsFactory.PlayerDefenceUpdatedFactory(healthModule.Defence));
+    }
+
+    private void NotifyAttackUpdatedGlobal()
+    {
+        GlobalEventManager.CastEvent(GlobalEventIndex.PlayerAttackUpdated,
+        GlobalEventArgsFactory.PlayerAttackUpdatedFactory(playerWeapon.DamageOutput));
     }
     #endregion
 

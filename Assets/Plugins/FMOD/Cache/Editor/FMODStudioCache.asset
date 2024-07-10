@@ -69,7 +69,7 @@ MonoBehaviour:
   Path: ChefAngerFmodAudio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638553664025745465
+  lastModified: 638557700589741016
   FileSizes:
   - Name: Desktop
     Value: 1212
@@ -143,7 +143,7 @@ MonoBehaviour:
   Path: ChefAngerFmodAudio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638553664025875501
+  lastModified: 638557700589894984
   FileSizes:
   - Name: Desktop
     Value: 4173728
@@ -205,7 +205,7 @@ MonoBehaviour:
   - {fileID: 7897830381167853607}
   StringsBanks:
   - {fileID: -6463580410780466389}
-  cacheTime: 638553664025885496
+  cacheTime: 638557700589894984
   cacheVersion: 131618
 --- !u!114 &1773204746410419708
 MonoBehaviour:
@@ -249,7 +249,7 @@ MonoBehaviour:
   Path: ChefAngerFmodAudio/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638553664025885496
+  lastModified: 638557700589894984
   FileSizes:
   - Name: Desktop
     Value: 51424
@@ -296,7 +296,7 @@ MonoBehaviour:
   Path: ChefAngerFmodAudio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638553664025735464
+  lastModified: 638557700589741016
   FileSizes:
   - Name: Desktop
     Value: 1340

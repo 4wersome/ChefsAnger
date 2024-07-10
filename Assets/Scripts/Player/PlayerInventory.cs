@@ -101,8 +101,12 @@ public class PlayerInventory : MonoBehaviour
     #endregion
 
     #region Recipes
-    public void AddRecipe(Recipe recipe)
-    {
+    public void AddRecipe(Recipe recipe){
+
+        if(CheckIfDuplicatedAbility(recipe.RecipeName)){
+            recipe.ChangeIntoPowerUpRecipe();
+        }
+
         UncompletedRecipes.Add(recipe);
         OnRecipeFound?.Invoke(recipe);
         TryToCompleteRecipes();
@@ -148,6 +152,22 @@ public class PlayerInventory : MonoBehaviour
         {
             ConsumeIngredient(ingredient);
         }
+    }
+
+    private bool CheckIfDuplicatedAbility(RecipeNameEnum recipeName){
+        if((int) recipeName > 0 && (int) recipeName <= (int) RecipeNameEnum.PumpkinMine){
+            foreach(Recipe rec in CompletedRecipes){
+                if(recipeName == rec.RecipeName){
+                    return true;
+                }
+            }
+            foreach(Recipe rec in UncompletedRecipes){
+                if(recipeName == rec.RecipeName){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     #endregion
 

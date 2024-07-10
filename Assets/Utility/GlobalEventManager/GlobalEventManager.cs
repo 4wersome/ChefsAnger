@@ -96,8 +96,11 @@ public enum GlobalEventIndex {
     PlayerHealthUpdated,
     PlayerMovement,
     EnableGamepad,
-    UIRecipeUnlock
-
-    
+    UIRecipeUnlock,
+    RecipeObtained,
+    RecipeCompleted,
+    IngredientObtained,
+    PlayerDefenceUpdated,
+    PlayerAttackUpdated
 }
 
