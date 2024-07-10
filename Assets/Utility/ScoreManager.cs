@@ -3,37 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour
-{
-    private const string PlayerPrefCurrentScore = "Score";
 
-    public static ScoreManager instance;
 
-    [SerializeField]
-    private Text scoreText;
-    int score = 0;
+
+    public class ScoreManager : MonoBehaviour
+    {
+
+        public static ScoreManager instance;
+        public Text scoreText;
+        public Text highscoreText;
+        int score = 0;
+        int highscore = 0;
 
     private void Awake()
-    {
-        instance = this;
-        DontDestroyOnLoad(this);
-    }
-    void Start()
-    {
-        if (scoreText != null)
-
+        {
+            instance = this;
+        }
+        void Start()
+        {
+        highscore = PlayerPrefs.GetInt("highscore", 0);
             scoreText.text = "SCORE: " + score.ToString();
+            highscoreText.text = "HIGHSCORE: " + highscore.ToString();
     }
 
 
-    public void AddPoint()
-    {
-        score += 1;
-
-        if (scoreText != null)
+        public void AddPoint()
+        {
+            score += 1;
             scoreText.text = "SCORE: " + score.ToString();
-
-        PlayerPrefs.SetInt(PlayerPrefCurrentScore, score);
+            if(highscore < score)
+            PlayerPrefs.SetInt("highscore", score);
+        }
     }
-}
+
 
