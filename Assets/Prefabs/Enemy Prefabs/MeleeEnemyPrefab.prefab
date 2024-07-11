@@ -1378,7 +1378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c4df9f8bc56854893c3f22441392c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagebleTags: []
+  damagebleTags:
+  - Player
   damageContainer:
     damageType: 0
     damage: 3

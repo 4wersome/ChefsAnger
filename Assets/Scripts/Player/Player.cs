@@ -8,6 +8,7 @@ public  class Player : MonoBehaviour, IDamageble
     private const string isDeadAnimatorParameter = "PlayerDead";
     private const string playerResetParameter = "PlayerReset";
 
+
     #region SerializeFields
     [SerializeField]
     private HealthModule healthModule;
@@ -84,7 +85,8 @@ public  class Player : MonoBehaviour, IDamageble
         playerController.UnpreventAllAbilities();
         transform.position = new Vector3 (7,0,12);
         GlobalEventManager.CastEvent(GlobalEventIndex.CAMERAPlayerSpawn, null);
-       
+
+
     }
     private void Update()
     {

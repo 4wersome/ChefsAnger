@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class newScoreManager : MonoBehaviour
@@ -17,6 +18,9 @@ public class newScoreManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(this);
+    
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        
     }
     void Start()
     {
@@ -46,4 +50,11 @@ public class newScoreManager : MonoBehaviour
             textToUpdate.text = "HIGHSCORE: " + PlayerPrefs.GetInt($"LeaderScore0").ToString();
         }
     }
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    {
+        PlayerPrefs.SetInt(PlayerPrefCurrentScore, 0);
+        score = 0;
+    }
+
+
 }
