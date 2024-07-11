@@ -1,0 +1,18 @@
+{
+    "name": "ChefsAnger_VFX",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3e86d9dafad6a42478a6b3c967b69335",
+        "GUID:99933a00cb929de4a97dab6392595feb",
+        "GUID:fc073e7c889a45447b4e62037b4512b4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

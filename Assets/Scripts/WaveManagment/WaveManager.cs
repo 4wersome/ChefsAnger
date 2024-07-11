@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Utility.PoolingSystem;
-using WaveManagment.SerializedPoolClass;
+using SerializedClass.SerializedPoolClass;
 using Random = UnityEngine.Random;
 
 public enum WaveStage { Safe, EnemyAttack, DestroyableSpawn }
