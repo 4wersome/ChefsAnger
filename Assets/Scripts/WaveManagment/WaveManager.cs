@@ -137,6 +137,7 @@ public class WaveManager : MonoBehaviour, IPoolRequester {
         waveStatus = WaveStage.EnemyAttack;
         ResetTimer();
         level++;
+        GlobalEventManager.CastEvent(GlobalEventIndex.PlayerAttackUpdated, GlobalEventArgsFactory.PlayerAttackUpdatedFactory(level));
         int fuzzyDifficulty = (int) (level * levelDifficultyGrowth * 0.5f);
         numberOfEnemy += fuzzyDifficulty;
         int nOfActiveSpawner = NumberOfActiveSpawn(fuzzyDifficulty);

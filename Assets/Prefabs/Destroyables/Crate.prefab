@@ -123,6 +123,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 14d04a9e3ea29094a9f90e081a05dc20, type: 2}
   - {fileID: 11400000, guid: cf0e0294a7530244db23d11161e3747f, type: 2}
   - {fileID: 11400000, guid: fd6043f561edf8f499fa906dd8a34ad3, type: 2}
+  - {fileID: 11400000, guid: f493012bbf124ac449e11c8c73a1e63b, type: 2}
   healthModule:
     maxHP: 2
     defence: 0

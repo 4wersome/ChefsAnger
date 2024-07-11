@@ -34,7 +34,6 @@ public class EnemyComponent : MonoBehaviour, IPoolRequester, IDamageble {
 #if DEBUG
         healthModule.OnDamageTaken += (damageContainer) => Debug.Log(gameObject.name + " is being attacked");
 #endif
-
         enemyAttackComponent = GetComponent<IEnemyAttack>();
         if(enemyDrops != null) healthModule.OnDeath += SpawnDrop;
         healthModule.OnDeath += InternalOnDeath;

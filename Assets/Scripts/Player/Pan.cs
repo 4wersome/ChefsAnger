@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Pan : MonoBehaviour
 {
@@ -9,8 +10,12 @@ public class Pan : MonoBehaviour
 
     public float DamageOutput { get { return damage.Damage; } }
 
+    private UnityAction<GlobalEventArgs> addDmg;
     #region Mono
     private void Awake() {
+        addDmg += GlobalIncreaseDamage;
+
+        GlobalEventManager.AddListener(GlobalEventIndex.PlayerAttackUpdated, addDmg);
     }
     #endregion
 
@@ -18,6 +23,11 @@ public class Pan : MonoBehaviour
         damage.Damage += amount;
     }
 
+    public void GlobalIncreaseDamage(GlobalEventArgs message)
+    {
+        GlobalEventArgsFactory.PlayerAttackUpdatedParser(message, out float attackDmg);
+        damage.Damage += attackDmg;
+    }
     private void OnTriggerEnter(Collider other) {
         //Debug.Log("collider found");
         IDamageble damageble = other.GetComponent<IDamageble>();

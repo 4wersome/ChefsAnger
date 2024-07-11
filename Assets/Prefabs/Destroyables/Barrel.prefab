@@ -123,6 +123,7 @@ MonoBehaviour:
   prefabsToSpawn:
   - {fileID: 11400000, guid: 70ad2da35595fc442b7d41cb3fce76a7, type: 2}
   - {fileID: 11400000, guid: f63a732c51edcf94299ea22038db0375, type: 2}
+  - {fileID: 11400000, guid: 4741190fe95b7234a8181cffefdb541f, type: 2}
   healthModule:
     maxHP: 2
     defence: 0
