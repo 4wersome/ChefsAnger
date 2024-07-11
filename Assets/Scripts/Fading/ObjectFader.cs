@@ -33,13 +33,14 @@ public class ObjectFader : MonoBehaviour {
         fadingMaterials = new Material[materials.Length];
         for (int i = 0; i < materials.Length; i++) {
             fadingMaterials[i] = new Material(materials[i]);
+            fadingMaterials[i].SetFloat("_Mode", 2);
             fadingMaterials[i].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             fadingMaterials[i].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
             fadingMaterials[i].SetInt("_ZWrite", 0);
             fadingMaterials[i].DisableKeyword("_ALPHATEST_ON");
             fadingMaterials[i].EnableKeyword("_ALPHABLEND_ON");
             fadingMaterials[i].DisableKeyword("_ALPHAPREMULTIPLY_ON");
-            fadingMaterials[i].renderQueue = 3000;
+            fadingMaterials[i].renderQueue = (int) UnityEngine.Rendering.RenderQueue.Transparent;;
         }
     }
 
