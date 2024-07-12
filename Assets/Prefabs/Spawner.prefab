@@ -57,25 +57,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dc5833fefe4b9ab4e8ae339abea288a8, type: 2}
   - {fileID: 11400000, guid: c59b18c01ecd67742a347340b87c7d83, type: 2}
   destroyableSpawnPositions: []
-  numberOfWave: 1
-  maxNumeberOfDestroyable: 0
+  numberOfWave: 2
+  maxNumeberOfDestroyable: 3
   enemyTypes:
   - enemyPoolType: {fileID: 11400000, guid: 7df7fe6655c302f4ca1a396db25b9363, type: 2}
-    levelStartSpawn: 0
-    levelStopSpawn: 0
+    levelStartSpawn: 1
+    levelStopSpawn: 10000
   - enemyPoolType: {fileID: 11400000, guid: 2616e08d731d67c4abdfb04b3a580f3d, type: 2}
-    levelStartSpawn: 0
-    levelStopSpawn: 0
+    levelStartSpawn: 2
+    levelStopSpawn: 10000
   - enemyPoolType: {fileID: 11400000, guid: aa407e540261165459142fa3968ddfe6, type: 2}
-    levelStartSpawn: 0
-    levelStopSpawn: 0
+    levelStartSpawn: 3
+    levelStopSpawn: 10000
   victoryLevel: 3
   isInfinite: 0
   startingWaveStatus: 0
   safeDuration: 15
-  waveDuration: 80
-  timeNoise: 0.166
-  levelDifficultyGrowth: 4
+  waveDuration: 60
+  timeNoise: 0.25
+  levelDifficultyGrowth: 2
   numberOfEnemy: 10
 --- !u!114 &7878338628782549066
 MonoBehaviour:

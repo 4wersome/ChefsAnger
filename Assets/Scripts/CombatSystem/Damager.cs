@@ -3,7 +3,7 @@ using UnityEngine.Serialization;
 
 public class Damager : MonoBehaviour, IDamager {
 
-    [FormerlySerializedAs("damagebleTag")] [SerializeField] protected string[] damagebleTags;
+    [SerializeField] protected string[] damagebleTags;
 
     [SerializeField]
     protected DamageContainer damageContainer;

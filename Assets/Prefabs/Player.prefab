@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 3751981348876703246}
   - component: {fileID: 4273928890350180286}
   - component: {fileID: 151116140270337051}
+  - component: {fileID: 795156700110260464}
   m_Layer: 6
   m_Name: TBDWeapon
   m_TagString: Untagged
@@ -82,7 +83,8 @@ Transform:
   m_LocalPosition: {x: 0.085, y: 0.132, z: -0.493}
   m_LocalScale: {x: 1.5000002, y: 1.5000002, z: 1.5000004}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2789448987938435560}
   m_Father: {fileID: 3874200686535949710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6994037244803479242
@@ -150,7 +152,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -173,6 +175,21 @@ MonoBehaviour:
     damage: 5
     damageImpulse: {x: 0, y: 0, z: 0}
     freezeTime: 0
+--- !u!114 &795156700110260464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446076315293322575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3cea818e190e24ab61a4415e681fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VFX: {fileID: 6146097272022268091}
+  compatibleTag:
+  - Enemy
 --- !u!1 &2276835295575999314
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +487,7 @@ MonoBehaviour:
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
   m_FrequencyGain: 0
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  mNoiseOffsets: {x: 856.6189, y: 334.4836, z: -843.3418}
 --- !u!1 &3685347251700581791
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +563,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4900188714757862118}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.23999977, y: 1.14, z: 0.40999985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -849,6 +866,98 @@ Transform:
   - {fileID: 4191869826389073957}
   m_Father: {fileID: 3874200686535967050}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2682153390652462945
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2840694865651872294}
+    m_Modifications:
+    - target: {fileID: -7834942747963692371, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834942747963692371, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: Spawn Rate
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834942747963692371, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834942747963692371, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906153094008675161, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: m_Name
+      value: VFX_BloodSplatter_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470081219999094738, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: compatibleTag.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470081219999094738, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+      propertyPath: compatibleTag.Array.data[0]
+      value: Enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6470081219999094738, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+--- !u!4 &2789448987938435560 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 256407619665110665, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+  m_PrefabInstance: {fileID: 2682153390652462945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6146097272022268091 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8103029798887059418, guid: d79caa7ec8dad444c9caa8fa7030d2f7, type: 3}
+  m_PrefabInstance: {fileID: 2682153390652462945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3874200686535779456
 PrefabInstance:
   m_ObjectHideFlags: 0
