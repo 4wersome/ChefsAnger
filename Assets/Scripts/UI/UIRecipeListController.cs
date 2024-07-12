@@ -132,7 +132,7 @@ public class UIRecipeListController : MonoBehaviour
             currentRecipeIngredientsData.Add(entryData);
         }
 
-        recipeListView.Refresh();
+        recipeListView.Rebuild();
     }
 
     private void UpdateRecipeIngredientsData(Ingredient ingredient){
@@ -144,7 +144,7 @@ public class UIRecipeListController : MonoBehaviour
                 break;
             }
         }
-        recipeListView.Refresh();
+        recipeListView.Rebuild();
     }
     #endregion
 

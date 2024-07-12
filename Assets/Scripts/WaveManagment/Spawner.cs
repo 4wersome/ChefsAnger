@@ -73,7 +73,7 @@ public class Spawner : MonoBehaviour {
                         Vector3 spawnPosition = Player.Get().transform.position + (randomPoint.normalized * Random.Range(30f, 40f));
 #if DEBUG
                         Debug.Log("Searching for Position");
-                        Debug.DrawRay(spawnPosition, Vector3.up*5f, Color.yellow, 15f);
+                        Debug.DrawRay(spawnPosition, Vector3.up*5f, Color.yellow, 3f);
 #endif
                         //yield return waitForFixedUpdate;
                             
