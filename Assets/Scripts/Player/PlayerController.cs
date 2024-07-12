@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
     private const string animatorIdleStateName = "Idle";
     private const string animatorMovingStateName = "Movement";
     private const string isDeadAnimatorParameter = "PlayerDead";
+    private const string PlayerPrefsGamepadEnabledName = "GamepadEnabled";
+
+    private const string PlayerPrefsLastScoreName = "LastScore";
+    private const string PlayerPrefCurrentScore = "Score";
 
 
 
@@ -26,6 +30,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isGamepadActive;
     #endregion
+
+    
 
     private AbilityBase[] abilities;
     public bool IsGamepadActive { get { return isGamepadActive; } }
@@ -83,7 +89,8 @@ public class PlayerController : MonoBehaviour
         {
             ability.Init(this);
         }
-
+        
+        isGamepadActive = (PlayerPrefs.GetInt(PlayerPrefsGamepadEnabledName) != 0);
 
     }
 
@@ -202,7 +209,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void InternalOnDeath() => SetIsKinematic(true);
+    private void InternalOnDeath()
+    {
+        SetIsKinematic(true);
+        PlayerPrefs.SetInt(PlayerPrefsLastScoreName, PlayerPrefs.GetInt(PlayerPrefCurrentScore));
+        PlayerPrefs.SetInt(PlayerPrefCurrentScore,0);
+
+    }
 
     public void SetIsKinematic(bool value) => playerRigidBody.isKinematic = value;
     #endregion

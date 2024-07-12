@@ -15,7 +15,7 @@ public class UIOPener : MonoBehaviour
         if (InputManager.OpenPause())
         {
 
-            if (PauseMenu.active)
+            if (PauseMenu.activeInHierarchy)
             {
                 PauseMenu.SetActive(false);
                 Time.timeScale = 1.0f;

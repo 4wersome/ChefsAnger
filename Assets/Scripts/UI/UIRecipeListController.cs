@@ -25,6 +25,9 @@ public class UIRecipeListController : MonoBehaviour
     private ListView recipeListView;
     private List<UIRecipeListEntryData> currentRecipeIngredientsData;
 
+
+    private Recipe DefaultRecipe;
+
     #region Mono
     private void Awake()
     {
@@ -54,6 +57,11 @@ public class UIRecipeListController : MonoBehaviour
 
         Button nextButton = container.Q<Button>("NextButton");
         nextButton.clicked += OnNextButtonClicked;
+
+        
+
+        DefaultRecipe = new Recipe();
+
     }
 
     private void OnEnable() {
@@ -178,14 +186,26 @@ public class UIRecipeListController : MonoBehaviour
 
     private void OnRecipeGet(GlobalEventArgs message) {
         GlobalEventArgsFactory.UIRecipeCompletedParses(message, out Recipe recipe);
+        if(recipes.Count == 1 )
+        {
+            recipes.Remove(DefaultRecipe);
+        }
         recipes.Add(recipe);
+        
         ChangeShownRecipe();
     }
 
     private void OnRecipeComplete(GlobalEventArgs message) {
         GlobalEventArgsFactory.UIRecipeCompletedParses(message, out Recipe recipe);
         RemoveUsedIngredients(recipe);
+        
+        
         recipes.Remove(recipe);
+        if(recipes.Count<=0)
+        {
+         
+            recipes.Add(DefaultRecipe);
+        }    
         ChangeShownRecipe();
     }
 
