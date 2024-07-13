@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1282e67f51d6af647b834ab717c01663, type: 3}
+  m_Name: Recipe_DefenceUp
+  m_EditorClassIdentifier: 
+  poolKey: Recipe_DefenceUp
+  prefab: {fileID: 2006840600298156594, guid: 128e57885cbf97c4c930ed7526706540, type: 3}
+  poolNumber: 5
+  resizablePool: 0

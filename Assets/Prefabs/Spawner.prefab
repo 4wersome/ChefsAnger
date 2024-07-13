@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4685716504517028859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7829057331866076663}
+  - component: {fileID: 749516897663454064}
+  - component: {fileID: 7878338628782549066}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7829057331866076663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685716504517028859}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &749516897663454064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685716504517028859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0619e9fe41784340a4d7f3f673a5e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyables:
+  - {fileID: 11400000, guid: 140f616ae45138248964f6fe35918209, type: 2}
+  - {fileID: 11400000, guid: dbf53eb9dc524e44580e5ace9305f3c4, type: 2}
+  - {fileID: 11400000, guid: 477e70e49d1903846892f171acaead81, type: 2}
+  - {fileID: 11400000, guid: 690d9340a41a5bc46b1d127012e44f34, type: 2}
+  - {fileID: 11400000, guid: 59febfeb697bc5f488d8de1626193fd4, type: 2}
+  - {fileID: 11400000, guid: d5cd228a712a87e4f9fb5dc15efc220e, type: 2}
+  - {fileID: 11400000, guid: 0844f138c12c9874cb1f6d2a8f43f687, type: 2}
+  - {fileID: 11400000, guid: 9fb5426e1526eef41ae12be0cff0abf9, type: 2}
+  - {fileID: 11400000, guid: dc5833fefe4b9ab4e8ae339abea288a8, type: 2}
+  - {fileID: 11400000, guid: c59b18c01ecd67742a347340b87c7d83, type: 2}
+  destroyableSpawnPositions: []
+  numberOfWave: 2
+  maxNumeberOfDestroyable: 3
+  enemyTypes:
+  - enemyPoolType: {fileID: 11400000, guid: 7df7fe6655c302f4ca1a396db25b9363, type: 2}
+    levelStartSpawn: 1
+    levelStopSpawn: 10000
+  - enemyPoolType: {fileID: 11400000, guid: 2616e08d731d67c4abdfb04b3a580f3d, type: 2}
+    levelStartSpawn: 2
+    levelStopSpawn: 10000
+  - enemyPoolType: {fileID: 11400000, guid: aa407e540261165459142fa3968ddfe6, type: 2}
+    levelStartSpawn: 3
+    levelStopSpawn: 10000
+  victoryLevel: 3
+  isInfinite: 0
+  startingWaveStatus: 0
+  safeDuration: 15
+  waveDuration: 60
+  timeNoise: 0.25
+  levelDifficultyGrowth: 2
+  numberOfEnemy: 10
+--- !u!114 &7878338628782549066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685716504517028859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acbb591a88c152145a4897399fd79ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

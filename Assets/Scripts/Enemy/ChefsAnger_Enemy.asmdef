@@ -1,0 +1,20 @@
+{
+    "name": "ChefsAnger_Enemy",
+    "rootNamespace": "",
+    "references": [
+        "GUID:df8be16442906e8449ee29c998ccb7f8",
+        "GUID:99933a00cb929de4a97dab6392595feb",
+        "GUID:3e86d9dafad6a42478a6b3c967b69335",
+        "GUID:0c752da273b17c547ae705acf0f2adf2",
+        "GUID:e0adb0606c60a4741a934520fd093ab3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
