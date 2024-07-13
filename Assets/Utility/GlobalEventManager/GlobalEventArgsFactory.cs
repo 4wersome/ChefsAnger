@@ -143,7 +143,7 @@ public static class GlobalEventArgsFactory
     public static GlobalEventArgs PlayerDefenceUpdatedFactory(float currentDefence)
     {
         GlobalEventArgs message = new GlobalEventArgs();
-        message.args = new ExtendedVariable[0];
+        message.args = new ExtendedVariable[1];
         message.args[0] = new ExtendedVariable("CurrenctDefence", ExtendedVariableType.Float, currentDefence);
         return message;
     }

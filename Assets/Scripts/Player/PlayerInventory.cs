@@ -34,8 +34,8 @@ public class PlayerInventory : MonoBehaviour
 
         if (pickupable != null)
         {
-            pickupable.OnPickup();
             PickItem(pickupable);
+            pickupable.OnPickup();
         }
     }
 
