@@ -98,7 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d9711d8bbf49440a99254e8b222a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsToSpawn: []
+  prefabsToSpawn:
+  - {fileID: 11400000, guid: 7e106c7a4c619b24e9cc0848a31e7711, type: 2}
+  - {fileID: 11400000, guid: 4d4b24247da7b9a48bc0264d21a9c04b, type: 2}
   healthModule:
     maxHP: 3
     defence: 0

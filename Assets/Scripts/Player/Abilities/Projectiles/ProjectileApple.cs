@@ -10,8 +10,8 @@ public class ProjectileApple : ProjectileBase
     protected bool startPositionCalculated;
 
     protected bool timerIsAwake;
-    protected float appleDespawnTime = 3f;
-    protected float ActualDisableTime = 3.5f;
+    protected float appleDespawnTime = 1f;
+    protected float ActualDisableTime = 2.5f;
     protected float elapsedTime;
     public bool StartPositionCalculated
     { get { return startPositionCalculated; } }

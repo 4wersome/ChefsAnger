@@ -102,6 +102,7 @@ public class Recipe : MonoBehaviour, IPickupable
     public void OnPickup()
     {
         Debug.Log("Picked up: " + recipeName);
+      
         foreach (Ingredient ingr in requiredIngredients)
         {
             Debug.Log("Required Ingredient: " + ingr.IngredientType + " x" + ingr.Number);
